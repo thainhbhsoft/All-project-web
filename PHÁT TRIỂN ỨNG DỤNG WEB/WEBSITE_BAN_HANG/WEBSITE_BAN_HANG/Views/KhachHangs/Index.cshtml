@@ -1,0 +1,103 @@
+﻿@model IEnumerable<WEBSITE_BAN_HANG.Models.KhachHang>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="hoadon">
+        <style>
+            table{
+                margin:auto;
+            }
+            td {
+                border: 1px solid black;
+                padding: 10px;
+                color: #ed1d3c;
+                background-color: #b7edf1;
+                /* border-collapse: collapse; */
+            }
+
+            table.table {
+                border-collapse: collapse;
+                border: 1px solid;
+            }
+
+            th {
+                border: 1px solid;
+                padding: 10px;
+                color: blue;
+                background-color: yellow;
+            }
+        </style>
+        <table class="table">
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenKH)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaChi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoDienThoai)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThanhVien.TaiKhoan)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenKH)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThanhVien.TaiKhoan)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MaKH }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MaKH }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MaKH })
+                    </td>
+                </tr>
+            }
+
+            @*@Html.ActionLink("Đến trang home", "Index","Home")*@
+        </table>
+
+    </div>
+    @Html.RouteLink("Đến trang home", "Home")
+    <h1>In đơn hàng</h1>
+    
+    <script src="~/Scripts/Index.js"></script>
+
+
+   
+</body>
+</html>

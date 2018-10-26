@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WEBSITE_BAN_HANG.Models.ThanhVien>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+   
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaiKhoan)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MatKhau)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoTen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaChi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoDienThoai)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CauHoi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CauTraLoi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LoaiThanhVien.TenLoai)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaiKhoan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatKhau)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CauHoi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CauTraLoi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LoaiThanhVien.TenLoai)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MaThanhVien }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MaThanhVien }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MaThanhVien })
+                    </td>
+                </tr>
+            }
+   
+    @*@Html.ActionLink("Đến trang home", "Index","Home")*@
+    @Html.RouteLink("Đến trang home", "Home")
+
+    </table>
+</body>
+</html>

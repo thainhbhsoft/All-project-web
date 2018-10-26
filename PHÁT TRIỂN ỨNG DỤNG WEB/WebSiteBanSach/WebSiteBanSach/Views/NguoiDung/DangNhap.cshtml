@@ -1,0 +1,13 @@
+﻿@model WebSiteBanSach.Models.KhachHang
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<h2>DangNhap</h2>
+<h1>@ViewBag.ThongBao</h1>
+<form action="/NguoiDung/DangNhap" method="post">
+    <input type="text" name="name" value="" />
+    <input type="password" name="password" value="" />
+    <input type="submit" name="submit" value="Submit" />
+</form>

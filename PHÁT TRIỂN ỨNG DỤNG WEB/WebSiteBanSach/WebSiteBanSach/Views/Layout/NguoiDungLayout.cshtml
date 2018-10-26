@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Contents/CSS/style.css" rel="stylesheet" />
+    <link href="~/Contents/fontawesome-free-5.2.0-web/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="page-header">
+        <div class="header-left">
+            <div class="menu column-left"></div>
+            <div class="icon-cukcuk column-left">
+                <img src="Contents/Images/logo-text.png" />
+            </div>
+            <div class="list-restaurent column-left">
+                <select class="list">
+                    <option value="">Nhà hàng biển đông</option>
+                    <option value="">Nhà hàng năm sao</option>
+                    <option value="">Nhà hàng hải sản</option>
+                </select>
+            </div>
+        </div>
+        <div class="search">
+            @using (Html.BeginForm("KetQuaTimKiem","TimKiem",FormMethod.Post))
+            {
+                @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder="Search....." })
+                <button type="submit">
+                    <i class="fas fa-search" style="color:black"></i>
+                </button>
+            }
+
+        </div>
+        <div class="login_logout">
+            <i class="fas fa-user-lock"></i>
+            @Html.ActionLink("Đăng ký", "Dangky","NguoiDung", null, htmlAttributes: new { @class = "DangKy" })
+            <i class="fas fa-sign-in-alt"></i>
+            @Html.ActionLink("Đăng nhập", "Dangnhap", "NguoiDung", null, htmlAttributes: new { @class = "DangNhap" })
+        </div>
+        <div class="header-right">
+            <div class="select-language column-left">
+                <select class="list">
+                    <option value="">Tiếng Việt (Vietnamese)</option>
+                    <option value="">Tiếng Anh (English)</option>
+                    <option value="">Tiếng Đức (Germany)</option>
+                </select>
+            </div>
+            <div class="globe column-left"></div>
+            <div class="personal-infor column-left">
+                <div class="avatar column-left"></div>
+                <div class="name column-left">
+                    <select class="list-name">
+                        <option value="">Đặng Thành Tâm</option>
+                    </select>
+                </div>
+                <div class="triangle column-left"></div>
+            </div>
+        </div>
+    </div>
+    <div class="content-left">
+        <div class="item">
+            <div class="icon-item icon-item1"></div>
+            <div class="name-item">Tổng quan</div>
+        </div>
+        <div class="item checked">
+            <div class="icon-item icon-item2"></div>
+            <div class="name-item">Báo cáo</div>
+            <div class="icon-down">
+                <ul>
+                    <li>Báo cáo tiền lãi</li>
+                    <li>Báo cáo số dư</li>
+                    <li>Báo cáo doanh số</li>
+                    <li>Báo cáo tổng chi</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item3"></div>
+            <div class="name-item">Mua hàng</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item4"></div>
+            <div class="name-item">Kho</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item5"></div>
+            <div class="name-item">Qũy tiền mặt</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item6"></div>
+            <div class="name-item">Qũy tiền gửi</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item7"></div>
+            <div class="name-item">Chi phí</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item8"></div>
+            <div class="name-item">Khuyến mại</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item9"></div>
+            <div class="name-item">Thực đơn</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item10"></div>
+            <div class="name-item">Hủy hóa đơn</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item11"></div>
+            <div class="name-item">Danh mục</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item12"></div>
+            <div class="name-item">Thiết lập hệ thống</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item13"></div>
+            <div class="name-item">Trợ giúp</div>
+            <div class="icon-down">
+                <ul>
+                    <li>Trợ giúp trực tiếp</li>
+                    <li>Trợ giúp online</li>
+                    <li>Kiểm tra trạng thái</li>
+                    <li>Báo cáo đơn vị</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item14"></div>
+            <div class="name-item">Thuê bao</div>
+        </div>
+        <div class="item">
+            <div class="icon-item icon-item15"></div>
+            <div class="name-item">5Food</div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    <div class="content-right">
+        <div class="item-content">
+            @* @Html.Partial("~/Views/Home/SachMoiPartial.cshtml")*@
+            @Html.Action("SachMoiPartial", "Sach")
+            @Html.Action("GioHangPartial", "GioHang")
+        </div>
+        <div class="item-content">
+            @Html.Action("ChuDePartial", "ChuDe")
+        </div>
+        <div class="item-content">
+            @Html.Action("NhaXuatBanPartial", "NhaXuatBan")
+        </div>
+        <div class="item-content">
+
+        </div>
+        @RenderSection("NoiDungBenDuoi", false)
+
+    </div>
+    <br />
+    <div>
+        @RenderBody()
+    </div>
+</body>
+
+</html>

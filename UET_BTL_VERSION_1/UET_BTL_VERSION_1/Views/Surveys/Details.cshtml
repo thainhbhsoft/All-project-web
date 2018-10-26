@@ -1,0 +1,42 @@
+﻿@model UET_BTL_VERSION_1.Models.Survey
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Survey</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Point)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Point)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentSurvey.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContentSurvey.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentDetail.NoteSurvey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentDetail.NoteSurvey)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SurveyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

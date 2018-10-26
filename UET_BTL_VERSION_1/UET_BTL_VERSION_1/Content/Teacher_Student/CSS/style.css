@@ -1,0 +1,68 @@
+﻿body {
+}
+
+.header-page {
+    height: 100px;
+    color: blueviolet;
+    background: blue;
+}
+
+.wrapper {
+    display: flex;
+}
+
+
+.content-right {
+    height: 2000px;
+    width: 85%;
+    margin:auto;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+
+.header-page {
+    text-align: center;
+    font-size: 30pt;
+    color: white;
+}
+
+    .header-page a {
+        float: right;
+        padding-top: 29px;
+        font-size: 18pt;
+        margin-right: 33px;
+        color: white;
+    }
+
+.information {
+    float: left;
+    font-size: 20pt;
+    margin-top: 22px;
+    padding: 5px 10px;
+    background: #80afad;
+    margin-left: 10px;
+    border: 3px solid #d882cf;
+    border-radius: 28px;
+}
+.form-control {
+    width: 50%;
+}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    padding: 0px;
+    /* padding-top: 13px; */
+    vertical-align: center;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #dc1f1f;
+    float: right;
+    width: 131px;
+    background: blue;
+    color: white;
+    margin-right: 78px;
+}

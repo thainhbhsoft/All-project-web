@@ -1,0 +1,34 @@
+﻿@using WebSiteBanSach.Models;
+@model  List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<table>
+    <tr>
+        <td>Mã sách </td>
+        <td>Tên sách</td>
+        <td>Đơn giá</td>
+        <td>Số lượng</td>
+        <td>Thành tiền</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.iMaSach </td>
+            <td>@item.sTenSach</td>
+            <td>@item.dDonGia</td>
+            <td>@item.iSoLuong</td>
+            <td>@item.dThanhTien</td>
+
+        </tr>
+
+    }
+    <tr><td>@Html.ActionLink("SỬA GIỎ HÀNG", "SuaGioHang")</td></tr>
+    @using (Html.BeginForm("DatHang", "GioHang"))
+    {
+        <input type="submit" name="name" value="Đặt hàng" />
+    }
+    
+</table>

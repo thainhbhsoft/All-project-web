@@ -1,0 +1,67 @@
+﻿@model UET_BTL_VERSION_1.Models.StudentDetail
+
+@{
+    Layout = null;
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h4>Tên môn học: @Model.Subject.Name  @Model.Subject.SubjectCode</h4>
+    <h4>Số tín chỉ: @Model.Subject.CreditNumber</h4>
+    <h4>Tên giảng viên: @Model.Teacher.Name</h4>
+
+    @if (ViewBag.check != 1)
+    {
+        using (Html.BeginForm())
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        Các tiêu chí đánh giá
+                    </th>
+                    <th>
+                        Chấm điểm
+                    </th>
+                    <th></th>
+                </tr>
+                @{
+                    for (int i = 0; i < ViewBag.Count; i++)
+                    {
+
+                        <tr>
+                            <td>
+                                @ViewBag.ContentSurvey[@i]
+                            </td>
+                            <td>
+                                | @Html.RadioButton(@i.ToString(), 20)20 |
+                                @Html.RadioButton(@i.ToString(), 40)40 |
+                                @Html.RadioButton(@i.ToString(), 60)60 |
+                                @Html.RadioButton(@i.ToString(), 80)80 |
+                                @Html.RadioButton(@i.ToString(), 100)100 |
+                            </td>
+
+                        </tr>
+
+                    }
+
+                }
+
+            </table>
+            @Html.Hidden("id", Model.SubjectID)
+            @Html.Hidden("studentDetailID", Model.StudentDetailID)
+            <input type="submit" value="Submit" class="btn btn-default" />
+
+        }
+    }
+
+    <h1>@ViewBag.Message</h1>
+
+</body>
+</html>

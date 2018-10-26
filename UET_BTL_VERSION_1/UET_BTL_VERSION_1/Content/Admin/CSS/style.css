@@ -1,0 +1,47 @@
+﻿body {
+}
+
+.header-page {
+    height: 100px;
+    color: blueviolet;
+    background: blue;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.content-left {
+    height: 1000px;
+    width: 15%;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.content-right {
+    height: 2000px;
+    width: 85%;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.header-page h1 {
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    display: inline-block;
+}
+
+.header-page {
+    text-align: center;
+    font-size: 30pt;
+    color: white;
+}
+
+    .header-page a {
+        float: right;
+        padding-top: 29px;
+        font-size: 18pt;
+        margin-right: 33px;
+        color: white;
+    }

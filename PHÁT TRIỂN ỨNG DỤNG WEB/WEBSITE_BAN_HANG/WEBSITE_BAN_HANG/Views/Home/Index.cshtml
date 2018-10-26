@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>ĐÂY LÀ TRANG HOME</h1>
+    <div>
+        @Html.ActionLink("Đến trang khách hàng", "Index","KhachHangs") |
+        @Html.ActionLink("Đến trang nhà sản xuất", "Index","NhaSanXuats") |
+        @Html.ActionLink("Đến trang Thành Viên", "Index", "ThanhViens")
+    </div>
+    <table>
+        <tr>
+            <td>Số người đã truy cập</td>
+            <td>@ViewBag.SoNguoiTruyCap</td>
+        </tr>
+        <tr>
+            <td>Số người đang online</td>
+            <td>@ViewBag.SoNguoiOnline</td>
+        </tr>
+    </table>
+</body>
+</html>

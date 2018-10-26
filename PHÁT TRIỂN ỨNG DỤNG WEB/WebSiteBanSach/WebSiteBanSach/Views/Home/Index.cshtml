@@ -1,0 +1,33 @@
+﻿
+@using WebSiteBanSach.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Sach>
+@{
+
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+@{
+    var i = 0;
+    foreach (var item in Model)
+    {
+        i++;
+    <h3> @item.TenSach</h3>
+    }
+ }
+
+@section NoiDungBenDuoi{
+
+}
+    Trang  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount;
+    <div class="menu-trang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+<style>
+    .menu-trang li{
+        display:inline;
+    }
+    .menu-trang{
+        text-align:center;
+    }
+</style>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<UET_BTL_VERSION_1.Models.StudentDetail>
+
+@{
+    ViewBag.Title = "ShowListSubject";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+}
+
+<h2>Các môn học đã đăng ký</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Tên môn học
+        </th>
+        <th>
+            Mã môn học
+        </th>
+        <th>
+            Số tín chỉ
+        </th>
+        <th>
+            Giảng viên
+        </th>
+        <th>
+            Giảng đường
+        </th>
+        <th>
+            Thời gian
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.SubjectCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.CreditNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teacher.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.ClassRoom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.TimeTeach)
+        </td>
+        <td>
+            @Html.ActionLink("Đánh giá môn học", "SurveySubject", new { id = item.SubjectID, stID = item.StudentID }) 
+           
+        </td>
+    </tr>
+}
+
+</table>

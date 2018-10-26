@@ -1,0 +1,98 @@
+﻿@model WEBSITE_BAN_HANG.Models.ThanhVien
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>ThanhVien</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TaiKhoan)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TaiKhoan)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MatKhau)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HoTen)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SoDienThoai)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CauHoi)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CauHoi)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CauTraLoi)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CauTraLoi)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LoaiThanhVien.TenLoai)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LoaiThanhVien.TenLoai)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MaThanhVien }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

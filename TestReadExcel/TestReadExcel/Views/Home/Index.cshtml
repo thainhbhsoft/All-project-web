@@ -1,0 +1,10 @@
+﻿@model string
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <input type="file" name="fileUpload" />
+    <br />
+    <input type="submit" name="Submit" value="ImportExcel" />
+}
+
+@Model

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WEBSITE_BAN_HANG.Models.NhaSanXuat>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenNSX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThongTIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logo)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNSX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThongTIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MaNSX }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MaNSX }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MaNSX })
+            </td>
+        </tr>
+    }
+    @*@Html.ActionLink("Đến trang home", "Index","Home")*@
+        @Html.RouteLink("Đến trang home","Home")
+    
+    </table>
+</body>
+</html>

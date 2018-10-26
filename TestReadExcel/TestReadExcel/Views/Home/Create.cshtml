@@ -1,0 +1,13 @@
+﻿@model TestReadExcel.Models.Student
+
+
+
+@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <input type="file" name="fileUpload" />
+    <br />
+    <input type="submit" name="Submit" value="ImportExcel" />
+}
+
+
+@ViewBag.fileName

@@ -1,0 +1,17 @@
+﻿
+@using WebSiteBanSach.Models;
+@model  Sach
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<h2>@Model.MaSach</h2>
+<h2>@Model.TenSach</h2>
+<h2>@Model.MoTa</h2>
+@using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = Model.MaSach, @strURL = Request.Url.ToString() }))
+{
+    <input type="submit" name="name" value="Mua hàng" />
+}
+
+

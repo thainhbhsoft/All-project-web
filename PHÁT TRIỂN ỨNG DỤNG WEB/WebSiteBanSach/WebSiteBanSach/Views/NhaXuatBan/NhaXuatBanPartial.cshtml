@@ -1,0 +1,13 @@
+﻿
+@using WebSiteBanSach.Models;
+@model  List<NhaXuatBan>
+
+@{
+    foreach (var item in Model)
+    {
+        <a href="@Url.Action("SachTheoNXB","NhaXuatBan",new { @MaNXB = item.MaNXB })">@item.TenNXB </a>
+        <br />
+    }
+    <a href="@Url.Action("DanhMucNXB","NhaXuatBan")">Nha xuat ban khac </a>
+    <br />
+}

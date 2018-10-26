@@ -1,0 +1,42 @@
+﻿@model UET_BTL_VERSION_1.Models.StudentDetail
+
+@{
+    ViewBag.Title = "ShowResultSurvey";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+}
+
+<h2 style="text-align:center">Bảng đánh giá theo cả lớp </h2>
+<h4>Tên môn học: @Model.Subject.Name  @Model.Subject.SubjectCode</h4>
+<h4>Số tín chỉ: @Model.Subject.CreditNumber</h4>
+<h4>Tổng Số sinh viên: @ViewBag.SumStudent</h4>
+<h4>Tên giảng viên: @Model.Teacher.Name</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            Tên tiêu chí đánh giá
+        </th>
+        <th>
+            Điểm trung bình ( thang điểm 100 )
+        </th>
+        <th></th>
+    </tr>
+    @{
+        for (int i = 0; i < ViewBag.CountSurvey; i++)
+        {
+
+            <tr>
+                <td>
+                    @ViewBag.NameSurvey[@i]
+                </td>
+                <td>
+                    @Math.Round(@ViewBag.ListPointAver[@i], 2)
+                </td>
+
+            </tr>
+
+        }
+
+    }
+
+</table>

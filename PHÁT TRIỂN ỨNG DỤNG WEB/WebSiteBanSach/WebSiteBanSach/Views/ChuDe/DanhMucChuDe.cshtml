@@ -1,0 +1,18 @@
+﻿@using WebSiteBanSach.Models;
+@model  List<ChuDe>
+
+
+@{
+    ViewBag.Title = "DanhMucChuDe";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+@{
+    foreach (var item in Model)
+    {
+        <a href="@Url.Action("SachTheoChuDe","ChuDe",new { @machude = item.MaChuDe })"> @item.TenChuDe </a>
+        <br />
+    }
+}
+
+

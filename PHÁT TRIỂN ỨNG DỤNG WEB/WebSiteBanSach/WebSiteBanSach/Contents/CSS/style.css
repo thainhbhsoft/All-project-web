@@ -1,0 +1,229 @@
+﻿.page-header{
+    height:52px;
+    background:#0973b9;
+    margin:-8px -8px;
+}
+.header-left, .column-left, .name-item, .icon-item, .icon-down {
+    float: left;
+}
+.header-right, .column-right, .icon-down {
+    float: right;
+}
+.menu {
+    background-image: url('../Images/icon-left-header.png');
+}
+.header-left{
+    margin-top:15px;
+    margin-left:15px;
+}
+.menu{
+    width:20px;
+    height:20px;
+    margin-right:13px;
+}
+.icon-cukcuk{
+    margin-right:30px;
+}
+.list {
+    background-color: #005082;
+    color: #fff;
+    padding-left: 10px;
+    margin-right:20px;
+    margin-top:-5px;
+    font-family: Tahoma;
+    border: none;
+    height: 29px;
+    width: 200px;
+}
+.list:last-child{
+    width:175px;
+}
+.header-right {
+    width: 400px;
+    margin-top: -22px;
+}
+.globe {
+    width: 20px;
+    height: 20px;
+    background-image: url('../Images/globe-2-16.png');
+    background-repeat: no-repeat;
+    background-size: 103%;
+    margin-right:20px;
+}
+.avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: white;
+    margin-top: -5px;
+    background-image: url('../Images/EmployeeImage.png');
+    background-repeat: no-repeat;
+    background-size: 93%;
+}
+
+.list-name {
+    background-color: #0973B9;
+    color: #fff;
+    margin-top:-5px;
+    font-family: Tahoma;
+    border: none;
+    height: 24px;
+    width: 130px;
+}
+.content-left {
+    float: left;
+    width: 230px;
+    margin-left: -8px;
+    margin-top: 8px;
+    height: 699px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background: #0973b9;
+}
+.content-right {
+    float: left;
+    width: 1103px;
+    margin-top: 8px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    height: 704px;
+}
+.item {
+    cursor: pointer;
+    height: 32px;
+    line-height: 32px;
+    color: white;
+    background: #0973b9;
+    font-family: Tahoma;
+    font-size: 10pt;
+    border-bottom: 1px solid gray;
+}
+.item:hover{
+    background:#eb7728;
+}
+.icon-item {
+    height: 26px;
+    width: 26px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-image: url(../Images/iconMenu.png);
+    background-size: 116%;
+    background-position-x: -3px;
+    background-position-y: 3px;
+    background-repeat: no-repeat;
+}
+.icon-down {
+    width: 17px;
+    height: 17px;
+    background-image: url(../Images/arraw.png);
+    margin-right: 4px;
+    margin-top: 9px;
+}
+.icon-item2 {
+    background-position-y: -204px;
+    background-position-x: 0px;
+}
+.icon-item3 {
+    background-position-y: -401px;
+    background-position-x: -2px;
+}
+.icon-item4 {
+    background-position-y: -38px;
+    background-position-x: -2px;
+}
+.icon-item5 {
+    background-position-y: -83px;
+    background-position-x: -2px;
+}
+.icon-item6 {
+    background-image: url('../Images/QuyTienGui.png');
+    background-position-y: 2px;
+    background-position-x: 4px;
+    background-size: 21px;
+}
+.icon-item7 {
+    background-image: url('../Images/ChiPhi.png');
+    background-position-y: 2px;
+    background-position-x: 1px;
+    background-size: 27px;
+}
+.icon-item8 {
+    background-position-y: -126px;
+    background-position-x: 0px;
+}
+.icon-item9 {
+    background-image: url('../Images/ThucDon.png');
+    background-position-y: 2px;
+    background-position-x: 5px;
+    background-size: 21px;
+}
+.icon-item10 {
+    background-image: url('../Images/HuyHoaDon.png');
+    background-position-y: 2px;
+    background-position-x: 5px;
+    background-size: 21px;
+}
+.icon-item11 {
+    background-position-y: -165px;
+    background-position-x: 1px;
+}
+.icon-item12 {
+    background-position-y: -248px;
+    background-position-x: 1px;
+}
+.icon-item13 {
+    background-image: url('../Images/TroGiup.png');
+    background-position-y: 4px;
+    background-position-x: 4px;
+    background-size: 21px;
+}
+.icon-item14 {
+    background-image: url('../Images/ThueBao.png');
+    background-position-y: 7px;
+    background-position-x: 4px;
+    background-size: 21px;
+}
+.icon-item15 {
+    background-image: url('../Images/5food.png');
+    background-position-y: 7px;
+    background-position-x: 4px;
+    background-size: 21px;
+}
+.login_logout {
+    float: right;
+    width: 300px;
+    height: 40px;
+    margin-top: -34px;
+    line-height: 40px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+.login_logout a {
+        color: white;
+}
+i{
+    color:white;
+    margin:5px;
+    margin-left:10px;
+}
+.TextBoxTimKiem {
+    float: left;
+    width: 115px;
+    height: 24px;
+    margin-top: 8px;
+}
+button {
+    width: 48px;
+    height: 30px;
+    margin-top: 8px;
+    margin-left: -1px;
+    font-size: 16px;
+    text-align: center;
+}
+.item-content{
+    float:left;
+    height:100%;
+    width:25%;
+    border:1px solid black;
+    box-sizing:border-box;
+}

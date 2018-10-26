@@ -1,0 +1,20 @@
+﻿
+@using WebSiteBanSach.Models;
+@model  List<Sach>
+
+@{
+    foreach (var item in Model)
+    {
+        @*<h3> @item.AnhBia</h3>*@
+        @*<img src="@Url.Content("~/HinhAnhSP/" + item.AnhBia)" style="width:40; height:70px;">*@
+        if (item.TenSach.Length > 10)
+        {
+            <p>
+                <strong title="@item.TenSach">Tieu de : @item.TenSach.Substring(0, 10) ....</strong>
+                <br />
+                <a href="@Url.Action("XemChiTiet","Sach",new { @masach = item.MaSach })">Xem chi tiet</a>
+            </p>
+        }
+
+    }
+}
