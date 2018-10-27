@@ -36,7 +36,7 @@
         k = k + 1;
         <tr>
             <td>
-            @k
+                @k
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -62,3 +62,9 @@
     }
 
 </table>
+<form action="/Subjects/ImportSubject" method="post" enctype="multipart/form-data">
+    Import một danh sách lớp học phần từ excel:<br>
+    <input type="file" name="fileUpload">
+    <br>
+    <input type="submit" value="Import">
+</form> 

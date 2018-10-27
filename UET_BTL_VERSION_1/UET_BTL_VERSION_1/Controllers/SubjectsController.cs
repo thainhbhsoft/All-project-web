@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -96,6 +97,80 @@ namespace UET_BTL_VERSION_1.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult ImportSubject(HttpPostedFileBase fileUpload)
+        {
+            ViewBag.message = "Import không thành công";
+            int count = 0;
+            var package = new ExcelPackage(fileUpload.InputStream);
+            if (ImportData(out count, package))
+            {
+                ViewBag.message = "Import thành công";
+            }
+            return View();
+        }
+
+        public bool ImportData(out int count, ExcelPackage package)
+        {
+            count = 0;
+            var result = false;
+            try
+            {
+                int startColumn = 1;
+                int startRow = 12;
+                ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
+                object data = null;
+                UetSurveyEntities db = new UetSurveyEntities();
+                object teacherName = workSheet.Cells[7,3].Value;
+                object subjectName = workSheet.Cells[10,3].Value;
+                object subjectCode = workSheet.Cells[9,3].Value;
+                object classRoom = workSheet.Cells[8,6].Value;
+                object creditNumber = workSheet.Cells[9,6].Value;
+                object time = workSheet.Cells[8,3].Value;
+                 if (db.Subject.Where(x => x.SubjectCode.ToLower().Equals(subjectCode.ToString().ToLower())).Count() == 0)
+                {
+                    Subject sub = new Subject();
+                    sub.Name = subjectName.ToString();
+                    sub.SubjectCode = subjectCode.ToString();
+                    sub.ClassRoom = classRoom.ToString();
+                    sub.CreditNumber = int.Parse(creditNumber.ToString());
+                    sub.TimeTeach = time.ToString();
+                    db.Subject.Add(sub);
+                    db.SaveChanges();
+                    int subID = db.Subject.Max(x => x.SubjectID);
+                    int teacherID = db.Teacher.SingleOrDefault(x => x.Name.ToLower().Equals(teacherName.ToString().ToLower())).TeacherID;
+
+                    do
+                    {
+                        data = workSheet.Cells[startRow, startColumn].Value;
+                        string userName = workSheet.Cells[startRow, startColumn + 1].Value.ToString();
+                        object dob = workSheet.Cells[startRow, startColumn + 3].Value;
+                        if (data != null)
+                        {
+                            Student stu = db.Student.SingleOrDefault(x => x.UserName.Trim().Equals(userName.Trim()));
+                            stu.DateOfBirth = DateTime.Parse(dob.ToString());
+                            stu.StudentCode = userName;
+                            StudentDetail stuDetail = new StudentDetail();
+                            stuDetail.StudentID = stu.StudentID;
+                            stuDetail.SubjectID = subID;
+                            stuDetail.TeacherID = teacherID;
+                            db.StudentDetail.Add(stuDetail);
+                            db.SaveChanges();
+                            result = true;
+                        }
+                        startRow++;
+                    } while (data != null);
+                }
+                
+            }
+            catch (Exception x)
+            {
+
+
+            }
+            return result;
+        }
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)

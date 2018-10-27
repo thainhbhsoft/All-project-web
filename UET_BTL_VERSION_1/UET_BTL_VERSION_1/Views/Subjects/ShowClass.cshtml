@@ -14,7 +14,9 @@
 
 <table class="table">
     <tr>
-
+        <th>
+            STT
+        </th>
         <th>
             Họ tên
         </th>
@@ -22,26 +24,42 @@
             Mã sinh viên
         </th>
         <th>
+            Ngày sinh
+        </th>
+        <th>
             Khóa học
+        </th>
+        <th>
+            Email
         </th>
         <th></th>
     </tr>
-
+    @{ int i = 0;}
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.StudentCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.Course)
-            </td>
+        i = i + 1;
+        var date = item.Student.DateOfBirth.ToString().Substring(0, 10);
+    <tr>
+        <td>
+           @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.StudentCode)
+        </td>
+        <td>
+            @date
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.Course)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.Email)
+        </td>
 
-
-        </tr>
+    </tr>
     }
 
 </table>

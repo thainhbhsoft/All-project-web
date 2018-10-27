@@ -298,6 +298,7 @@
     <Content Include="Views\Students\ImportStudent.cshtml" />
     <Content Include="Views\Teachers\ImportTeacher.cshtml" />
     <Content Include="Views\Subjects\ShowResultSurvey.cshtml" />
+    <Content Include="Views\Subjects\ImportSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

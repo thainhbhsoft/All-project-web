@@ -13,15 +13,18 @@
 
 <table class="table">
     <tr>
-       
+
         <th>
-           Họ tên
+            Họ tên
         </th>
         <th>
-           Mã sinh viên
+            Mã sinh viên
         </th>
         <th>
-           Khóa học
+            Khóa học
+        </th>
+        <th>
+            Email
         </th>
         <th></th>
     </tr>
@@ -37,8 +40,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Student.Course)
         </td>
-       
-       
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.Email)
+        </td>
+
     </tr>
 }
 
