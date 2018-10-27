@@ -51,7 +51,11 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -273,10 +277,8 @@
     <Content Include="Views\ContentSurveys\Details.cshtml" />
     <Content Include="Views\ContentSurveys\Edit.cshtml" />
     <Content Include="Views\ContentSurveys\Index.cshtml" />
-    <Content Include="Views\Subjects\Create.cshtml" />
     <Content Include="Views\Subjects\Delete.cshtml" />
-    <Content Include="Views\Subjects\Details.cshtml" />
-    <Content Include="Views\Subjects\Edit.cshtml" />
+    <Content Include="Views\Subjects\ShowClass.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
@@ -293,6 +295,9 @@
     <Content Include="Views\Surveys\Edit.cshtml" />
     <Content Include="Views\Surveys\Index.cshtml" />
     <Content Include="Views\Students\SurveySubject.cshtml" />
+    <Content Include="Views\Students\ImportStudent.cshtml" />
+    <Content Include="Views\Teachers\ImportTeacher.cshtml" />
+    <Content Include="Views\Subjects\ShowResultSurvey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -26,73 +26,32 @@ namespace UET_BTL_VERSION_1.Controllers
         }
 
         // GET: Subjects/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult ShowClass(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = db.Subject.Find(id);
-            if (subject == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subject);
+            IEnumerable<StudentDetail> listStudent = db.StudentDetail.Where(x => x.SubjectID == id);
+            return View(listStudent);
+           
         }
-
-        // GET: Subjects/Create
-        public ActionResult Create()
+        public ActionResult ShowResultSurvey(int? id)
         {
-            return View();
+            List<int> lis = db.StudentDetail.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
+            
+            ViewBag.ListPointAver = db.Survey
+                .Where(x => lis.Any(k => k == x.StudentDetailID))
+                .GroupBy(x => x.ContentSurveyID)
+                .Select(x => x.Average(y => y.Point)).ToList();
+            ViewBag.hasSurvey = db.Survey.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
+            ViewBag.NameSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
+            ViewBag.CountSurvey = db.ContentSurvey.ToList().Count();
+            ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
+            StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
+            return View(student_Detail);
         }
 
-        // POST: Subjects/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SubjectID,Name,SubjectCode,CreditNumber,ClassRoom,TimeTeach")] Subject subject)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Subject.Add(subject);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(subject);
-        }
-
-        // GET: Subjects/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Subject subject = db.Subject.Find(id);
-            if (subject == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subject);
-        }
-
-        // POST: Subjects/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SubjectID,Name,SubjectCode,CreditNumber,ClassRoom,TimeTeach")] Subject subject)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(subject).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(subject);
-        }
 
         // GET: Subjects/Delete/5
         public ActionResult Delete(int? id)
@@ -116,10 +75,27 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             Subject subject = db.Subject.Find(id);
             db.Subject.Remove(subject);
+            IEnumerable<StudentDetail> list = db.StudentDetail.Where(x => x.SubjectID == id);
+            foreach (var item in list)
+            {
+                db.StudentDetail.Remove(item);
+                IEnumerable<Survey> list2 = db.Survey.Where(x => x.StudentDetailID == item.StudentDetailID);
+                try
+                {
+                    foreach (var item2 in list2)
+                    {
+                        db.Survey.Remove(item2);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+               
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

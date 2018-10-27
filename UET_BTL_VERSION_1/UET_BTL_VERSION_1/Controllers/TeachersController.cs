@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -159,6 +160,93 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
             StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
             return View(student_Detail);
+        }
+        [HttpPost]
+        public ActionResult ImportTeacher(HttpPostedFileBase fileUpload)
+        {
+            ViewBag.message = "Import không thành công";
+            int count = 0;
+            var package = new ExcelPackage(fileUpload.InputStream);
+            if (ImportData(out count, package))
+            {
+                ViewBag.message = "Import thành công";
+            }
+            ViewBag.countStudent = count;
+            return View();
+        }
+
+        public bool ImportData(out int count, ExcelPackage package)
+        {
+            count = 0;
+            var result = false;
+            try
+            {
+                int startColumn = 1;
+                int startRow = 2;
+                ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
+                object data = null;
+                UetSurveyEntities db = new UetSurveyEntities();
+
+                do
+                {
+                    data = workSheet.Cells[startRow, startColumn].Value;
+                    object userName = workSheet.Cells[startRow, startColumn + 1].Value;
+                    object passWord = workSheet.Cells[startRow, startColumn + 2].Value;
+                    object fullName = workSheet.Cells[startRow, startColumn + 3].Value;
+                    object email = workSheet.Cells[startRow, startColumn + 4].Value;
+
+                    if (data != null)
+                    {
+                        var isSuccess = SaveStudent(userName.ToString(), passWord.ToString(), fullName.ToString(), email.ToString(), db);
+                        if (isSuccess)
+                        {
+                            count++;
+                            result = true;
+                        }
+                    }
+                    startRow++;
+                } while (data != null);
+            }
+            catch (Exception x)
+            {
+
+
+            }
+            return result;
+        }
+        public bool SaveStudent(string userName, string passWord, string fullName, string email, UetSurveyEntities db)
+        {
+            var result = false;
+            try
+            {
+                if (db.Teacher.Where(x => x.UserName.Equals(userName)).Count() == 0)
+                {
+                    var teacher = new Teacher();
+                    teacher.UserName = userName;
+                    teacher.PassWord = passWord;
+                    teacher.Name = fullName;
+                    teacher.Email = email;
+                    db.Teacher.Add(teacher);
+                    db.SaveChanges();
+                    int teacherid = db.Teacher.Max(x => x.TeacherID);
+                    User user = new User()
+                    {
+                        UserName = userName,
+                        PassWord = passWord,
+                        Position = "Teacher",
+                        TeacherID = teacherid
+                    };
+                    db.User.Add(user);
+                    db.SaveChanges();
+                    result = true;
+                }
+            }
+            catch (Exception x)
+            {
+
+            }
+            return result;
+
         }
         protected override void Dispose(bool disposing)
         {

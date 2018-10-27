@@ -5,13 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Danh sách các học phần</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@{ int k = 0; }
 <table class="table">
     <tr>
+        <th>
+            STT
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -30,29 +31,34 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubjectCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreditNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClassRoom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeTeach)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SubjectID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SubjectID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SubjectID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        k = k + 1;
+        <tr>
+            <td>
+            @k
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassRoom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeTeach)
+            </td>
+            <td>
+                @Html.ActionLink("Danh sách sinh viên", "ShowClass", new { id = item.SubjectID }) |
+                @Html.ActionLink("Kết quả đánh giá", "ShowResultSurvey", new { id = item.SubjectID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.SubjectID })
+            </td>
+        </tr>
+    }
 
 </table>

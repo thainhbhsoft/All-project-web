@@ -13,10 +13,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            STT
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TeacherCode)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -30,13 +30,16 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @{ int i = 0; }
+    @foreach (var item in Model)
+    {
+        i = i + 1;
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @i
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TeacherCode)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
@@ -48,11 +51,18 @@
             @Html.DisplayFor(modelItem => item.PassWord)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeacherID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeacherID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeacherID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.TeacherID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.TeacherID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.TeacherID })
         </td>
     </tr>
-}
+    }
 
 </table>
+<form action="/Teachers/ImportTeacher" method="post" enctype="multipart/form-data">
+    Import danh sách giảng viên từ excel:<br>
+    <input type="file" name="fileUpload">
+    <br>
+
+    <input type="submit" value="Submit">
+</form> 

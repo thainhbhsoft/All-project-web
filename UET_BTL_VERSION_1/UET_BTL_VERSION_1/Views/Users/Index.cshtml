@@ -11,6 +11,9 @@
 <table class="table">
     <tr>
         <th>
+            STT
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
@@ -19,24 +22,29 @@
         <th>
             @Html.DisplayNameFor(model => model.Position)
         </th>
-       
+
         <th></th>
     </tr>
+    @{ int i = 0; }
+    @foreach (var item in Model)
+    {
+        i = i + 1;
+        <tr>
+             <td>
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassWord)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PassWord)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position)
-        </td>
-       
-       
-    </tr>
-}
+
+        </tr>
+    }
 
 </table>
