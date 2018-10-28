@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,11 +17,14 @@ namespace UET_BTL_VERSION_1.Controllers
         private UetSurveyEntities db = new UetSurveyEntities();
 
         // GET: Teachers
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             if (Session["user"] != null)
             {
-                return View(db.Teacher.ToList());
+                int pageSize = 15;
+                int pageNumber = (page ?? 1);
+                ViewBag.sum = db.Teacher.Count();
+                return View(db.Teacher.ToList().ToPagedList(pageNumber, pageSize));
             }
             return RedirectToAction("Login", "Users");
            
@@ -116,6 +120,11 @@ namespace UET_BTL_VERSION_1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Teacher teacher = db.Teacher.Find(id);
+            bool a = db.StudentDetail.Any(x => x.TeacherID == id);
+            if (a)
+            {
+                ViewBag.message = "Giảng viên này đang dạy một học phần, không thể xóa được";
+            }
             if (teacher == null)
             {
                 return HttpNotFound();
@@ -151,6 +160,12 @@ namespace UET_BTL_VERSION_1.Controllers
         public ActionResult ShowResultSurvey(int? id)
         {
             List<int> lis = db.StudentDetail.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
+            StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
+            ViewBag.hasSurvey = db.Survey.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
+            if (ViewBag.hasSurvey == 0)
+            {
+                return View(student_Detail);
+            }
             ViewBag.ListPointAver = db.Survey
                 .Where(x => lis.Any(k => k == x.StudentDetailID))
                 .GroupBy(x => x.ContentSurveyID)
@@ -158,7 +173,6 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.NameSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
             ViewBag.CountSurvey = db.ContentSurvey.ToList().Count();
             ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
-            StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
             return View(student_Detail);
         }
         [HttpPost]

@@ -45,3 +45,61 @@
         margin-right: 33px;
         color: white;
     }
+.header-table {
+    display: flex;
+}
+
+.item-header {
+    border: 1px solid gainsboro;
+    text-align: center;
+    background: #8dd2cf;
+    height: 38px;
+    vertical-align: middle;
+    line-height: 38px;
+    font-weight: bold;
+    border-left: none;
+    border-right: none;
+}
+
+td {
+    text-align: center;
+}
+
+.item-header.stt {
+    width: 55px;
+}
+
+.item-header.hoten {
+    width: 268px;
+}
+
+.item-header.mssv {
+    width: 134px;
+}
+
+.item-header.ngaysinh {
+    width: 146px;
+}
+
+.item-header.khoahoc {
+    width: 252px;
+}
+
+.item-header.email {
+    width: 271px;
+}
+
+.content-table {
+    overflow: auto;
+    height: 600px;
+}
+.menu-trang li {
+    display: inline;
+}
+
+.menu-trang {
+    text-align: center;
+}
+th {
+    text-align: center;
+}

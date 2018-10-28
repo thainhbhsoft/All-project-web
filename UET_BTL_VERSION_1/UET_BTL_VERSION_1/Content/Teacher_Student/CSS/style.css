@@ -48,14 +48,7 @@
 .form-control {
     width: 50%;
 }
-.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-    padding: 0px;
-    /* padding-top: 13px; */
-    vertical-align: center;
-    line-height: 1.42857143;
-    vertical-align: middle;
-    border-top: 1px solid #ddd;
-}
+
 .btn-default {
     color: #333;
     background-color: #fff;
@@ -65,4 +58,11 @@
     background: blue;
     color: white;
     margin-right: 78px;
+}
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
 }

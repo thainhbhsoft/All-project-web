@@ -40,16 +40,19 @@ namespace UET_BTL_VERSION_1.Controllers
         public ActionResult ShowResultSurvey(int? id)
         {
             List<int> lis = db.StudentDetail.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
-            
+            ViewBag.hasSurvey = db.Survey.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
+            StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
+            if (ViewBag.hasSurvey == 0)
+            {
+                return View(student_Detail);
+            }
             ViewBag.ListPointAver = db.Survey
                 .Where(x => lis.Any(k => k == x.StudentDetailID))
                 .GroupBy(x => x.ContentSurveyID)
                 .Select(x => x.Average(y => y.Point)).ToList();
-            ViewBag.hasSurvey = db.Survey.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
             ViewBag.NameSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
             ViewBag.CountSurvey = db.ContentSurvey.ToList().Count();
             ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
-            StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
             return View(student_Detail);
         }
 
@@ -148,8 +151,14 @@ namespace UET_BTL_VERSION_1.Controllers
                         if (data != null)
                         {
                             Student stu = db.Student.SingleOrDefault(x => x.UserName.Trim().Equals(userName.Trim()));
-                            stu.DateOfBirth = DateTime.Parse(dob.ToString());
-                            stu.StudentCode = userName;
+                            if(stu.DateOfBirth == null)
+                            {
+                                stu.DateOfBirth = DateTime.Parse(dob.ToString());
+                            }
+                            if (stu.StudentCode == null)
+                            {
+                                stu.StudentCode = userName;
+                            }
                             StudentDetail stuDetail = new StudentDetail();
                             stuDetail.StudentID = stu.StudentID;
                             stuDetail.SubjectID = subID;

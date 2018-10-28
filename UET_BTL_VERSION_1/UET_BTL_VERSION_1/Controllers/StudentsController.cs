@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,11 +17,14 @@ namespace UET_BTL_VERSION_1.Controllers
         private UetSurveyEntities db = new UetSurveyEntities();
 
         // GET: Students
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             if (Session["user"] != null)
             {
-                return View(db.Student.ToList());
+                int pageSize = 20;
+                int pageNumber = (page ?? 1);
+                ViewBag.sum = db.Student.Count();
+                return View(db.Student.ToList().ToPagedList(pageNumber, pageSize));
             }
             return RedirectToAction("Login", "Users");
            
@@ -126,10 +130,29 @@ namespace UET_BTL_VERSION_1.Controllers
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(FormCollection f)
         {
-            Student student = db.Student.Find(id);
-            User user = db.User.SingleOrDefault(x => x.StudentID == student.StudentID);
+            int id = int.Parse(f["STUID"].ToString());
+            Student student = db.Student.SingleOrDefault(x => x.StudentID == id);
+            User user = db.User.SingleOrDefault(x => x.StudentID == id);
+            IEnumerable<StudentDetail> list2 = db.StudentDetail.Where(x => x.StudentID == id);
+            foreach (var item in list2)
+            {
+                db.StudentDetail.Remove(item);
+                IEnumerable<Survey> list3 = db.Survey.Where(x => x.StudentDetailID == item.StudentDetailID);
+                try
+                {
+                    foreach (var item3 in list3)
+                    {
+                        db.Survey.Remove(item3);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
             db.User.Remove(user);
             db.Student.Remove(student);
             db.SaveChanges();

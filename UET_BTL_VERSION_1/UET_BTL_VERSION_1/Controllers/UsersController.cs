@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -14,15 +15,6 @@ namespace UET_BTL_VERSION_1.Controllers
     {
         private UetSurveyEntities db = new UetSurveyEntities();
 
-        // GET: Users
-        public ActionResult Index()
-        {
-            if(Session["user"] != null)
-            {
-                return View(db.User.ToList());
-            }
-            return RedirectToAction("Login", "Users");
-        }
         [HttpGet]
         public ActionResult Login()
         {
@@ -46,7 +38,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("Index", "Students");
                 }
                
             }
@@ -56,7 +48,7 @@ namespace UET_BTL_VERSION_1.Controllers
         public ActionResult Logout()
         {
             Session.Remove("user");
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Login","Users");
         }
         protected override void Dispose(bool disposing)
         {

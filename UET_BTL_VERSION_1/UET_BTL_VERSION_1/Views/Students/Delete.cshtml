@@ -74,6 +74,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
+            @Html.Hidden("STUID", @Model.StudentID)
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>

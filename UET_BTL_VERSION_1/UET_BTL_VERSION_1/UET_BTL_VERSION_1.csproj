@@ -55,6 +55,12 @@
       <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -214,7 +220,10 @@
     <Content Include="Content\Admin\CSS\style.css" />
     <Content Include="Content\Admin\JS\admin.js" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Home\CSS\home.css" />
+    <Content Include="Content\User\CSS\style.css" />
+    <Content Include="Content\User\IMAGES\bgLogin.png" />
+    <Content Include="Content\User\IMAGES\iconLogin.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Teacher_Student\CSS\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -241,15 +250,14 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Admin\Images\" />
-    <Folder Include="Content\Home\IMAGES\" />
-    <Folder Include="Content\Home\JS\" />
     <Folder Include="Content\Teacher_Student\Images\" />
     <Folder Include="Content\Teacher_Student\JS\" />
+    <Folder Include="Content\User\Fonts\" />
+    <Folder Include="Content\User\JS\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Model1.edmx">
@@ -261,20 +269,16 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Students\Delete.cshtml" />
-    <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Teachers\Create.cshtml" />
     <Content Include="Views\Teachers\Delete.cshtml" />
-    <Content Include="Views\Teachers\Details.cshtml" />
     <Content Include="Views\Teachers\Edit.cshtml" />
     <Content Include="Views\Teachers\Index.cshtml" />
     <Content Include="Views\ContentSurveys\Create.cshtml" />
     <Content Include="Views\ContentSurveys\Delete.cshtml" />
-    <Content Include="Views\ContentSurveys\Details.cshtml" />
     <Content Include="Views\ContentSurveys\Edit.cshtml" />
     <Content Include="Views\ContentSurveys\Index.cshtml" />
     <Content Include="Views\Subjects\Delete.cshtml" />
@@ -282,7 +286,6 @@
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
     <Content Include="Views\Teachers\ShowListSubject.cshtml" />
     <Content Include="Views\Teachers\ShowClass.cshtml" />
@@ -291,7 +294,6 @@
     <Content Include="Views\Home\NamePartial.cshtml" />
     <Content Include="Views\Surveys\Create.cshtml" />
     <Content Include="Views\Surveys\Delete.cshtml" />
-    <Content Include="Views\Surveys\Details.cshtml" />
     <Content Include="Views\Surveys\Edit.cshtml" />
     <Content Include="Views\Surveys\Index.cshtml" />
     <Content Include="Views\Students\SurveySubject.cshtml" />

@@ -1,36 +1,104 @@
 ﻿@model UET_BTL_VERSION_1.Models.User
-@{
-    Layout = null;
-    Layout = "~/Views/Shared/_LayoutHome.cshtml";
-}
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <meta charset="utf-8" />
+    <link href="~/Content/User/CSS/style.css" rel="stylesheet" />
+    <title>my document</title>
 </head>
 <body>
-    <h2>Đăng nhập</h2>
-    <h1>@ViewBag.ThongBao</h1>
-    <form action="/Users/Login" method="post">
-        <table>
-            <tr>
-                <td>Tên đăng nhập:</td>
-                <td><input type="text" name="username" value="" /></td>
-            </tr>
-            <tr>
-                <td> Mật khẩu:</td>
-                <td> <input type="password" name="password" value="" /></td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> <input type="submit" name="submit" value="Submit" /></td>
-            </tr>
-        </table>
-         
-       
-    </form>
+    <div class="page-header">
+        
+        <div class="">
+            <select class="select-language" name="" id="" style="height: 30px; width: 180px;">
+                <option value="">Tiếng Việt (Vietnamese)</option>
+                <option value="">Tiếng Anh (English)</option>
+                <option value="">Tiếng Đức (Germany)</option>
+            </select>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content-login">
+            <div class="image">
+                <img src="~/Content/User/IMAGES/bgLogin.png" />
+            </div>
+            <div class="login-success">
+                <img src="~/Content/User/IMAGES/login-success.png" />
+                <div class="log-out">
+                    ĐĂNG XUẤT
+                </div>
+            </div>
+            <form action="/Users/Login" method="post">
+                <div class="login-form">
+                    <div class="error">
+                        <ul>@ViewBag.ThongBao</ul>
+                    </div>
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="dangnhap">ĐĂNG NHẬP HỆ THỐNG</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="item">
+                                    Tên đăng nhập
+                                </div>
+                            </td>
+                            <td>
+                                <div class="wrapp-login">
+                                    <div class="icon-user"></div>
+                                    <input id="username" type="text" name="username" value="" placeholder="Tên đăng nhập/Số điện thoại/Email" required />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="item">
+                                    Mật khẩu
+                                </div>
+                            </td>
+                            <td>
+                                <div class="wrapp-password">
+                                    <div class="icon-password"></div>
+                                    <input id="password" type="password" name="password" value="" placeholder="Mật khẩu" required />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="login">
+                                    <input type="submit" name="name" value="ĐĂNG NHẬP" />
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="email">
+        <div class="footer-item">Đại học công nghệ ĐHQGHN</div>
+        <div class="footer-item">Website: uet.vnu.edu.vn</div>
+        <div class="footer-item">Hướng dẫn sử dụng</div>
+    </div>
+    <div class="time-footer">
+        <pre>
+        Thời gian làm việc: Thứ 2 - Thứ 7: từ 7:30 đến 22:00,
+        Thứ 7, Chủ nhật: Sáng 8:00 - 12:00; Chiều 13:30 - 22:00
+        </pre>
+    </div>
+    <footer>
+        <pre>Copyright © 2015 - 2018        uet.vnu.edu.vn</pre>
+    </footer>
+
+   
+   
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 </body>
 </html>

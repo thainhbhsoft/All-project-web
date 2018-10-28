@@ -11,9 +11,11 @@
 </h2>
 
 
-<table class="table">
+<table class="table table-striped table-bordered table-hover">
     <tr>
-
+        <th>
+            STT
+        </th>
         <th>
             Họ tên
         </th>
@@ -26,25 +28,30 @@
         <th>
             Email
         </th>
-        <th></th>
+      
     </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        i = i + 1;
+        <tr>
+             <td>
+                    @i
+             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.StudentCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Course)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Email)
+            </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.StudentCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.Course)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.Email)
-        </td>
-
-    </tr>
-}
+        </tr>
+    }
 
 </table>

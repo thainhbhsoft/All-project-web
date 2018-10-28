@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-striped table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Text)
@@ -25,7 +25,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ContentSurveyID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ContentSurveyID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ContentSurveyID })
         </td>
     </tr>
