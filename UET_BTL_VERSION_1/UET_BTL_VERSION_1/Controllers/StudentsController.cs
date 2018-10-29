@@ -29,6 +29,24 @@ namespace UET_BTL_VERSION_1.Controllers
             return RedirectToAction("Login", "Users");
            
         }
+        [HttpPost]
+        public ActionResult Index(FormCollection f, int? page)
+        {
+            string sTuKhoa = f["txtTimKiem"].ToString();
+            ViewBag.tukhoa = sTuKhoa;
+            List<Student> listKQ = db.Student.Where(x => x.Name.Contains(sTuKhoa)).ToList();
+            // phân trang
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
+            if (listKQ.Count == 0)
+            {
+                ViewBag.ThongBao = "Không tìm thấy sinh viên nào";
+                return View(db.Student.ToList().ToPagedList(pageNumber, pageSize));
+            }
+            ViewBag.messageSearch = "Kết quả tìm kiếm với từ khóa : " + sTuKhoa;
+            ViewBag.sum = listKQ.Count();
+            return View(listKQ.ToPagedList(pageNumber, pageSize));
+        }
 
         // GET: Students/Details/5
         public ActionResult Details(int? id)
@@ -170,7 +188,6 @@ namespace UET_BTL_VERSION_1.Controllers
             StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id && x.StudentID == stID);
             if (db.Survey.Any(x => x.StudentDetailID == student_Detail.StudentDetailID))
             {
-                ViewBag.check = 1;
                 ViewBag.Message = "Bạn đã đánh giá môn học này";
                 return View(student_Detail);
             }

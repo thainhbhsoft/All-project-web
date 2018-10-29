@@ -218,7 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\CSS\style.css" />
-    <Content Include="Content\Admin\JS\admin.js" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\User\CSS\style.css" />
     <Content Include="Content\User\IMAGES\bgLogin.png" />
@@ -254,6 +253,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Admin\Images\" />
+    <Folder Include="Content\Admin\JS\" />
     <Folder Include="Content\Teacher_Student\Images\" />
     <Folder Include="Content\Teacher_Student\JS\" />
     <Folder Include="Content\User\Fonts\" />

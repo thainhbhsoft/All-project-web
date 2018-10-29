@@ -14,25 +14,19 @@
      </div>
     <div class="wrapper">
         <div class="content-left">
-
-            @Html.ActionLink("Quản lý sinh viên", "Index", "Students")
-            <br />
-            @Html.ActionLink("Quản lý giảng viên", "Index", "Teachers")
-            <br />
-            @Html.ActionLink("Quản lý các học phần", "Index", "Subjects")
-            <br />
-            @Html.ActionLink("Quản lý Phiếu khảo sát", "Index", "ContentSurveys")
-
-
+            <ul>
+                <li> @Html.ActionLink("Quản lý sinh viên", "Index", "Students")</li>
+                <li> @Html.ActionLink("Quản lý giảng viên", "Index", "Teachers")</li>
+                <li>@Html.ActionLink("Quản lý các học phần", "Index", "Subjects")</li>
+                <li>@Html.ActionLink("Quản lý Phiếu khảo sát", "Index", "ContentSurveys")</li>
+            </ul>
         </div>
         <div class="content-right">
-            <div class="ContentAjax"></div>
             @RenderBody()
         </div>
     </div>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Content/Admin/JS/admin.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

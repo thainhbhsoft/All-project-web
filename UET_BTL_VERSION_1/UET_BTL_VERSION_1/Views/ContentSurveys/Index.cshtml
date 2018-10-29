@@ -5,29 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Danh sách các tiêu chí đánh giá</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm tiêu chí mới và xóa dữ liệu cũ", "Create")
 </p>
 <table class="table table-striped table-bordered table-hover">
     <tr>
+        <th>STT</th>
         <th>
-            @Html.DisplayNameFor(model => model.Text)
+           Tiêu chí đánh giá
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+    @{ int i = 0; }
+    @foreach (var item in Model)
+    {
+        i = i + 1;
     <tr>
+        <td>
+            @i
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Text)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ContentSurveyID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ContentSurveyID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ContentSurveyID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ContentSurveyID })
         </td>
     </tr>
-}
+    }
 
 </table>

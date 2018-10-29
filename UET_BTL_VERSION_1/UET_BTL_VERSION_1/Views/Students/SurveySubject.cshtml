@@ -17,7 +17,11 @@
     <h4>Số tín chỉ: @Model.Subject.CreditNumber</h4>
     <h4>Tên giảng viên: @Model.Teacher.Name</h4>
 
-    @if (ViewBag.check != 1)
+    @if (ViewBag.Message != null)
+    {
+        <h1>@ViewBag.Message</h1>
+    }
+    else
     {
         using (Html.BeginForm())
         {
@@ -61,7 +65,10 @@
         }
     }
 
-    <h1>@ViewBag.Message</h1>
+
+    
+
+
 
 </body>
 </html>

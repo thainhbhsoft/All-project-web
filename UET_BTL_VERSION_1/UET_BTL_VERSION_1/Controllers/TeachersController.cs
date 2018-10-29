@@ -29,6 +29,24 @@ namespace UET_BTL_VERSION_1.Controllers
             return RedirectToAction("Login", "Users");
            
         }
+        [HttpPost]
+        public ActionResult Index(FormCollection f, int? page)
+        {
+            string sTuKhoa = f["txtTimKiem"].ToString();
+            ViewBag.tukhoa = sTuKhoa;
+            List<Teacher> listKQ = db.Teacher.Where(x => x.Name.Contains(sTuKhoa)).ToList();
+            // phân trang
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
+            if (listKQ.Count == 0)
+            {
+                ViewBag.ThongBao = "Không tìm thấy giang viên nào";
+                return View(db.Teacher.ToList().ToPagedList(pageNumber, pageSize));
+            }
+            ViewBag.messageSearch = "Kết quả tìm kiếm với từ khóa : " + sTuKhoa; 
+            ViewBag.sum = listKQ.Count();
+            return View(listKQ.ToPagedList(pageNumber, pageSize));
+        }
 
         // GET: Teachers/Details/5
         public ActionResult Details(int? id)
@@ -162,6 +180,7 @@ namespace UET_BTL_VERSION_1.Controllers
             List<int> lis = db.StudentDetail.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
             StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
             ViewBag.hasSurvey = db.Survey.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
+            ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
             if (ViewBag.hasSurvey == 0)
             {
                 return View(student_Detail);
@@ -172,7 +191,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 .Select(x => x.Average(y => y.Point)).ToList();
             ViewBag.NameSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
             ViewBag.CountSurvey = db.ContentSurvey.ToList().Count();
-            ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
+           
             return View(student_Detail);
         }
         [HttpPost]

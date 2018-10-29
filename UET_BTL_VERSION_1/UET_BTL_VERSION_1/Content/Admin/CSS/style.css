@@ -14,14 +14,14 @@
 .content-left {
     height: 1000px;
     width: 15%;
-    border: 1px solid black;
+   
     box-sizing: border-box;
 }
 
 .content-right {
     height: 2000px;
     width: 85%;
-    border: 1px solid black;
+   
     box-sizing: border-box;
 }
 
@@ -102,4 +102,47 @@ td {
 }
 th {
     text-align: center;
+}
+li a {
+    padding: 10px;
+    padding-left: 20px;
+    font-size: 15px;
+    background: #f9f9f9;
+    display: block;
+    color: blue;
+    /* text-align: center; */
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    margin: 4px;
+    border: 1px solid;
+}
+.pagination li{
+    border:none;
+}
+*{}
+.search .btn-default {
+    position: absolute;
+    right: 16px;
+    top: 109px;
+    background: #cbf1ec;
+    width: 75px;
+    line-height: 16px;
+    height: 44px;
+    border-radius: 0;
+    border: 1px solid blue;
+    padding: 0px;
+}
+input#txtTimKiem {
+    position: absolute;
+    right: 90px;
+    top: 109px;
+    width: 222px;
+    height: 44px;
+    border: 1px solid blue;
+    padding: 14px;
 }

@@ -42,6 +42,7 @@ namespace UET_BTL_VERSION_1.Controllers
             List<int> lis = db.StudentDetail.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
             ViewBag.hasSurvey = db.Survey.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
             StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
+            ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
             if (ViewBag.hasSurvey == 0)
             {
                 return View(student_Detail);
@@ -52,7 +53,6 @@ namespace UET_BTL_VERSION_1.Controllers
                 .Select(x => x.Average(y => y.Point)).ToList();
             ViewBag.NameSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
             ViewBag.CountSurvey = db.ContentSurvey.ToList().Count();
-            ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
             return View(student_Detail);
         }
 

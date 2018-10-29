@@ -25,21 +25,7 @@ namespace UET_BTL_VERSION_1.Controllers
            
         }
 
-        // GET: ContentSurveys/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ContentSurvey contentSurvey = db.ContentSurvey.Find(id);
-            if (contentSurvey == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contentSurvey);
-        }
-
+       
         // GET: ContentSurveys/Create
         public ActionResult Create()
         {
@@ -55,6 +41,10 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
+                foreach (var item in db.Survey)
+                {
+                    db.Survey.Remove(item);
+                }
                 db.ContentSurvey.Add(contentSurvey);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -116,6 +106,17 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             ContentSurvey contentSurvey = db.ContentSurvey.Find(id);
             db.ContentSurvey.Remove(contentSurvey);
+            try
+            {
+                IEnumerable<Survey> listsurvey = db.Survey.Where(x => x.ContentSurveyID == id);
+                foreach (var item in listsurvey)
+                {
+                    db.Survey.Remove(item);
+                }
+            }
+            catch (Exception)
+            {
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
