@@ -36,7 +36,7 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.tukhoa = sTuKhoa;
             List<Student> listKQ = db.Student.Where(x => x.Name.Contains(sTuKhoa)).ToList();
             // phân trang
-            int pageSize = 15;
+            int pageSize = 200;
             int pageNumber = (page ?? 1);
             if (listKQ.Count == 0)
             {
