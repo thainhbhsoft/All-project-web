@@ -60,12 +60,13 @@
             </table>
             @Html.Hidden("id", Model.SubjectID)
             @Html.Hidden("studentDetailID", Model.StudentDetailID)
+            <h3> ý kiến đóng góp:  <input type="text" name="note" value="" /></h3>
             <input type="submit" value="Submit" class="btn btn-default" />
-
         }
+    @ViewBag.Message2
     }
 
-
+           
     
 
 

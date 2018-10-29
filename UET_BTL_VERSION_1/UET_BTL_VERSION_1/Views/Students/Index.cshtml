@@ -17,7 +17,7 @@ else
     <div class="search">
         @using (Html.BeginForm("Index", "Students", FormMethod.Post))
         {
-            @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Tìm kiếm sinh viên..." })
+            @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", required = "required", @placeholder = "Tìm kiếm sinh viên..." })
             <button type="submit" class="btn btn-default btn-lg" value="">
                 Search
             </button>

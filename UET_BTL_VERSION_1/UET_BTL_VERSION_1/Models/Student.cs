@@ -30,7 +30,7 @@ namespace UET_BTL_VERSION_1.Models
         public string Course { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         [Required(ErrorMessage = "Không được để trống")]
-        [RegularExpression(@"[0-9]{8}@vnu.edu.vn", ErrorMessage = "Email phải có dạng xxxxxxxx@vnu.edu.vn với x là số")]
+        [RegularExpression(@"\d\d\d\d\d\d\d\d@vnu.edu.vn", ErrorMessage = "Email phải có dạng xxxxxxxx@vnu.edu.vn với x là số")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Không được để trống")]
         public string UserName { get; set; }

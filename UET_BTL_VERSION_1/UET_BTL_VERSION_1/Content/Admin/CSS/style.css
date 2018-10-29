@@ -14,14 +14,12 @@
 .content-left {
     height: 1000px;
     width: 15%;
-   
     box-sizing: border-box;
 }
 
 .content-right {
     height: 2000px;
     width: 85%;
-   
     box-sizing: border-box;
 }
 
@@ -45,6 +43,7 @@
         margin-right: 33px;
         color: white;
     }
+
 .header-table {
     display: flex;
 }
@@ -66,33 +65,34 @@ td {
 }
 
 .item-header.stt {
-    width: 55px;
+    width: 40px;
 }
 
 .item-header.hoten {
-    width: 268px;
+    width: 216px;
 }
 
 .item-header.mssv {
-    width: 134px;
+    width: 107px;
 }
 
 .item-header.ngaysinh {
-    width: 146px;
+    width: 161px;
 }
 
 .item-header.khoahoc {
-    width: 252px;
+    width: 135px;
 }
 
 .item-header.email {
-    width: 271px;
+    width: 284px;
 }
 
 .content-table {
     overflow: auto;
     height: 600px;
 }
+
 .menu-trang li {
     display: inline;
 }
@@ -100,9 +100,11 @@ td {
 .menu-trang {
     text-align: center;
 }
+
 th {
     text-align: center;
 }
+
 li a {
     padding: 10px;
     padding-left: 20px;
@@ -112,19 +114,25 @@ li a {
     color: blue;
     /* text-align: center; */
 }
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
+
 li {
     margin: 4px;
     border: 1px solid;
 }
-.pagination li{
-    border:none;
+
+.pagination li {
+    border: none;
 }
-*{}
+
+* {
+}
+
 .search .btn-default {
     position: absolute;
     right: 16px;
@@ -137,6 +145,7 @@ li {
     border: 1px solid blue;
     padding: 0px;
 }
+
 input#txtTimKiem {
     position: absolute;
     right: 90px;

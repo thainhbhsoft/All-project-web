@@ -196,19 +196,22 @@ namespace UET_BTL_VERSION_1.Controllers
             int k = int.Parse(form["id"]);
             int stDetailID = int.Parse(form["studentDetailID"]);
             StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == k);
-            if(form.Count < db.ContentSurvey.ToList().Count() + 2)
+            if(form.Count < db.ContentSurvey.ToList().Count() + 3)
             {
-                ViewBag.Message = "Bạn cần đánh giá đủ các tiêu chí";
+                ViewBag.Message2 = "Bạn cần đánh giá đủ các tiêu chí";
                 return View(student_Detail);
             }
-            for (int i = 0; i < ViewBag.Count; i++)
+            int i = 0;
+            foreach (var item in db.ContentSurvey)
             {
                 Survey survey = new Survey();
                 survey.StudentDetailID = stDetailID;
-                survey.ContentSurveyID = i + 1;
-                survey.Point = int.Parse(form[i]);
+                survey.ContentSurveyID = item.ContentSurveyID;
+                survey.Point = int.Parse(form[i++]);
                 db.Survey.Add(survey);
             }
+            StudentDetail stDetail =  db.StudentDetail.SingleOrDefault(x => x.StudentDetailID == stDetailID);
+            stDetail.NoteSurvey = form["note"].ToString();
             db.SaveChanges();
             return RedirectToAction("ShowListSubject");
         }

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "ResultSurveyEveryStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ int k = 0; }
+@{
+    if (ViewBag.hasSurvey == 0)
+    {
+        <h2>Chưa có kết quả đánh giá</h2>
+    }
+    else
+    {
+        <table class="table table table-striped table-bordered table-hover">
+            <tr>
+                <th>
+                    STT
+                </th>
+                <th>
+                    Tên tiêu chí đánh giá
+                </th>
+                <th>
+                    Điểm đánh giá(Thang điểm 100)
+                </th>
+            </tr>
+
+            @for (int i = 0; i < ViewBag.CountSurvey; i++)
+            {
+                k = k + 1;
+                <tr>
+                    <td>
+                        @k
+                    </td>
+                    <td>
+                        @ViewBag.NameSurvey[@i]
+                    </td>
+                    <td>
+                       @ViewBag.ListPoint[@i]
+                    </td>
+
+                </tr>
+
+            }
+
+
+        </table>
+        if (ViewBag.note != null)
+        {
+            <h2>Ý kiến đóng góp: @ViewBag.note</h2>
+        }
+    }
+
+}

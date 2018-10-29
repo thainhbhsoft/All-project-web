@@ -37,6 +37,22 @@ namespace UET_BTL_VERSION_1.Controllers
             return View(listStudent);
            
         }
+
+        public ActionResult ResultSurveyEveryStudent(int? id)
+        {
+            ViewBag.hasSurvey = db.Survey.Where(x => x.StudentDetailID == id).ToList().Count();
+            if (ViewBag.hasSurvey == 0)
+            {
+                return View();
+            }
+            ViewBag.ListPoint = db.Survey
+              .Where(x => x.StudentDetailID == id)
+              .Select(x => x.Point).ToList();
+            ViewBag.NameSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
+            ViewBag.CountSurvey = db.ContentSurvey.ToList().Count();
+            ViewBag.note = db.StudentDetail.SingleOrDefault(x => x.StudentDetailID == id).NoteSurvey;
+            return View();
+        }
         public ActionResult ShowResultSurvey(int? id)
         {
             List<int> lis = db.StudentDetail.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();

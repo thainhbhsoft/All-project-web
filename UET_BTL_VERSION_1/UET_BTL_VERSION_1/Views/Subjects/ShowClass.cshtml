@@ -14,12 +14,12 @@
 
 
 <div class="header-table">
-    <div class="item-header stt" >STT</div>
+    <div class="item-header stt">STT</div>
     <div class="item-header hoten">Họ tên</div>
-    <div class="item-header mssv" >Mã sinh viên</div>
-    <div class="item-header ngaysinh" >Ngày sinh</div>
-    <div class="item-header khoahoc" >Khóa học</div>
-    <div class="item-header email" >Email</div>
+    <div class="item-header mssv">Mã sinh viên</div>
+    <div class="item-header ngaysinh">Ngày sinh</div>
+    <div class="item-header khoahoc">Khóa học</div>
+    <div class="item-header email">Email</div>
 </div>
 <div class="content-table">
     <table class="table table-striped table-bordered table-hover">
@@ -28,27 +28,29 @@
         {
             i = i + 1;
             var date = item.Student.DateOfBirth.ToString().Substring(0, 10);
-            <tr>
-                <td>
-                    @i
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Student.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Student.StudentCode)
-                </td>
-                <td>
-                    @date
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Student.Course)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Student.Email)
-                </td>
-
-            </tr>
+        <tr>
+            <td>
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.StudentCode)
+            </td>
+            <td>
+                @date
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Course)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Kết quả đánh giá", "ResultSurveyEveryStudent", new { id = item.StudentDetailID }) 
+            </td>
+        </tr>
         }
     </table>
 </div>
