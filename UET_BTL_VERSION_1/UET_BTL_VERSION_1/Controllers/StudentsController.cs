@@ -69,9 +69,6 @@ namespace UET_BTL_VERSION_1.Controllers
             return View();
         }
 
-        // POST: Students/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StudentID,Name,StudentCode,Course,DateOfBirth,Email,UserName,PassWord")] Student student)
@@ -111,9 +108,6 @@ namespace UET_BTL_VERSION_1.Controllers
             return View(student);
         }
 
-        // POST: Students/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StudentID,Name,StudentCode,Course,DateOfBirth,Email,UserName,PassWord")] Student student)
@@ -180,7 +174,6 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             User user = Session["user"] as User;
             IEnumerable<StudentDetail> listStudent = db.StudentDetail.Where(x => x.StudentID == user.StudentID);
-
             return View(listStudent);
         }
         public ActionResult SurveySubject(int? id, int? stID)
@@ -283,6 +276,7 @@ namespace UET_BTL_VERSION_1.Controllers
                     var stu = new Student();
                     stu.UserName = userName;
                     stu.PassWord = passWord;
+                    stu.StudentCode = userName;
                     stu.Name = fullName;
                     stu.Email = email;
                     stu.Course = course;
