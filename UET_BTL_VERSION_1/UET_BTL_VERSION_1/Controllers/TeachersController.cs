@@ -48,20 +48,7 @@ namespace UET_BTL_VERSION_1.Controllers
             return View(listKQ.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Teachers/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Teacher teacher = db.Teacher.Find(id);
-            if (teacher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(teacher);
-        }
+      
 
         // GET: Teachers/Create
         public ActionResult Create()
@@ -71,28 +58,34 @@ namespace UET_BTL_VERSION_1.Controllers
 
         // POST: Teachers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "TeacherID,Name,TeacherCode,Email,UserName,PassWord")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
-                db.Teacher.Add(teacher);
-                db.SaveChanges();
-                int teachertid = db.Teacher.Max(x => x.TeacherID);
-                User user = new User()
+                if (db.Teacher.Any(x => x.UserName == teacher.UserName))
                 {
-                    UserName = teacher.UserName,
-                    PassWord = teacher.PassWord,
-                    Position = "Teacher",
-                    TeacherID = teachertid
-                };
-                db.User.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    ViewBag.error = "Tên đăng nhập đã tồn tại";
+                    return View(teacher);
+                }
+                else
+                {
+                    db.Teacher.Add(teacher);
+                    db.SaveChanges();
+                    int teachertid = db.Teacher.Max(x => x.TeacherID);
+                    User user = new User()
+                    {
+                        UserName = teacher.UserName,
+                        PassWord = teacher.PassWord,
+                        Position = "Teacher",
+                        TeacherID = teachertid
+                    };
+                    db.User.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
             return View(teacher);
         }
 

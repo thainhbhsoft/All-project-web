@@ -23,7 +23,6 @@ namespace UET_BTL_VERSION_1.Controllers
                 return View(db.Subject.ToList());
             }
             return RedirectToAction("Login", "Users");
-          
         }
 
         // GET: Subjects/Details/5

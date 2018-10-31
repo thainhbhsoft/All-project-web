@@ -34,7 +34,6 @@ namespace UET_BTL_VERSION_1.Controllers
 
         // POST: ContentSurveys/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ContentSurveyID,Text")] ContentSurvey contentSurvey)
@@ -70,7 +69,6 @@ namespace UET_BTL_VERSION_1.Controllers
 
         // POST: ContentSurveys/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ContentSurveyID,Text")] ContentSurvey contentSurvey)

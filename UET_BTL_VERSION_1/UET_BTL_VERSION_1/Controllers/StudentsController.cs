@@ -48,20 +48,7 @@ namespace UET_BTL_VERSION_1.Controllers
             return View(listKQ.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Students/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = db.Student.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
-        }
+       
 
         // GET: Students/Create
         public ActionResult Create()
@@ -75,21 +62,28 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Student.Add(student);
-                db.SaveChanges();
-                int studentid = db.Student.Max(x => x.StudentID);
-                User user = new User()
+                if (db.Student.Any(x => x.UserName == student.UserName))
                 {
-                    UserName = student.UserName,
-                    PassWord = student.PassWord,
-                    Position = "Student",
-                    StudentID = studentid
-                };
-                db.User.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    ViewBag.error = "Tên đăng nhập đã tồn tại";
+                    return View(student);
+                }
+                else
+                {
+                    db.Student.Add(student);
+                    db.SaveChanges();
+                    int studentid = db.Student.Max(x => x.StudentID);
+                    User user = new User()
+                    {
+                        UserName = student.UserName,
+                        PassWord = student.PassWord,
+                        Position = "Student",
+                        StudentID = studentid
+                    };
+                    db.User.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
             return View(student);
         }
 

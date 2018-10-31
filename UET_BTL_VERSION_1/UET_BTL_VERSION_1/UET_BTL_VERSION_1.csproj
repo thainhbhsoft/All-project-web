@@ -169,7 +169,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
-    <Compile Include="Controllers\SurveysController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -251,7 +250,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\Admin\Images\" />
     <Folder Include="Content\Admin\JS\" />
     <Folder Include="Content\Teacher_Student\Images\" />
@@ -292,10 +290,6 @@
     <Content Include="Views\Teachers\ShowResultSurvey.cshtml" />
     <Content Include="Views\Students\ShowListSubject.cshtml" />
     <Content Include="Views\Home\NamePartial.cshtml" />
-    <Content Include="Views\Surveys\Create.cshtml" />
-    <Content Include="Views\Surveys\Delete.cshtml" />
-    <Content Include="Views\Surveys\Edit.cshtml" />
-    <Content Include="Views\Surveys\Index.cshtml" />
     <Content Include="Views\Students\SurveySubject.cshtml" />
     <Content Include="Views\Students\ImportStudent.cshtml" />
     <Content Include="Views\Teachers\ImportTeacher.cshtml" />
