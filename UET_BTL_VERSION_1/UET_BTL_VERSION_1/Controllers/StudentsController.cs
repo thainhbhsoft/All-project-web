@@ -15,7 +15,6 @@ namespace UET_BTL_VERSION_1.Controllers
     public class StudentsController : Controller
     {
         private UetSurveyEntities db = new UetSurveyEntities();
-
         // GET: Students
         public ActionResult Index(int? page)
         {
@@ -47,15 +46,11 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.sum = listKQ.Count();
             return View(listKQ.ToPagedList(pageNumber, pageSize));
         }
-
-       
-
         // GET: Students/Create
         public ActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StudentID,Name,StudentCode,Course,DateOfBirth,Email,UserName,PassWord")] Student student)
@@ -86,7 +81,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(student);
         }
-
         // GET: Students/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -101,7 +95,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(student);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StudentID,Name,StudentCode,Course,DateOfBirth,Email,UserName,PassWord")] Student student)
@@ -117,7 +110,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(student);
         }
-
         // GET: Students/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -132,7 +124,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(student);
         }
-
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -222,7 +213,6 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.countStudent = count;
             return View();
         }
-
         public bool ImportData(out int count, ExcelPackage package)
         {
             count = 0;
@@ -299,7 +289,6 @@ namespace UET_BTL_VERSION_1.Controllers
             return result;
 
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -14,7 +14,6 @@ namespace UET_BTL_VERSION_1.Controllers
     public class SubjectsController : Controller
     {
         private UetSurveyEntities db = new UetSurveyEntities();
-
         // GET: Subjects
         public ActionResult Index()
         {
@@ -24,7 +23,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return RedirectToAction("Login", "Users");
         }
-
         // GET: Subjects/Details/5
         public ActionResult ShowClass(int? id)
         {
@@ -36,7 +34,6 @@ namespace UET_BTL_VERSION_1.Controllers
             return View(listStudent);
            
         }
-
         public ActionResult ResultSurveyEveryStudent(int? id)
         {
             ViewBag.hasSurvey = db.Survey.Where(x => x.StudentDetailID == id).ToList().Count();
@@ -70,8 +67,6 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.CountSurvey = db.ContentSurvey.ToList().Count();
             return View(student_Detail);
         }
-
-
         // GET: Subjects/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -86,7 +81,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(subject);
         }
-
         // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -127,7 +121,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View();
         }
-
         public bool ImportData(out int count, ExcelPackage package)
         {
             count = 0;
@@ -194,7 +187,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return result;
         }
-       
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -14,7 +14,6 @@ namespace UET_BTL_VERSION_1.Controllers
     public class UsersController : Controller
     {
         private UetSurveyEntities db = new UetSurveyEntities();
-
         [HttpGet]
         public ActionResult Login()
         {
@@ -38,7 +37,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Students");
+                    return RedirectToAction("Index", "Home");
                 }
                
             }

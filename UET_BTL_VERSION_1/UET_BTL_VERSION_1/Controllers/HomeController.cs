@@ -12,6 +12,10 @@ namespace UET_BTL_VERSION_1.Controllers
     {
         private UetSurveyEntities db = new UetSurveyEntities();
        
+        public ActionResult Index()
+        {
+            return View();
+        }
         public PartialViewResult NamePartial()
         {
             User user = Session["user"] as User;

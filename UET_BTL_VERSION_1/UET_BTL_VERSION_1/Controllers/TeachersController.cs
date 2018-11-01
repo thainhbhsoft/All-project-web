@@ -15,7 +15,6 @@ namespace UET_BTL_VERSION_1.Controllers
     public class TeachersController : Controller
     {
         private UetSurveyEntities db = new UetSurveyEntities();
-
         // GET: Teachers
         public ActionResult Index(int? page)
         {
@@ -47,15 +46,11 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.sum = listKQ.Count();
             return View(listKQ.ToPagedList(pageNumber, pageSize));
         }
-
-      
-
         // GET: Teachers/Create
         public ActionResult Create()
         {
             return View();
         }
-
         // POST: Teachers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
@@ -88,7 +83,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(teacher);
         }
-
         // GET: Teachers/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -103,7 +97,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(teacher);
         }
-
         // POST: Teachers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
@@ -121,7 +114,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(teacher);
         }
-
         // GET: Teachers/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -141,7 +133,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(teacher);
         }
-
         // POST: Teachers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -199,7 +190,6 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.countStudent = count;
             return View();
         }
-
         public bool ImportData(out int count, ExcelPackage package)
         {
             count = 0;

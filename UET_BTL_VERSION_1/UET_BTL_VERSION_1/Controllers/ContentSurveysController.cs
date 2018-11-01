@@ -13,7 +13,6 @@ namespace UET_BTL_VERSION_1.Controllers
     public class ContentSurveysController : Controller
     {
         private UetSurveyEntities db = new UetSurveyEntities();
-
         // GET: ContentSurveys
         public ActionResult Index()
         {
@@ -24,14 +23,11 @@ namespace UET_BTL_VERSION_1.Controllers
             return RedirectToAction("Login", "Users");
            
         }
-
-       
         // GET: ContentSurveys/Create
         public ActionResult Create()
         {
             return View();
         }
-
         // POST: ContentSurveys/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
@@ -51,7 +47,6 @@ namespace UET_BTL_VERSION_1.Controllers
 
             return View(contentSurvey);
         }
-
         // GET: ContentSurveys/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -66,7 +61,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(contentSurvey);
         }
-
         // POST: ContentSurveys/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
@@ -81,7 +75,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(contentSurvey);
         }
-
         // GET: ContentSurveys/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -96,7 +89,6 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(contentSurvey);
         }
-
         // POST: ContentSurveys/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -118,7 +110,6 @@ namespace UET_BTL_VERSION_1.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

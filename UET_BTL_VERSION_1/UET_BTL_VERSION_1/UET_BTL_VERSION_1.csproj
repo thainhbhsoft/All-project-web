@@ -216,7 +216,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Admin\CSS\style.css" />
+    <Content Include="Contents\CSS\bootstrap.min.css" />
+    <Content Include="Contents\CSS\dashboard.css" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Contents\js\admin.js" />
+    <Content Include="Contents\js\bootstrap.min.js" />
+    <Content Include="Contents\js\jquery-3.3.1.min.js" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\User\CSS\style.css" />
     <Content Include="Content\User\IMAGES\bgLogin.png" />
@@ -250,8 +255,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Admin\Images\" />
-    <Folder Include="Content\Admin\JS\" />
     <Folder Include="Content\Teacher_Student\Images\" />
     <Folder Include="Content\Teacher_Student\JS\" />
     <Folder Include="Content\User\Fonts\" />
@@ -265,8 +268,12 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Students\Delete.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
@@ -296,6 +303,7 @@
     <Content Include="Views\Subjects\ShowResultSurvey.cshtml" />
     <Content Include="Views\Subjects\ImportSubject.cshtml" />
     <Content Include="Views\Subjects\ResultSurveyEveryStudent.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
