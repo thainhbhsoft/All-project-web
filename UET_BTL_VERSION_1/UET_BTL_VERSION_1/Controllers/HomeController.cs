@@ -14,7 +14,15 @@ namespace UET_BTL_VERSION_1.Controllers
        
         public ActionResult Index()
         {
-            return View();
+            if (Session["user"] != null)
+            {
+                ViewBag.SumStudents = db.Student.ToList().Count();
+                ViewBag.SumSubjects = db.Subject.ToList().Count();
+                ViewBag.SumSurveys = db.Survey.GroupBy(x => x.StudentDetailID).Count();
+                ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
+                return View();
+            }
+            return RedirectToAction("Login", "Users");
         }
         public PartialViewResult NamePartial()
         {

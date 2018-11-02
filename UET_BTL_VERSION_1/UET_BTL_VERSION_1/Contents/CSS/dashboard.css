@@ -46,6 +46,10 @@ h2 {
     margin-bottom: 0px;
 }
 
+.list-group {
+    border: none;
+}
+
     .list-group .list-group-item {
         border-radius: 0px;
         border-right: 0px;
@@ -86,6 +90,19 @@ hr {
         color: #fff;
     }
 
+p.result {
+    border: 1px solid;
+    background: green;
+    padding: 0;
+    text-align: center;
+    border-radius: 50%;
+    margin-top: 19px;
+    width: 85px;
+    height: 50px;
+    line-height: 50px;
+    opacity: 0.7;
+}
+
 .arrow-right {
     position: absolute;
     float: right;
@@ -115,6 +132,14 @@ hr {
 }
 
 * {
+}
+
+a.navbar-brand {
+    color: white;
+}
+
+button.btn.btn-default {
+    background: #efe66f;
 }
 
 .input-search {
