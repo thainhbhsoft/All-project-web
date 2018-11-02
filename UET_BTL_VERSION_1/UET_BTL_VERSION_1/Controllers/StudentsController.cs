@@ -164,14 +164,51 @@ namespace UET_BTL_VERSION_1.Controllers
                 List<int> listID = db.StudentDetail.Where(x => x.StudentID == user.StudentID).Select(y => y.StudentDetailID).ToList();
                 ViewBag.SumSubjectSurvey = db.Survey.Where(x => listID.Any(y => y == x.StudentDetailID)).GroupBy(x => x.StudentDetailID).Count();
                 ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
+                return View();
             }
-            return View();
+            return RedirectToAction("Login", "Users");
         }
         public ActionResult ShowListSubject()
         {
             User user = Session["user"] as User;
-            IEnumerable<StudentDetail> listStudent = db.StudentDetail.Where(x => x.StudentID == user.StudentID);
-            return View(listStudent);
+            if (user != null)
+            {
+                IEnumerable<StudentDetail> listStudent = db.StudentDetail.Where(x => x.StudentID == user.StudentID);
+                return View(listStudent);
+            }
+            return RedirectToAction("Login", "Users");
+        }
+        public ActionResult ShowInforStudent()
+        {
+            User user = Session["user"] as User;
+            if (user != null)
+            {
+                Student student = db.Student.SingleOrDefault(x => x.StudentID == user.StudentID);
+                return View(student);
+            }
+            return RedirectToAction("Login", "Users");
+        }
+        [HttpPost]
+        public ActionResult ShowInforStudent(FormCollection f)
+        {
+            User user = Session["user"] as User;
+            string pass = f["passOld"].ToString();
+            if (user != null)
+            {
+                Student stu = db.Student.SingleOrDefault(x => x.StudentID == user.StudentID);
+                if ((pass != user.PassWord)  || (f["passNew1"].ToString().Trim() != f["passNew2"].ToString().Trim()))
+                {
+                    ViewBag.Message = "Mật khẩu cũ không đúng hoặc hai mật khẩu mới không khớp nhau!";
+                    return View(stu);
+                }
+                User u = db.User.SingleOrDefault(x => x.UserName == user.UserName);
+                u.PassWord = f["passNew1"].ToString();
+                stu.PassWord = f["passNew1"].ToString();
+                db.SaveChanges();
+                ViewBag.Message = "Đã đổi mật khẩu thành công";
+                return View(stu);
+            }
+            return RedirectToAction("Login", "Users");
         }
         public ActionResult SurveySubject(int? id, int? stID)
         {

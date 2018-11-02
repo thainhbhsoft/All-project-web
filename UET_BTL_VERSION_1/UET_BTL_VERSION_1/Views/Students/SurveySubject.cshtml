@@ -25,51 +25,63 @@
     {
         using (Html.BeginForm())
         {
-            <table class="table">
-                <tr>
-                    <th>
-                        Các tiêu chí đánh giá
-                    </th>
-                    <th>
-                        Chấm điểm
-                    </th>
-                    <th></th>
-                </tr>
-                @{
-                    for (int i = 0; i < ViewBag.Count; i++)
-                    {
+            <div class="row">
 
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>
-                                @ViewBag.ContentSurvey[@i]
-                            </td>
-                            <td>
-                                | @Html.RadioButton(@i.ToString(), 20)20 |
-                                @Html.RadioButton(@i.ToString(), 40)40 |
-                                @Html.RadioButton(@i.ToString(), 60)60 |
-                                @Html.RadioButton(@i.ToString(), 80)80 |
-                                @Html.RadioButton(@i.ToString(), 100)100 |
-                            </td>
-
+                            <th>Các tiêu chí đánh giá</th>
+                            <th>20</th>
+                            <th>40</th>
+                            <th>60</th>
+                            <th>80</th>
+                            <th>100</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            for (int i = 0; i < ViewBag.Count; i++)
+                            {
 
-                    }
+                                <tr>
+                                    <td>
+                                        @ViewBag.ContentSurvey[@i]
+                                    </td>
+                                    <td>
+                                        @Html.RadioButton(@i.ToString(), 20)
+                                    </td>
+                                    <td>
+                                        @Html.RadioButton(@i.ToString(), 40)
+                                    </td>
+                                    <td>
+                                        @Html.RadioButton(@i.ToString(), 60)
+                                    </td>
+                                    <td>
+                                        @Html.RadioButton(@i.ToString(), 80)
+                                    </td>
+                                    <td>
+                                        @Html.RadioButton(@i.ToString(), 100)
+                                    </td>
+                                </tr>
 
-                }
+                            }
 
-            </table>
+                        }
+                    </tbody>
+
+
+
+                </table>
+            </div>
             @Html.Hidden("id", Model.SubjectID)
             @Html.Hidden("studentDetailID", Model.StudentDetailID)
-            <h3> ý kiến đóng góp:  <input type="text" name="note" value="" /></h3>
-            <input type="submit" value="Submit" class="btn btn-default" />
+            <h4> ý kiến đóng góp:  <input type="text" name="note" value="" /></h4>
+            <hr />
+            <input type="submit" value="Submit" class="btn btn-primary" />
+
+            @ViewBag.Message2
         }
-    @ViewBag.Message2
     }
-
-           
-    
-
-
 
 </body>
 </html>
