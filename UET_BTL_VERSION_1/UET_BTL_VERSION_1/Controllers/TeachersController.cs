@@ -46,6 +46,17 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.sum = listKQ.Count();
             return View(listKQ.ToPagedList(pageNumber, pageSize));
         }
+        public ActionResult ShowCountResult()
+        {
+            User user = Session["user"] as User;
+            if (user != null)
+            {
+                ViewBag.SumStudents = db.StudentDetail.Where(x => x.TeacherID == user.TeacherID).Count();
+                ViewBag.SumSubjects = db.StudentDetail.Where(x => x.TeacherID == user.TeacherID).GroupBy(x => x.SubjectID).Count();
+                ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
+            }
+            return View();
+        }
         // GET: Teachers/Create
         public ActionResult Create()
         {

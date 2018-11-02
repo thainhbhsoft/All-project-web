@@ -222,12 +222,6 @@
     <Content Include="Contents\js\admin.js" />
     <Content Include="Contents\js\bootstrap.min.js" />
     <Content Include="Contents\js\jquery-3.3.1.min.js" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\User\CSS\style.css" />
-    <Content Include="Content\User\IMAGES\bgLogin.png" />
-    <Content Include="Content\User\IMAGES\iconLogin.png" />
-    <Content Include="Content\PagedList.css" />
-    <Content Include="Content\Teacher_Student\CSS\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -243,8 +237,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -254,12 +246,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Teacher_Student\Images\" />
-    <Folder Include="Content\Teacher_Student\JS\" />
-    <Folder Include="Content\User\Fonts\" />
-    <Folder Include="Content\User\JS\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -290,8 +277,7 @@
     <Content Include="Views\Subjects\ShowClass.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
-    <Content Include="Views\Shared\_LayoutHome.cshtml" />
-    <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
+    <Content Include="Views\Shared\_LayoutStudent.cshtml" />
     <Content Include="Views\Teachers\ShowListSubject.cshtml" />
     <Content Include="Views\Teachers\ShowClass.cshtml" />
     <Content Include="Views\Teachers\ShowResultSurvey.cshtml" />
@@ -304,6 +290,9 @@
     <Content Include="Views\Subjects\ImportSubject.cshtml" />
     <Content Include="Views\Subjects\ResultSurveyEveryStudent.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
+    <Content Include="Views\Teachers\ShowCountResult.cshtml" />
+    <Content Include="Views\Students\ShowCountResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

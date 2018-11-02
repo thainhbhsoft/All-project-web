@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
 }
 
-<h2 style="text-align:center">Bảng đánh giá theo cả lớp </h2>
+<h2 style="font-weight:bold;color:blue;text-align:center">Bảng đánh giá theo cả lớp </h2>
 <h4>Tên môn học: @Model.Subject.Name  @Model.Subject.SubjectCode</h4>
 <h4>Số tín chỉ: @Model.Subject.CreditNumber</h4>
 <h4>Tổng Số sinh viên: @ViewBag.SumStudent</h4>
@@ -20,40 +20,44 @@
     }
     else
     {
-        <table class="table table-striped table-bordered table-hover">
-            <tr>
-                <th>
-                    STT
-                </th>
-                <th>
-                    Tên tiêu chí đánh giá
-                </th>
-                <th>
-                    Điểm trung bình ( thang điểm 100 )
-                </th>
-                <th></th>
-            </tr>
+        <div class="content-teacher">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr class="btn-primary">
+                            <th>
+                                STT
+                            </th>
+                            <th>
+                                Tên tiêu chí đánh giá
+                            </th>
+                            <th>
+                                Điểm trung bình ( thang điểm 100 )
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < ViewBag.CountSurvey; i++)
+                        {
+                            k = k + 1;
+                            <tr class="table-striped">
+                                <td>
+                                    @k
+                                </td>
+                                <td>
+                                    @ViewBag.NameSurvey[@i]
+                                </td>
+                                <td>
+                                    @Math.Round(@ViewBag.ListPointAver[@i], 2)
+                                </td>
 
-            @for (int i = 0; i < ViewBag.CountSurvey; i++)
-            {
-                k = k + 1;
-                <tr>
-                    <td>
-                        @k
-                    </td>
-                    <td>
-                        @ViewBag.NameSurvey[@i]
-                    </td>
-                    <td>
-                        @Math.Round(@ViewBag.ListPointAver[@i], 2)
-                    </td>
+                            </tr>
 
-                </tr>
-
-            }
-
-
-        </table>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     }
 
 }

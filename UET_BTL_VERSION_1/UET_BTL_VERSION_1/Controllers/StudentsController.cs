@@ -155,6 +155,18 @@ namespace UET_BTL_VERSION_1.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult ShowCountResult()
+        {
+            User user = Session["user"] as User;
+            if (user != null)
+            {
+                ViewBag.SumSubject = db.StudentDetail.Where(x => x.StudentID == user.StudentID).Count();
+                List<int> listID = db.StudentDetail.Where(x => x.StudentID == user.StudentID).Select(y => y.StudentDetailID).ToList();
+                ViewBag.SumSubjectSurvey = db.Survey.Where(x => listID.Any(y => y == x.StudentDetailID)).GroupBy(x => x.StudentDetailID).Count();
+                ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
+            }
+            return View();
+        }
         public ActionResult ShowListSubject()
         {
             User user = Session["user"] as User;

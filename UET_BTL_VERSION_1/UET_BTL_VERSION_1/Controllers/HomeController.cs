@@ -24,25 +24,25 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return RedirectToAction("Login", "Users");
         }
-        public PartialViewResult NamePartial()
-        {
-            User user = Session["user"] as User;
-            if(user.Position == "Teacher")
-            {
-                Teacher teacher = db.Teacher.SingleOrDefault(x => x.TeacherID == user.TeacherID);
-                ViewBag.Name = teacher.Name;
-                return PartialView();
-            }
-            else if (user.Position == "Student")
-            {
-                Student stu = db.Student.SingleOrDefault(x => x.StudentID == user.StudentID);
-                ViewBag.Name = stu.Name;
-                return PartialView();
-            }
-            else
-            {
-                return  PartialView();
-            }
-        }
+        //public PartialViewResult NamePartial()
+        //{
+        //    User user = Session["user"] as User;
+        //    if(user.Position == "Teacher")
+        //    {
+        //        Teacher teacher = db.Teacher.SingleOrDefault(x => x.TeacherID == user.TeacherID);
+        //        ViewBag.Name = teacher.Name;
+        //        return PartialView();
+        //    }
+        //    else if (user.Position == "Student")
+        //    {
+        //        Student stu = db.Student.SingleOrDefault(x => x.StudentID == user.StudentID);
+        //        ViewBag.Name = stu.Name;
+        //        return PartialView();
+        //    }
+        //    else
+        //    {
+        //        return  PartialView();
+        //    }
+        //}
     }
 }

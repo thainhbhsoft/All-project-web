@@ -30,10 +30,10 @@ namespace UET_BTL_VERSION_1.Controllers
                 Session["user"] = user;
                 if(user.Position == "Teacher")
                 {
-                    return RedirectToAction("ShowListSubject", "Teachers");
+                    return RedirectToAction("ShowCountResult", "Teachers");
                 }else if(user.Position == "Student")
                 {
-                    return RedirectToAction("ShowListSubject", "Students");
+                    return RedirectToAction("ShowCountResult", "Students");
                 }
                 else
                 {
