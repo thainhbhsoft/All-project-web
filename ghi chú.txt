@@ -1,0 +1,26 @@
+﻿Các bước để tạo project code-first:
+bước 1: tạo project library, tạo các lớp trong thư mục Entities, tạo class DBContext bên ngoài
+bước 2: tạo projectWeb mvc 
+bước 3: add entityframeWork cho cả hai project
+bước 4: tham chiếu classlibrary đến project web
+bước 5: tạo chuỗi kết nối trong web.config
+<connectionStrings>
+    <add name="ProjectManagement"
+    connectionString="Data Source=TIEN-XUAN\MSSQLSERVER01;Initial Catalog=ProjectManagement;Integrated Security=SSPI;"
+    providerName="System.Data.SqlClient"/>
+  </connectionStrings>
+bước 6: Rebuidl project web và bắt đầu thực hiện các lệnh của migration
+enable-migrations
+add-migration createDB
+update-database
+---------------------------------------------
+để chuyển sang mysql
+
+<connectionStrings>
+    <add name="ProductDB" providerName="MySql.Data.MySqlClient" connectionString="server=localhost;user id=root;password=;database=ProductTest;persistsecurityinfo=True" />
+  </connectionStrings>
+
+thêm dòng này trước class DBcontext
+[DbConfigurationType(typeof(MySqlEFConfiguration))]
+
+cài thêm nuget package :  mysql.data.entity
