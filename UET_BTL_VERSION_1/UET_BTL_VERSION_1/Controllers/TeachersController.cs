@@ -8,13 +8,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using UET_BTL_VERSION_1.Models;
+using UET_BTL.Model;
+using UET_BTL.Model.Entities;
 
 namespace UET_BTL_VERSION_1.Controllers
 {
     public class TeachersController : Controller
     {
-        private UetSurveyEntities db = new UetSurveyEntities();
+        private UetSurveyDbContext db = new UetSurveyDbContext();
         // GET: Teachers
         public ActionResult Index(int? page)
         {
@@ -22,8 +23,8 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 int pageSize = 15;
                 int pageNumber = (page ?? 1);
-                ViewBag.sum = db.Teacher.Count();
-                return View(db.Teacher.ToList().ToPagedList(pageNumber, pageSize));
+                ViewBag.sum = db.Teachers.Count();
+                return View(db.Teachers.ToList().ToPagedList(pageNumber, pageSize));
             }
             return RedirectToAction("Login", "Users");
            
@@ -33,14 +34,14 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             string sTuKhoa = f["txtTimKiem"].ToString();
             ViewBag.tukhoa = sTuKhoa;
-            List<Teacher> listKQ = db.Teacher.Where(x => x.Name.Contains(sTuKhoa)).ToList();
+            List<Teacher> listKQ = db.Teachers.Where(x => x.Name.Contains(sTuKhoa)).ToList();
             // phân trang
             int pageSize = 200;
             int pageNumber = (page ?? 1);
             if (listKQ.Count == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy giang viên nào";
-                return View(db.Teacher.ToList().ToPagedList(pageNumber, pageSize));
+                return View(db.Teachers.ToList().ToPagedList(pageNumber, pageSize));
             }
             ViewBag.messageSearch = "Kết quả tìm kiếm với từ khóa : " + sTuKhoa; 
             ViewBag.sum = listKQ.Count();
@@ -51,8 +52,8 @@ namespace UET_BTL_VERSION_1.Controllers
             User user = Session["user"] as User;
             if (user != null)
             {
-                ViewBag.SumStudents = db.StudentDetail.Where(x => x.TeacherID == user.TeacherID).Count();
-                ViewBag.SumSubjects = db.StudentDetail.Where(x => x.TeacherID == user.TeacherID).GroupBy(x => x.SubjectID).Count();
+                ViewBag.SumStudents = db.StudentDetails.Where(x => x.TeacherID == user.TeacherID).Count();
+                ViewBag.SumSubjects = db.StudentDetails.Where(x => x.TeacherID == user.TeacherID).GroupBy(x => x.SubjectID).Count();
                 ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
             }
             return View();
@@ -70,16 +71,16 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.Teacher.Any(x => x.UserName == teacher.UserName))
+                if (db.Teachers.Any(x => x.UserName == teacher.UserName))
                 {
                     ViewBag.error = "Tên đăng nhập đã tồn tại";
                     return View(teacher);
                 }
                 else
                 {
-                    db.Teacher.Add(teacher);
+                    db.Teachers.Add(teacher);
                     db.SaveChanges();
-                    int teachertid = db.Teacher.Max(x => x.TeacherID);
+                    int teachertid = db.Teachers.Max(x => x.TeacherID);
                     User user = new User()
                     {
                         UserName = teacher.UserName,
@@ -87,7 +88,7 @@ namespace UET_BTL_VERSION_1.Controllers
                         Position = "Teacher",
                         TeacherID = teachertid
                     };
-                    db.User.Add(user);
+                    db.Users.Add(user);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -101,7 +102,7 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Teacher teacher = db.Teacher.Find(id);
+            Teacher teacher = db.Teachers.Find(id);
             if (teacher == null)
             {
                 return HttpNotFound();
@@ -116,7 +117,7 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = db.User.SingleOrDefault(x => x.TeacherID == teacher.TeacherID);
+                User user = db.Users.SingleOrDefault(x => x.TeacherID == teacher.TeacherID);
                 user.UserName = teacher.UserName;
                 user.PassWord = teacher.PassWord;
                 db.Entry(teacher).State = EntityState.Modified;
@@ -132,8 +133,8 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Teacher teacher = db.Teacher.Find(id);
-            bool a = db.StudentDetail.Any(x => x.TeacherID == id);
+            Teacher teacher = db.Teachers.Find(id);
+            bool a = db.StudentDetails.Any(x => x.TeacherID == id);
             if (a)
             {
                 ViewBag.message = "Giảng viên này đang dạy một học phần, không thể xóa được";
@@ -149,44 +150,76 @@ namespace UET_BTL_VERSION_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Teacher teacher = db.Teacher.Find(id);
-            User user = db.User.SingleOrDefault(x => x.TeacherID == teacher.TeacherID);
-            db.User.Remove(user);
-            db.Teacher.Remove(teacher);
+            Teacher teacher = db.Teachers.Find(id);
+            User user = db.Users.SingleOrDefault(x => x.TeacherID == teacher.TeacherID);
+            db.Users.Remove(user);
+            db.Teachers.Remove(teacher);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
         public ActionResult ShowListSubject()
         {
             User user = Session["user"] as User;
-            IEnumerable<StudentDetail> listStudent = db.StudentDetail.Where(x => x.TeacherID == user.TeacherID)
+            IEnumerable<StudentDetail> listStudent = db.StudentDetails.Where(x => x.TeacherID == user.TeacherID)
                 .GroupBy(x => x.SubjectID).Select(x => x.FirstOrDefault());
                 
             return View(listStudent);
         }
         public ActionResult ShowClass(int? id)
         {
-            IEnumerable<StudentDetail> listStudent = db.StudentDetail.Where(x => x.SubjectID == id);
+            IEnumerable<StudentDetail> listStudent = db.StudentDetails.Where(x => x.SubjectID == id);
             return View(listStudent);
         }
         public ActionResult ShowResultSurvey(int? id)
         {
-            List<int> lis = db.StudentDetail.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
-            StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id);
-            ViewBag.hasSurvey = db.Survey.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
-            ViewBag.SumStudent = db.StudentDetail.Where(x => x.SubjectID == id).ToList().Count();
+            List<int> lis = db.StudentDetails.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
+            StudentDetail student_Detail = db.StudentDetails.First(x => x.SubjectID == id);
+            ViewBag.hasSurvey = db.Surveys.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
+            ViewBag.SumStudent = db.StudentDetails.Where(x => x.SubjectID == id).ToList().Count();
             if (ViewBag.hasSurvey == 0)
             {
                 return View(student_Detail);
             }
-            ViewBag.ListPointAver = db.Survey
+            ViewBag.ListPointAver = db.Surveys
                 .Where(x => lis.Any(k => k == x.StudentDetailID))
                 .GroupBy(x => x.ContentSurveyID)
                 .Select(x => x.Average(y => y.Point)).ToList();
-            ViewBag.NameSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
-            ViewBag.CountSurvey = db.ContentSurvey.ToList().Count();
+            ViewBag.NameSurvey = db.ContentSurveys.Select(x => x.Text).ToList();
+            ViewBag.CountSurvey = db.ContentSurveys.ToList().Count();
            
             return View(student_Detail);
+        }
+        public ActionResult ShowInforTeacher()
+        {
+            User user = Session["user"] as User;
+            if (user != null)
+            {
+                Teacher teacher = db.Teachers.SingleOrDefault(x => x.TeacherID == user.TeacherID);
+                return View(teacher);
+            }
+            return RedirectToAction("Login", "Users");
+        }
+        [HttpPost]
+        public ActionResult ShowInforTeacher(FormCollection f)
+        {
+            User user = Session["user"] as User;
+            string pass = f["passOld"].ToString();
+            if (user != null)
+            {
+                Teacher teacher = db.Teachers.SingleOrDefault(x => x.TeacherID == user.TeacherID);
+                if ((pass != user.PassWord) || (f["passNew1"].ToString().Trim() != f["passNew2"].ToString().Trim()))
+                {
+                    ViewBag.Message = "Mật khẩu cũ không đúng hoặc hai mật khẩu mới không khớp nhau!";
+                    return View(teacher);
+                }
+                User u = db.Users.SingleOrDefault(x => x.UserName == user.UserName);
+                u.PassWord = f["passNew1"].ToString();
+                teacher.PassWord = f["passNew1"].ToString();
+                db.SaveChanges();
+                ViewBag.Message = "Đã đổi mật khẩu thành công";
+                return View(teacher);
+            }
+            return RedirectToAction("Login", "Users");
         }
         [HttpPost]
         public ActionResult ImportTeacher(HttpPostedFileBase fileUpload)
@@ -211,7 +244,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 int startRow = 2;
                 ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
                 object data = null;
-                UetSurveyEntities db = new UetSurveyEntities();
+                UetSurveyDbContext db = new UetSurveyDbContext();
 
                 do
                 {
@@ -240,21 +273,21 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return result;
         }
-        public bool SaveStudent(string userName, string passWord, string fullName, string email, UetSurveyEntities db)
+        public bool SaveStudent(string userName, string passWord, string fullName, string email, UetSurveyDbContext db)
         {
             var result = false;
             try
             {
-                if (db.Teacher.Where(x => x.UserName.Equals(userName)).Count() == 0)
+                if (db.Teachers.Where(x => x.UserName.Equals(userName)).Count() == 0)
                 {
                     var teacher = new Teacher();
                     teacher.UserName = userName;
                     teacher.PassWord = passWord;
                     teacher.Name = fullName;
                     teacher.Email = email;
-                    db.Teacher.Add(teacher);
+                    db.Teachers.Add(teacher);
                     db.SaveChanges();
-                    int teacherid = db.Teacher.Max(x => x.TeacherID);
+                    int teacherid = db.Teachers.Max(x => x.TeacherID);
                     User user = new User()
                     {
                         UserName = userName,
@@ -262,7 +295,7 @@ namespace UET_BTL_VERSION_1.Controllers
                         Position = "Teacher",
                         TeacherID = teacherid
                     };
-                    db.User.Add(user);
+                    db.Users.Add(user);
                     db.SaveChanges();
                     result = true;
                 }

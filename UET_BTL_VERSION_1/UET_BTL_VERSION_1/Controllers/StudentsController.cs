@@ -8,13 +8,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using UET_BTL_VERSION_1.Models;
+using UET_BTL.Model;
+using UET_BTL.Model.Entities;
 
 namespace UET_BTL_VERSION_1.Controllers
 {
     public class StudentsController : Controller
     {
-        private UetSurveyEntities db = new UetSurveyEntities();
+        private UetSurveyDbContext db = new UetSurveyDbContext();
         // GET: Students
         public ActionResult Index(int? page)
         {
@@ -22,8 +23,8 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 int pageSize = 20;
                 int pageNumber = (page ?? 1);
-                ViewBag.sum = db.Student.Count();
-                return View(db.Student.ToList().ToPagedList(pageNumber, pageSize));
+                ViewBag.sum = db.Students.Count();
+                return View(db.Students.ToList().ToPagedList(pageNumber, pageSize));
             }
             return RedirectToAction("Login", "Users");
            
@@ -33,14 +34,14 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             string sTuKhoa = f["txtTimKiem"].ToString();
             ViewBag.tukhoa = sTuKhoa;
-            List<Student> listKQ = db.Student.Where(x => x.Name.Contains(sTuKhoa)).ToList();
+            List<Student> listKQ = db.Students.Where(x => x.Name.Contains(sTuKhoa)).ToList();
             // phân trang
             int pageSize = 200;
             int pageNumber = (page ?? 1);
             if (listKQ.Count == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy sinh viên nào";
-                return View(db.Student.ToList().ToPagedList(pageNumber, pageSize));
+                return View(db.Students.ToList().ToPagedList(pageNumber, pageSize));
             }
             ViewBag.messageSearch = "Kết quả tìm kiếm với từ khóa : " + sTuKhoa;
             ViewBag.sum = listKQ.Count();
@@ -57,16 +58,16 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.Student.Any(x => x.UserName == student.UserName))
+                if (db.Students.Any(x => x.UserName == student.UserName))
                 {
                     ViewBag.error = "Tên đăng nhập đã tồn tại";
                     return View(student);
                 }
                 else
                 {
-                    db.Student.Add(student);
+                    db.Students.Add(student);
                     db.SaveChanges();
-                    int studentid = db.Student.Max(x => x.StudentID);
+                    int studentid = db.Students.Max(x => x.StudentID);
                     User user = new User()
                     {
                         UserName = student.UserName,
@@ -74,7 +75,7 @@ namespace UET_BTL_VERSION_1.Controllers
                         Position = "Student",
                         StudentID = studentid
                     };
-                    db.User.Add(user);
+                    db.Users.Add(user);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -88,7 +89,7 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Student.Find(id);
+            Student student = db.Students.Find(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -101,7 +102,7 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = db.User.SingleOrDefault(x => x.StudentID == student.StudentID);
+                User user = db.Users.SingleOrDefault(x => x.StudentID == student.StudentID);
                     user.UserName = student.UserName;
                     user.PassWord = student.PassWord;
                 db.Entry(student).State = EntityState.Modified;
@@ -117,7 +118,7 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Student.Find(id);
+            Student student = db.Students.Find(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -130,18 +131,18 @@ namespace UET_BTL_VERSION_1.Controllers
         public ActionResult DeleteConfirmed(FormCollection f)
         {
             int id = int.Parse(f["STUID"].ToString());
-            Student student = db.Student.SingleOrDefault(x => x.StudentID == id);
-            User user = db.User.SingleOrDefault(x => x.StudentID == id);
-            IEnumerable<StudentDetail> list2 = db.StudentDetail.Where(x => x.StudentID == id);
+            Student student = db.Students.SingleOrDefault(x => x.StudentID == id);
+            User user = db.Users.SingleOrDefault(x => x.StudentID == id);
+            IEnumerable<StudentDetail> list2 = db.StudentDetails.Where(x => x.StudentID == id);
             foreach (var item in list2)
             {
-                db.StudentDetail.Remove(item);
-                IEnumerable<Survey> list3 = db.Survey.Where(x => x.StudentDetailID == item.StudentDetailID);
+                db.StudentDetails.Remove(item);
+                IEnumerable<Survey> list3 = db.Surveys.Where(x => x.StudentDetailID == item.StudentDetailID);
                 try
                 {
                     foreach (var item3 in list3)
                     {
-                        db.Survey.Remove(item3);
+                        db.Surveys.Remove(item3);
                     }
                 }
                 catch (Exception)
@@ -150,8 +151,8 @@ namespace UET_BTL_VERSION_1.Controllers
                 }
 
             }
-            db.User.Remove(user);
-            db.Student.Remove(student);
+            db.Users.Remove(user);
+            db.Students.Remove(student);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -160,9 +161,9 @@ namespace UET_BTL_VERSION_1.Controllers
             User user = Session["user"] as User;
             if (user != null)
             {
-                ViewBag.SumSubject = db.StudentDetail.Where(x => x.StudentID == user.StudentID).Count();
-                List<int> listID = db.StudentDetail.Where(x => x.StudentID == user.StudentID).Select(y => y.StudentDetailID).ToList();
-                ViewBag.SumSubjectSurvey = db.Survey.Where(x => listID.Any(y => y == x.StudentDetailID)).GroupBy(x => x.StudentDetailID).Count();
+                ViewBag.SumSubject = db.StudentDetails.Where(x => x.StudentID == user.StudentID).Count();
+                List<int> listID = db.StudentDetails.Where(x => x.StudentID == user.StudentID).Select(y => y.StudentDetailID).ToList();
+                ViewBag.SumSubjectSurvey = db.Surveys.Where(x => listID.Any(y => y == x.StudentDetailID)).GroupBy(x => x.StudentDetailID).Count();
                 ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
                 return View();
             }
@@ -173,7 +174,7 @@ namespace UET_BTL_VERSION_1.Controllers
             User user = Session["user"] as User;
             if (user != null)
             {
-                IEnumerable<StudentDetail> listStudent = db.StudentDetail.Where(x => x.StudentID == user.StudentID);
+                IEnumerable<StudentDetail> listStudent = db.StudentDetails.Where(x => x.StudentID == user.StudentID);
                 return View(listStudent);
             }
             return RedirectToAction("Login", "Users");
@@ -183,7 +184,7 @@ namespace UET_BTL_VERSION_1.Controllers
             User user = Session["user"] as User;
             if (user != null)
             {
-                Student student = db.Student.SingleOrDefault(x => x.StudentID == user.StudentID);
+                Student student = db.Students.SingleOrDefault(x => x.StudentID == user.StudentID);
                 return View(student);
             }
             return RedirectToAction("Login", "Users");
@@ -195,13 +196,13 @@ namespace UET_BTL_VERSION_1.Controllers
             string pass = f["passOld"].ToString();
             if (user != null)
             {
-                Student stu = db.Student.SingleOrDefault(x => x.StudentID == user.StudentID);
+                Student stu = db.Students.SingleOrDefault(x => x.StudentID == user.StudentID);
                 if ((pass != user.PassWord)  || (f["passNew1"].ToString().Trim() != f["passNew2"].ToString().Trim()))
                 {
                     ViewBag.Message = "Mật khẩu cũ không đúng hoặc hai mật khẩu mới không khớp nhau!";
                     return View(stu);
                 }
-                User u = db.User.SingleOrDefault(x => x.UserName == user.UserName);
+                User u = db.Users.SingleOrDefault(x => x.UserName == user.UserName);
                 u.PassWord = f["passNew1"].ToString();
                 stu.PassWord = f["passNew1"].ToString();
                 db.SaveChanges();
@@ -212,39 +213,39 @@ namespace UET_BTL_VERSION_1.Controllers
         }
         public ActionResult SurveySubject(int? id, int? stID)
         {
-            StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == id && x.StudentID == stID);
-            if (db.Survey.Any(x => x.StudentDetailID == student_Detail.StudentDetailID))
+            StudentDetail student_Detail = db.StudentDetails.First(x => x.SubjectID == id && x.StudentID == stID);
+            if (db.Surveys.Any(x => x.StudentDetailID == student_Detail.StudentDetailID))
             {
                 ViewBag.Message = "Bạn đã đánh giá môn học này";
                 return View(student_Detail);
             }
-            ViewBag.Count = db.ContentSurvey.ToList().Count();
-            ViewBag.ContentSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
+            ViewBag.Count = db.ContentSurveys.ToList().Count();
+            ViewBag.ContentSurvey = db.ContentSurveys.Select(x => x.Text).ToList();
             return View(student_Detail);
         }
         [HttpPost]
         public ActionResult SurveySubject(FormCollection form)
         {
-            ViewBag.Count = db.ContentSurvey.ToList().Count();
-            ViewBag.ContentSurvey = db.ContentSurvey.Select(x => x.Text).ToList();
+            ViewBag.Count = db.ContentSurveys.ToList().Count();
+            ViewBag.ContentSurvey = db.ContentSurveys.Select(x => x.Text).ToList();
             int k = int.Parse(form["id"]);
             int stDetailID = int.Parse(form["studentDetailID"]);
-            StudentDetail student_Detail = db.StudentDetail.First(x => x.SubjectID == k);
-            if(form.Count < db.ContentSurvey.ToList().Count() + 3)
+            StudentDetail student_Detail = db.StudentDetails.First(x => x.SubjectID == k);
+            if(form.Count < db.ContentSurveys.ToList().Count() + 3)
             {
                 ViewBag.Message2 = "Bạn cần đánh giá đủ các tiêu chí";
                 return View(student_Detail);
             }
             int i = 0;
-            foreach (var item in db.ContentSurvey)
+            foreach (var item in db.ContentSurveys)
             {
                 Survey survey = new Survey();
                 survey.StudentDetailID = stDetailID;
                 survey.ContentSurveyID = item.ContentSurveyID;
                 survey.Point = int.Parse(form[i++]);
-                db.Survey.Add(survey);
+                db.Surveys.Add(survey);
             }
-            StudentDetail stDetail =  db.StudentDetail.SingleOrDefault(x => x.StudentDetailID == stDetailID);
+            StudentDetail stDetail =  db.StudentDetails.SingleOrDefault(x => x.StudentDetailID == stDetailID);
             stDetail.NoteSurvey = form["note"].ToString();
             db.SaveChanges();
             return RedirectToAction("ShowListSubject");
@@ -272,7 +273,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 int startRow = 2;
                 ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
                 object data = null;
-                UetSurveyEntities db = new UetSurveyEntities();
+                UetSurveyDbContext db = new UetSurveyDbContext();
 
                 do
                 {
@@ -302,12 +303,12 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return result;
         }
-        public bool SaveStudent(string userName, string passWord, string fullName, string email, string course, UetSurveyEntities db)
+        public bool SaveStudent(string userName, string passWord, string fullName, string email, string course, UetSurveyDbContext db)
         {
             var result = false;
             try
             {
-                if (db.Student.Where(x => x.UserName.Equals(userName)).Count() == 0)
+                if (db.Students.Where(x => x.UserName.Equals(userName)).Count() == 0)
                 {
                     var stu = new Student();
                     stu.UserName = userName;
@@ -316,9 +317,9 @@ namespace UET_BTL_VERSION_1.Controllers
                     stu.Name = fullName;
                     stu.Email = email;
                     stu.Course = course;
-                    db.Student.Add(stu);
+                    db.Students.Add(stu);
                     db.SaveChanges();
-                    int studentid = db.Student.Max(x => x.StudentID);
+                    int studentid = db.Students.Max(x => x.StudentID);
                     User user = new User()
                     {
                         UserName = userName,
@@ -326,7 +327,7 @@ namespace UET_BTL_VERSION_1.Controllers
                         Position = "Student",
                         StudentID = studentid
                     };
-                    db.User.Add(user);
+                    db.Users.Add(user);
                     db.SaveChanges();
                     result = true;
                 }

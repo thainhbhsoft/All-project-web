@@ -7,13 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using UET_BTL_VERSION_1.Models;
+using UET_BTL.Model;
+using UET_BTL.Model.Entities;
 
 namespace UET_BTL_VERSION_1.Controllers
 {
     public class UsersController : Controller
     {
-        private UetSurveyEntities db = new UetSurveyEntities();
+        private UetSurveyDbContext db = new UetSurveyDbContext();
         [HttpGet]
         public ActionResult Login()
         {
@@ -24,7 +25,7 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             string username = form["username"].ToString().Trim();
             string password = form["password"].ToString().Trim();
-            User user = db.User.SingleOrDefault(x => x.UserName == username && x.PassWord == password);
+            User user = db.Users.SingleOrDefault(x => x.UserName == username && x.PassWord == password);
             if (user != null)
             {
                 Session["user"] = user;

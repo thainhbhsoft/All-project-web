@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UET_BTL_VERSION_1.Models
+namespace UET_BTL.Model.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -15,12 +15,6 @@ namespace UET_BTL_VERSION_1.Models
 
     public partial class Teacher
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Teacher()
-        {
-            this.StudentDetail = new HashSet<StudentDetail>();
-        }
-    
         public int TeacherID { get; set; }
         [Required(ErrorMessage = "Không được để trống")]
         public string Name { get; set; }
@@ -33,7 +27,6 @@ namespace UET_BTL_VERSION_1.Models
         [Required(ErrorMessage = "Không được để trống")]
         public string PassWord { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentDetail> StudentDetail { get; set; }
     }
 }

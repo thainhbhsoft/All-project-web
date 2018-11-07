@@ -1,4 +1,3 @@
-C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\ApplicationInsights.config
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\UET_BTL_VERSION_1.dll.config
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\UET_BTL_VERSION_1.dll
@@ -74,7 +73,10 @@ C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\Sys
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\System.Web.WebPages.Deployment.dll
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\System.Web.WebPages.dll
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\System.Web.WebPages.Razor.dll
+C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\UET_BTL.Model.dll
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\WebGrease.dll
+C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\UET_BTL.Model.pdb
+C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\UET_BTL.Model.dll.config
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\EntityFramework.xml
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\EntityFramework.SqlServer.xml
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\EPPlus.xml
@@ -95,7 +97,8 @@ C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\Mic
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\Microsoft.AI.Web.xml
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.csproj.CopyComplete
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.dll
 C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.pdb
-C:\Users\Admin\Desktop\VISUAL STUDIO\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.csprojAssemblyReference.cache

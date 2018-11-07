@@ -6,19 +6,20 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using UET_BTL_VERSION_1.Models;
+using UET_BTL.Model;
+using UET_BTL.Model.Entities;
 
 namespace UET_BTL_VERSION_1.Controllers
 {
     public class ContentSurveysController : Controller
     {
-        private UetSurveyEntities db = new UetSurveyEntities();
+        private UetSurveyDbContext db = new UetSurveyDbContext();
         // GET: ContentSurveys
         public ActionResult Index()
         {
             if (Session["user"] != null)
             {
-                return View(db.ContentSurvey.ToList());
+                return View(db.ContentSurveys.ToList());
             }
             return RedirectToAction("Login", "Users");
            
@@ -36,11 +37,11 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                foreach (var item in db.Survey)
+                foreach (var item in db.Surveys)
                 {
-                    db.Survey.Remove(item);
+                    db.Surveys.Remove(item);
                 }
-                db.ContentSurvey.Add(contentSurvey);
+                db.ContentSurveys.Add(contentSurvey);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -54,7 +55,7 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ContentSurvey contentSurvey = db.ContentSurvey.Find(id);
+            ContentSurvey contentSurvey = db.ContentSurveys.Find(id);
             if (contentSurvey == null)
             {
                 return HttpNotFound();
@@ -82,7 +83,7 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ContentSurvey contentSurvey = db.ContentSurvey.Find(id);
+            ContentSurvey contentSurvey = db.ContentSurveys.Find(id);
             if (contentSurvey == null)
             {
                 return HttpNotFound();
@@ -94,14 +95,14 @@ namespace UET_BTL_VERSION_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ContentSurvey contentSurvey = db.ContentSurvey.Find(id);
-            db.ContentSurvey.Remove(contentSurvey);
+            ContentSurvey contentSurvey = db.ContentSurveys.Find(id);
+            db.ContentSurveys.Remove(contentSurvey);
             try
             {
-                IEnumerable<Survey> listsurvey = db.Survey.Where(x => x.ContentSurveyID == id);
+                IEnumerable<Survey> listsurvey = db.Surveys.Where(x => x.ContentSurveyID == id);
                 foreach (var item in listsurvey)
                 {
-                    db.Survey.Remove(item);
+                    db.Surveys.Remove(item);
                 }
             }
             catch (Exception)

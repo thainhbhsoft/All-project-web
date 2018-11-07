@@ -174,68 +174,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ContentSurvey.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Student.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StudentDetail.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Subject.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Survey.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Teacher.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Contents\CSS\bootstrap.min.css" />
     <Content Include="Contents\CSS\dashboard.css" />
+    <Content Include="Contents\CSS\Login.css" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Contents\js\admin.js" />
     <Content Include="Contents\js\bootstrap.min.js" />
     <Content Include="Contents\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\CSS\style.css" />
+    <Content Include="Content\Images\bgLogin.png" />
+    <Content Include="Content\Images\iconLogin.png" />
+    <Content Include="Content\Images\login-success.png" />
+    <Content Include="Content\Images\logoCukCuk.png" />
+    <Content Include="Content\Images\success.PNG" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Models\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -246,15 +204,10 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
+    <Folder Include="Content\Fonts\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Contents\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.woff" />
@@ -294,12 +247,19 @@
     <Content Include="Views\Teachers\ShowCountResult.cshtml" />
     <Content Include="Views\Students\ShowCountResult.cshtml" />
     <Content Include="Views\Students\ShowInforStudent.cshtml" />
+    <Content Include="Views\Teachers\ShowInforTeacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UET_BTL.Model\UET_BTL.Model.csproj">
+      <Project>{fe7b0c9c-99fa-4d6b-8755-f2aa023bed38}</Project>
+      <Name>UET_BTL.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
