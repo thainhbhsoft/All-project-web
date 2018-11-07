@@ -24,3 +24,4 @@ thêm dòng này trước class DBcontext
 [DbConfigurationType(typeof(MySqlEFConfiguration))]
 
 cài thêm nuget package :  mysql.data.entity
+xuan
