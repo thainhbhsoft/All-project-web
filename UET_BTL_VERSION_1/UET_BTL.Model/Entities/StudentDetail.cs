@@ -7,8 +7,6 @@ namespace UET_BTL.Model.Entities
     
     public partial class StudentDetail
     {
-       
-    
         public int StudentDetailID { get; set; }
         public int? StudentID { get; set; }
         public int? SubjectID { get; set; }

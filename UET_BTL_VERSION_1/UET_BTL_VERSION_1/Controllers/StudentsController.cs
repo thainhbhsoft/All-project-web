@@ -102,7 +102,7 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = db.Users.SingleOrDefault(x => x.StudentID == student.StudentID);
+                User user = db.Users.FirstOrDefault(x => x.StudentID == student.StudentID);
                     user.UserName = student.UserName;
                     user.PassWord = student.PassWord;
                 db.Entry(student).State = EntityState.Modified;
@@ -131,26 +131,22 @@ namespace UET_BTL_VERSION_1.Controllers
         public ActionResult DeleteConfirmed(FormCollection f)
         {
             int id = int.Parse(f["STUID"].ToString());
-            Student student = db.Students.SingleOrDefault(x => x.StudentID == id);
-            User user = db.Users.SingleOrDefault(x => x.StudentID == id);
+            Student student = db.Students.FirstOrDefault(x => x.StudentID == id);
+            User user = db.Users.FirstOrDefault(x => x.StudentID == id);
             IEnumerable<StudentDetail> list2 = db.StudentDetails.Where(x => x.StudentID == id);
             foreach (var item in list2)
             {
-                db.StudentDetails.Remove(item);
                 IEnumerable<Survey> list3 = db.Surveys.Where(x => x.StudentDetailID == item.StudentDetailID);
                 try
                 {
-                    foreach (var item3 in list3)
-                    {
-                        db.Surveys.Remove(item3);
-                    }
+                    db.Surveys.RemoveRange(list3);
                 }
                 catch (Exception)
                 {
 
                 }
-
             }
+            db.StudentDetails.RemoveRange(list2);
             db.Users.Remove(user);
             db.Students.Remove(student);
             db.SaveChanges();
@@ -161,8 +157,9 @@ namespace UET_BTL_VERSION_1.Controllers
             User user = Session["user"] as User;
             if (user != null)
             {
-                ViewBag.SumSubject = db.StudentDetails.Where(x => x.StudentID == user.StudentID).Count();
-                List<int> listID = db.StudentDetails.Where(x => x.StudentID == user.StudentID).Select(y => y.StudentDetailID).ToList();
+                Student stu = db.Students.FirstOrDefault(s => s.StudentID == user.StudentID);
+                ViewBag.SumSubject = stu.StudentDetail.Count();
+                List<int> listID = stu.StudentDetail.Select(y => y.StudentDetailID).ToList();
                 ViewBag.SumSubjectSurvey = db.Surveys.Where(x => listID.Any(y => y == x.StudentDetailID)).GroupBy(x => x.StudentDetailID).Count();
                 ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
                 return View();
@@ -174,7 +171,7 @@ namespace UET_BTL_VERSION_1.Controllers
             User user = Session["user"] as User;
             if (user != null)
             {
-                IEnumerable<StudentDetail> listStudent = db.StudentDetails.Where(x => x.StudentID == user.StudentID);
+                IEnumerable<StudentDetail> listStudent = db.Students.FirstOrDefault(x => x.StudentID == user.StudentID).StudentDetail.ToList();
                 return View(listStudent);
             }
             return RedirectToAction("Login", "Users");
@@ -184,7 +181,7 @@ namespace UET_BTL_VERSION_1.Controllers
             User user = Session["user"] as User;
             if (user != null)
             {
-                Student student = db.Students.SingleOrDefault(x => x.StudentID == user.StudentID);
+                Student student = db.Students.FirstOrDefault(x => x.StudentID == user.StudentID);
                 return View(student);
             }
             return RedirectToAction("Login", "Users");
@@ -196,13 +193,13 @@ namespace UET_BTL_VERSION_1.Controllers
             string pass = f["passOld"].ToString();
             if (user != null)
             {
-                Student stu = db.Students.SingleOrDefault(x => x.StudentID == user.StudentID);
+                Student stu = db.Students.FirstOrDefault(x => x.StudentID == user.StudentID);
                 if ((pass != user.PassWord)  || (f["passNew1"].ToString().Trim() != f["passNew2"].ToString().Trim()))
                 {
                     ViewBag.Message = "Mật khẩu cũ không đúng hoặc hai mật khẩu mới không khớp nhau!";
                     return View(stu);
                 }
-                User u = db.Users.SingleOrDefault(x => x.UserName == user.UserName);
+                User u = db.Users.FirstOrDefault(x => x.UserName == user.UserName);
                 u.PassWord = f["passNew1"].ToString();
                 stu.PassWord = f["passNew1"].ToString();
                 db.SaveChanges();
@@ -245,7 +242,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 survey.Point = int.Parse(form[i++]);
                 db.Surveys.Add(survey);
             }
-            StudentDetail stDetail =  db.StudentDetails.SingleOrDefault(x => x.StudentDetailID == stDetailID);
+            StudentDetail stDetail =  db.StudentDetails.FirstOrDefault(x => x.StudentDetailID == stDetailID);
             stDetail.NoteSurvey = form["note"].ToString();
             db.SaveChanges();
             return RedirectToAction("ShowListSubject");

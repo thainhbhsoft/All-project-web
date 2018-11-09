@@ -28,15 +28,15 @@ namespace UET_BTL_VERSION_1.Controllers
         public PartialViewResult NamePartial()
         {
             User user = Session["user"] as User;
-            if (user.Position == "Teacher")
+            if (user.Position.Equals("Teacher"))
             {
-                Teacher teacher = db.Teachers.SingleOrDefault(x => x.TeacherID == user.TeacherID);
+                Teacher teacher = db.Teachers.FirstOrDefault(x => x.TeacherID == user.TeacherID);
                 ViewBag.Name = teacher.Name.ToUpper();
                 return PartialView();
             }
-            else if (user.Position == "Student")
+            else if (user.Position.Equals("Student"))
             {
-                Student stu = db.Students.SingleOrDefault(x => x.StudentID == user.StudentID);
+                Student stu = db.Students.FirstOrDefault(x => x.StudentID == user.StudentID);
                 ViewBag.Name = stu.Name.ToUpper();
                 return PartialView();
             }

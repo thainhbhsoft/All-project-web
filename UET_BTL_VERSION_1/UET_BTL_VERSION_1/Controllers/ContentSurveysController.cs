@@ -37,15 +37,11 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                foreach (var item in db.Surveys)
-                {
-                    db.Surveys.Remove(item);
-                }
+                db.Surveys.RemoveRange(db.Surveys);
                 db.ContentSurveys.Add(contentSurvey);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(contentSurvey);
         }
         // GET: ContentSurveys/Edit/5
@@ -100,10 +96,7 @@ namespace UET_BTL_VERSION_1.Controllers
             try
             {
                 IEnumerable<Survey> listsurvey = db.Surveys.Where(x => x.ContentSurveyID == id);
-                foreach (var item in listsurvey)
-                {
-                    db.Surveys.Remove(item);
-                }
+                db.Surveys.RemoveRange(listsurvey);
             }
             catch (Exception)
             {

@@ -2,13 +2,10 @@
 
 namespace UET_BTL.Model.Entities
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class Subject
     {
-       
-    
         public int SubjectID { get; set; }
         public string Name { get; set; }
         public string SubjectCode { get; set; }

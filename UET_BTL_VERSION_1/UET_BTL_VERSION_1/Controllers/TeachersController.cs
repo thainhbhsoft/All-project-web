@@ -52,8 +52,8 @@ namespace UET_BTL_VERSION_1.Controllers
             User user = Session["user"] as User;
             if (user != null)
             {
-                ViewBag.SumStudents = db.StudentDetails.Where(x => x.TeacherID == user.TeacherID).Count();
-                ViewBag.SumSubjects = db.StudentDetails.Where(x => x.TeacherID == user.TeacherID).GroupBy(x => x.SubjectID).Count();
+                ViewBag.SumStudents = db.Teachers.FirstOrDefault(x => x.TeacherID == user.TeacherID).StudentDetail.Count();
+                ViewBag.SumSubjects = db.Teachers.FirstOrDefault(x => x.TeacherID == user.TeacherID).StudentDetail.GroupBy(x => x.SubjectID).Count();
                 ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
             }
             return View();
@@ -117,7 +117,7 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = db.Users.SingleOrDefault(x => x.TeacherID == teacher.TeacherID);
+                User user = db.Users.FirstOrDefault(x => x.TeacherID == teacher.TeacherID);
                 user.UserName = teacher.UserName;
                 user.PassWord = teacher.PassWord;
                 db.Entry(teacher).State = EntityState.Modified;
@@ -151,7 +151,7 @@ namespace UET_BTL_VERSION_1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Teacher teacher = db.Teachers.Find(id);
-            User user = db.Users.SingleOrDefault(x => x.TeacherID == teacher.TeacherID);
+            User user = db.Users.FirstOrDefault(x => x.TeacherID == teacher.TeacherID);
             db.Users.Remove(user);
             db.Teachers.Remove(teacher);
             db.SaveChanges();
@@ -167,15 +167,15 @@ namespace UET_BTL_VERSION_1.Controllers
         }
         public ActionResult ShowClass(int? id)
         {
-            IEnumerable<StudentDetail> listStudent = db.StudentDetails.Where(x => x.SubjectID == id);
+            IEnumerable<StudentDetail> listStudent = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.ToList();
             return View(listStudent);
         }
         public ActionResult ShowResultSurvey(int? id)
         {
-            List<int> lis = db.StudentDetails.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
+            List<int> lis = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.Select(x => x.StudentDetailID).ToList();
             StudentDetail student_Detail = db.StudentDetails.First(x => x.SubjectID == id);
             ViewBag.hasSurvey = db.Surveys.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
-            ViewBag.SumStudent = db.StudentDetails.Where(x => x.SubjectID == id).ToList().Count();
+            ViewBag.SumStudent = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.ToList().Count();
             if (ViewBag.hasSurvey == 0)
             {
                 return View(student_Detail);

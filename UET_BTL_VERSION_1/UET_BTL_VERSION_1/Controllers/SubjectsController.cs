@@ -52,10 +52,10 @@ namespace UET_BTL_VERSION_1.Controllers
         }
         public ActionResult ShowResultSurvey(int? id)
         {
-            List<int> lis = db.StudentDetails.Where(x => x.SubjectID == id).Select(x => x.StudentDetailID).ToList();
+            List<int> lis = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.Select(x => x.StudentDetailID).ToList();
             ViewBag.hasSurvey = db.Surveys.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
             StudentDetail student_Detail = db.StudentDetails.First(x => x.SubjectID == id);
-            ViewBag.SumStudent = db.StudentDetails.Where(x => x.SubjectID == id).ToList().Count();
+            ViewBag.SumStudent = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.ToList().Count();
             if (ViewBag.hasSurvey == 0)
             {
                 return View(student_Detail);
@@ -64,6 +64,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 .Where(x => lis.Any(k => k == x.StudentDetailID))
                 .GroupBy(x => x.ContentSurveyID)
                 .Select(x => x.Average(y => y.Point)).ToList();
+
             ViewBag.NameSurvey = db.ContentSurveys.Select(x => x.Text).ToList();
             ViewBag.CountSurvey = db.ContentSurveys.ToList().Count();
             return View(student_Detail);
@@ -92,21 +93,16 @@ namespace UET_BTL_VERSION_1.Controllers
             IEnumerable<StudentDetail> list = db.StudentDetails.Where(x => x.SubjectID == id);
             foreach (var item in list)
             {
-                db.StudentDetails.Remove(item);
-                IEnumerable<Survey> list2 = db.Surveys.Where(x => x.StudentDetailID == item.StudentDetailID);
                 try
                 {
-                    foreach (var item2 in list2)
-                    {
-                        db.Surveys.Remove(item2);
-                    }
+                    db.Surveys.RemoveRange(item.Survey);
                 }
                 catch (Exception)
                 {
 
                 }
-               
             }
+            db.StudentDetails.RemoveRange(list);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
