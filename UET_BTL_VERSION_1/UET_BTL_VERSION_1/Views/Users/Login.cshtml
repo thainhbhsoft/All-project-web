@@ -4,12 +4,13 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link href="~/Contents/CSS/Login.css" rel="stylesheet" />
+    
+    @Styles.Render("~/login/css")
     <title>my document</title>
 </head>
 <body>
     <div class="page-header">
-        
+
         <div class="">
             <select class="select-language" name="" id="" style="height: 30px; width: 180px;">
                 <option value="">Tiếng Việt (Vietnamese)</option>
@@ -21,14 +22,9 @@
     <div class="main-content">
         <div class="content-login">
             <div class="image">
-                <img src="~/Content/Images/bgLogin.png" />
+                <img src="~/Contents/Images/bgLogin-min.png" />
             </div>
-            <div class="login-success">
-                <img src="~/Content/Images/login-success.png" />
-                <div class="log-out">
-                    ĐĂNG XUẤT
-                </div>
-            </div>
+
             <form action="/Users/Login" method="post">
                 <div class="login-form">
                     <div class="error">
@@ -97,8 +93,7 @@
         <pre>Copyright © 2015 - 2018        uet.vnu.edu.vn</pre>
     </footer>
 
-   
-   
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    @*@Scripts.Render("~/footer/js")*@
+    @Scripts.Render("~/footer/js")
 </body>
 </html>

@@ -171,7 +171,7 @@ footer {
 }
 
 .icon-user {
-    background-image: url('../../Content/Images/iconLogin.png');
+    background-image: url('../../Contents/Images/iconLogin.png');
     float: left;
     width: 30px;
     height: 25px;
@@ -182,7 +182,7 @@ footer {
 }
 
 .icon-password {
-    background-image: url('../../Content/Images/iconLogin.png');
+    background-image: url('../../Contents/Images/iconLogin.png');
     float: left;
     width: 30px;
     height: 25px;

@@ -181,21 +181,18 @@
     <Content Include="Contents\CSS\dashboard.css" />
     <Content Include="Contents\CSS\Login.css" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Contents\Images\iconLogin.png" />
     <Content Include="Contents\js\admin.js" />
     <Content Include="Contents\js\bootstrap.min.js" />
     <Content Include="Contents\js\jquery-3.3.1.min.js" />
-    <Content Include="Content\CSS\style.css" />
-    <Content Include="Content\Images\bgLogin.png" />
-    <Content Include="Content\Images\iconLogin.png" />
-    <Content Include="Content\Images\login-success.png" />
-    <Content Include="Content\Images\logoCukCuk.png" />
-    <Content Include="Content\Images\success.PNG" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -204,9 +201,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Fonts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Contents\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.ttf" />

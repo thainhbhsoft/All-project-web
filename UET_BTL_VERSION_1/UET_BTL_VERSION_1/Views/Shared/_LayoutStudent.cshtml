@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
-    <link href="~/Contents/CSS/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Contents/CSS/dashboard.css" rel="stylesheet" />
+    @*<link href="~/Contents/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Contents/CSS/dashboard.css" rel="stylesheet" />*@
+    @Styles.Render("~/header/css")
 </head>
 <body>
     <div class="container-fluid">
@@ -20,7 +21,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">@Html.Action("NamePartial","Home")</a>
+                        <a class="navbar-brand" href="#">@Html.Action("NamePartial", "Home")</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,9 +54,11 @@
         </div>
     </div><!-- end-body-page-->
     <hr>
-    <script src="~/Contents/js/jquery-3.3.1.min.js"></script>
-    <script src="~/Contents/js/bootstrap.min.js"></script>
-    <script src="~/Contents/js/admin.js"></script>
+    @*<script src="~/Contents/js/jquery-3.3.1.min.js"></script>
+        <script src="~/Contents/js/bootstrap.min.js"></script>*@
+
+    @*<script src="~/Contents/js/admin.js"></script>*@
+    @Scripts.Render("~/footer/js")
 
 </body>
 </html>

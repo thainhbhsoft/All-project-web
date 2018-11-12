@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
-    <link href="~/Contents/CSS/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Contents/CSS/dashboard.css" rel="stylesheet" />
+    @*<link href="~/Contents/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Contents/CSS/dashboard.css" rel="stylesheet" />*@
+    @Styles.Render("~/header/css")
 </head>
 <body>
     <div class="container-fluid">
@@ -28,7 +29,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="/Users/Logout">Đăng xuất </a>
-                               
+
                             </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
@@ -55,9 +56,10 @@
         </div>
     </div><!-- end-body-page-->
     <hr>
-    <script src="~/Contents/js/jquery-3.3.1.min.js"></script>
-    <script src="~/Contents/js/bootstrap.min.js"></script>
-    <script src="~/Contents/js/admin.js"></script>
-   
+    @*<script src="~/Contents/js/jquery-3.3.1.min.js"></script>
+        <script src="~/Contents/js/bootstrap.min.js"></script>
+
+    <script src="~/Contents/js/admin.js"></script>*@
+    @Scripts.Render("~/footer/js")
 </body>
 </html>
