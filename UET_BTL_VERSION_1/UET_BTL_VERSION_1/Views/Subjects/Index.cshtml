@@ -59,7 +59,7 @@
                     <td>
                         @Html.ActionLink("List", "ShowClass", new { id = item.SubjectID }, htmlAttributes: new { @class = "btn btn-warning" })
                         @Html.ActionLink("Result", "ShowResultSurvey", new { id = item.SubjectID }, htmlAttributes: new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.SubjectID }, htmlAttributes: new { @class = "btn btn-danger" })
+                        <a href="#" class="btn btn-danger delete-subject" id="@item.SubjectID">Xóa</a>
                     </td>
                 </tr>
                 }
@@ -76,3 +76,7 @@
     <br>
     <input type="submit" value="Import">
 </form> 
+
+<div class="confirm-delete-subject">
+
+</div>

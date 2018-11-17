@@ -74,8 +74,8 @@ else
                                 @Html.DisplayFor(modelItem => item.PassWord)
                             </td>
                             <td>
-                                @Html.ActionLink("sửa", "Edit", new { id = item.StudentID}, htmlAttributes: new { @class = "btn btn-warning" }) 
-                                @Html.ActionLink("Xóa", "Delete", new { id = item.StudentID}, htmlAttributes: new { @class = "btn btn-danger" })
+                                <a href="#" class="btn btn-warning edit-student" id="@item.StudentID">Sửa</a>
+                                <a href="#" class="btn btn-danger delete-student" id="@item.StudentID">Xóa</a>
                             </td>
                         </tr>
                     }
@@ -100,5 +100,9 @@ else
         </div>
     }
 }
+
+<div class="confirm-delete-student">
+
+</div>
 
 

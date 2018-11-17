@@ -25,7 +25,7 @@ else
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">Search</button>
                     </span>
-                </div><!-- /input-group -->
+                </div>
             }
         </div>
     </div>
@@ -71,8 +71,10 @@ else
                             @Html.DisplayFor(modelItem => item.PassWord)
                         </td>
                         <td>
-                            @Html.ActionLink("sửa", "Edit", new { id = item.TeacherID }, htmlAttributes: new { @class = "btn btn-warning" })
-                            @Html.ActionLink("Xóa", "Delete", new { id = item.TeacherID }, htmlAttributes: new { @class = "btn btn-danger" })
+                          
+                            <a href="#" class="btn btn-warning edit-teacher" id="@item.TeacherID">Sửa</a>
+                            <a href="#" class="btn btn-danger delete-teacher" id="@item.TeacherID">Xóa</a>
+
                         </td>
                     </tr>
                     }
@@ -95,5 +97,9 @@ else
         </div>
     }
 }
+
+<div class="confirm-delete-teacher">
+
+</div>
 
 

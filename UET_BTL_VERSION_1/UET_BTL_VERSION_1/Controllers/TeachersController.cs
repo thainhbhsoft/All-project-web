@@ -127,8 +127,10 @@ namespace UET_BTL_VERSION_1.Controllers
             return View(teacher);
         }
         // GET: Teachers/Delete/5
+        [HttpGet]
         public ActionResult Delete(int? id)
         {
+            db.Configuration.ProxyCreationEnabled = false;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -137,25 +139,24 @@ namespace UET_BTL_VERSION_1.Controllers
             bool a = db.StudentDetails.Any(x => x.TeacherID == id);
             if (a)
             {
-                ViewBag.message = "Giảng viên này đang dạy một học phần, không thể xóa được";
+                return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
             }
             if (teacher == null)
             {
                 return HttpNotFound();
             }
-            return View(teacher);
+            return Json(new { status = 1,teacher = teacher }, JsonRequestBehavior.AllowGet);
         }
         // POST: Teachers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
             Teacher teacher = db.Teachers.Find(id);
             User user = db.Users.FirstOrDefault(x => x.TeacherID == teacher.TeacherID);
             db.Users.Remove(user);
             db.Teachers.Remove(teacher);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ShowListSubject()
         {

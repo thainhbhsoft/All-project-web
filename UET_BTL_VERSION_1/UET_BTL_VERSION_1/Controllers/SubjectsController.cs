@@ -72,6 +72,7 @@ namespace UET_BTL_VERSION_1.Controllers
         // GET: Subjects/Delete/5
         public ActionResult Delete(int? id)
         {
+            db.Configuration.ProxyCreationEnabled = false;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -81,12 +82,11 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return HttpNotFound();
             }
-            return View(subject);
+            return Json(subject, JsonRequestBehavior.AllowGet);
         }
         // POST: Subjects/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
             Subject subject = db.Subjects.Find(id);
             db.Subjects.Remove(subject);
@@ -104,7 +104,7 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             db.StudentDetails.RemoveRange(list);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult ImportSubject(HttpPostedFileBase fileUpload)

@@ -111,9 +111,10 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(student);
         }
-        // GET: Students/Delete/5
+        [HttpGet]
         public ActionResult Delete(int? id)
         {
+            db.Configuration.ProxyCreationEnabled = false;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -123,14 +124,13 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return Json(student, JsonRequestBehavior.AllowGet);
+           // db.Configuration.ProxyCreationEnabled = proxyCreation;
         }
         // POST: Students/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(FormCollection f)
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            int id = int.Parse(f["STUID"].ToString());
             Student student = db.Students.FirstOrDefault(x => x.StudentID == id);
             User user = db.Users.FirstOrDefault(x => x.StudentID == id);
             IEnumerable<StudentDetail> list2 = db.StudentDetails.Where(x => x.StudentID == id);
@@ -150,7 +150,7 @@ namespace UET_BTL_VERSION_1.Controllers
             db.Users.Remove(user);
             db.Students.Remove(student);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ShowCountResult()
         {
