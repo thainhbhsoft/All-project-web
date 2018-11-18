@@ -153,8 +153,8 @@ button.btn.btn-default {
     color: white;
 }
 
-/*---------------------start ajax confirm-delete teacher-----------------*/
-.confirm-delete-teacher, .confirm-delete-student, .confirm-delete-subject {
+/*---------------------start ajax confirm-delete -----------------*/
+.confirm-delete-teacher, .confirm-delete-student, .confirm-delete-subject, .confirm-delete-ContentSurvey {
     position: fixed;
     left: 468px;
     top: 200px;
@@ -169,4 +169,4 @@ button.btn.btn-default {
 
 
 
-/*---------------------start ajax confirm-delete teacher-----------------*/
+/*---------------------start ajax confirm-delete -----------------*/

@@ -28,21 +28,29 @@
                 @foreach (var item in Model)
                 {
                     i = i + 1;
-                <tr class="table-striped">
-                    <td>
-                        @i
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Text)
-                    </td>
-                    <td>
-                        @Html.ActionLink("sửa", "Edit", new { id = item.ContentSurveyID }, htmlAttributes: new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Xóa", "Delete", new { id = item.ContentSurveyID }, htmlAttributes: new { @class = "btn btn-danger" })
-                    </td>
-                </tr>
+                    <tr class="table-striped">
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </td>
+                        <td>
+                            @Html.ActionLink("sửa", "Edit", new { id = item.ContentSurveyID }, htmlAttributes: new { @class = "btn btn-warning" })
+                            <a href="#" class="btn btn-danger delete-ContentSurvey" id="@item.ContentSurveyID">Xóa</a>
+                        </td>
+                    </tr>
                 }
 
             </tbody>
         </table>
     </div>
 </div>
+<div class="confirm-delete-ContentSurvey">
+
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/survey/js")
+}

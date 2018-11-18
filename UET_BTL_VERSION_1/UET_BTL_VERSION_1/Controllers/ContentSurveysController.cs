@@ -75,6 +75,7 @@ namespace UET_BTL_VERSION_1.Controllers
         // GET: ContentSurveys/Delete/5
         public ActionResult Delete(int? id)
         {
+            db.Configuration.ProxyCreationEnabled = false;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,12 +85,11 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 return HttpNotFound();
             }
-            return View(contentSurvey);
+            return Json(contentSurvey, JsonRequestBehavior.AllowGet);
         }
         // POST: ContentSurveys/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
             ContentSurvey contentSurvey = db.ContentSurveys.Find(id);
             db.ContentSurveys.Remove(contentSurvey);
@@ -102,7 +102,7 @@ namespace UET_BTL_VERSION_1.Controllers
             {
             }
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {

@@ -125,7 +125,6 @@ namespace UET_BTL_VERSION_1.Controllers
                 return HttpNotFound();
             }
             return Json(student, JsonRequestBehavior.AllowGet);
-           // db.Configuration.ProxyCreationEnabled = proxyCreation;
         }
         // POST: Students/Delete/5
         [HttpPost]

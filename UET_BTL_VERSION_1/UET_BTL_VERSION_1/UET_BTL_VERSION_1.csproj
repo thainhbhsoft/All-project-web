@@ -182,6 +182,7 @@
     <Content Include="Contents\CSS\Login.css" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Contents\Images\iconLogin.png" />
+    <Content Include="Contents\js\survey.js" />
     <Content Include="Contents\js\subject.js" />
     <Content Include="Contents\js\student.js" />
     <Content Include="Contents\js\teacher.js" />

@@ -29,6 +29,9 @@ namespace UET_BTL_VERSION_1
             bundles.Add(new ScriptBundle("~/subject/js").Include(
                      "~/Contents/js/subject.js"
                      ));
+            bundles.Add(new ScriptBundle("~/survey/js").Include(
+                     "~/Contents/js/survey.js"
+                     ));
 
             bundles.Add(new StyleBundle("~/login/css").Include(
                      "~/Contents/CSS/Login.css"
