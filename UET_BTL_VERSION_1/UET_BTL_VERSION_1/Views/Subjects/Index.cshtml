@@ -37,31 +37,31 @@
                 @foreach (var item in Model)
                 {
                     i = i + 1;
-                <tr class="table-striped">
-                    <td>
-                        @i
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SubjectCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreditNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClassRoom)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TimeTeach)
-                    </td>
-                    <td>
-                        @Html.ActionLink("List", "ShowClass", new { id = item.SubjectID }, htmlAttributes: new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Result", "ShowResultSurvey", new { id = item.SubjectID }, htmlAttributes: new { @class = "btn btn-primary" })
-                        <a href="#" class="btn btn-danger delete-subject" id="@item.SubjectID">Xóa</a>
-                    </td>
-                </tr>
+                    <tr class="table-striped">
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubjectCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreditNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClassRoom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeTeach)
+                        </td>
+                        <td>
+                            @Html.ActionLink("List", "ShowClass", new { id = item.SubjectID }, htmlAttributes: new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Result", "ShowResultSurvey", new { id = item.SubjectID }, htmlAttributes: new { @class = "btn btn-primary" })
+                            <a href="#" class="btn btn-danger delete-subject" id="@item.SubjectID">Xóa</a>
+                        </td>
+                    </tr>
                 }
 
             </tbody>
@@ -75,8 +75,13 @@
     <input type="file" name="fileUpload">
     <br>
     <input type="submit" value="Import">
-</form> 
+</form>
 
 <div class="confirm-delete-subject">
 
 </div>
+
+@section scripts
+{
+    @Scripts.Render("~/subject/js")
+}

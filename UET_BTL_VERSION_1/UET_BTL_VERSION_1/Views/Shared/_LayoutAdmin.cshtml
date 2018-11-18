@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/header/css")
+    @Styles.Render("~/bootstrap/css")
 </head>
 <body>
     <div class="container-fluid">
@@ -54,7 +54,8 @@
         </div>
     </div><!-- end-body-page-->
     <hr>
-   
-    @Scripts.Render("~/footer/js")
+
+    @Scripts.Render("~/bootstrap-jquery/js")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -31,7 +31,7 @@ else
     <h4>@ViewBag.messageSearch</h4>
     <h4>Tổng số sinh viên : @ViewBag.sum</h4>
     <p>
-        @Html.ActionLink("THÊM MỚI", "Create",null, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("THÊM MỚI", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
     </p>
     <div class="content-teacher">
         <div class="table-responsive">
@@ -105,4 +105,7 @@ else
 
 </div>
 
-
+@section scripts
+{
+    @Scripts.Render("~/student/js")
+}

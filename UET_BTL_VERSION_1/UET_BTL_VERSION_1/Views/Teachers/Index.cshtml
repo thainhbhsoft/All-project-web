@@ -54,29 +54,29 @@ else
                     @foreach (var item in Model)
                     {
                         i = i + 1;
-                    <tr class="table-striped">
-                        <td>
-                            @i
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PassWord)
-                        </td>
-                        <td>
-                          
-                            <a href="#" class="btn btn-warning edit-teacher" id="@item.TeacherID">Sửa</a>
-                            <a href="#" class="btn btn-danger delete-teacher" id="@item.TeacherID">Xóa</a>
+                        <tr class="table-striped">
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PassWord)
+                            </td>
+                            <td>
 
-                        </td>
-                    </tr>
+                                <a href="#" class="btn btn-warning edit-teacher" id="@item.TeacherID">Sửa</a>
+                                <a href="#" class="btn btn-danger delete-teacher" id="@item.TeacherID">Xóa</a>
+
+                            </td>
+                        </tr>
                     }
 
                 </tbody>
@@ -101,5 +101,10 @@ else
 <div class="confirm-delete-teacher">
 
 </div>
+
+@section scripts
+{
+    @Scripts.Render("~/teacher/js")
+}
 
 
