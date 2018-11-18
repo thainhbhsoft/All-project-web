@@ -53,5 +53,64 @@
         $(".confirm-delete-student").slideUp(700);
     });
     //end  ajax delete student
+    //end  ajax create student
+    $('.btn-close').click(function () {
+        $('.add-tab').hide();
+        $('.edit-tab').hide();
+        $('.input-information').removeClass('border-red');
+    });
+
+    $('#add-button').click(function () {
+        $('.add-tab').show();
+    });
+   
+    function ChuanhoaTen(ten) {
+        dname = ten;
+        ss = dname.split(' ');
+        dname = "";
+        for (i = 0; i < ss.length; i++)
+            if (ss[i].length > 0) {
+                if (dname.length > 0) dname = dname + " ";
+                dname = dname + ss[i].substring(0, 1).toUpperCase();
+                dname = dname + ss[i].substring(1).toLowerCase();
+            }
+        return dname;
+    }
+
+    function isStudentEmail(e) {
+        var regex = /(^(\d{8}))((@vnu.edu.vn)$)/;
+        if (regex.test(e)) return true;
+    }
+    // Kiểm tra mã minh viên (8 chữ số)
+    function isStudentId(e) {
+        var regex = /(^(\d{8})$)/;
+        if (regex.test(e)) return true;
+    }
+    $("#addStudent").submit(function (event) {
+
+        var check = true;
+       
+         if (isStudentEmail($("#studentEmail").val()) != true) {
+             $('#studentEmail[data-toggle="tooltip"]').tooltip("show");  
+            check = false;
+        }
+       
+        if (isStudentId($("#studentId").val()) != true) {
+            $('#studentId[data-toggle="tooltip"]').tooltip("show");  
+            check = false;
+        }
+        if (check == false)
+            event.preventDefault();
+    });
+    
+
+
+
+
+    //end  ajax create student
+
+
+
+
 });
 
