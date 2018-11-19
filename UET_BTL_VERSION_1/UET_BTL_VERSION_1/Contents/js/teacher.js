@@ -55,12 +55,12 @@
     //end  ajax create student
     $('.btn-close').click(function () {
         $('.create-teacher').hide();
-        $('.input-information').removeClass('border-red');
+        $('.input2').removeClass('border-red');
         $('[data-toggle="tooltip"]').tooltip("hide");
     });
 
     $('#add-button').click(function () {
-        $('.input-information').val("");
+        $('.input2').val("");
         $('.create-teacher').show();
     });
 
@@ -87,7 +87,7 @@
         return false;
     }
    
-    $('.input-information').blur(function () {
+    $('.input2').blur(function () {
         if ($(this).val() !== "") {
             $(this).removeClass('border-red');
         } else {
@@ -95,11 +95,10 @@
         }
     });
     $(".btn-submit").click(function (event) {
-
         let check = true;
-        $('.input-information').removeClass('border-red');
-        $('.input-information').each(function () {
-            if ($(this).val() === "") {
+        $('.input2').removeClass('border-red');
+        $('.input2').each(function () {
+            if ($(this).val().trim() === "") {
                 $(this).addClass('border-red');
                 check = false;
             }
@@ -108,7 +107,6 @@
             $('#teacherEmail[data-toggle="tooltip"]').tooltip("show");
             check = false;
         }
-       
         if (check) {
             PeformAjaxCreateTeacher();
         }

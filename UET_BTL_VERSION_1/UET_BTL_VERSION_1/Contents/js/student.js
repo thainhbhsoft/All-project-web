@@ -48,12 +48,12 @@
     $('.btn-close').click(function () {
         $('.create-student').hide();
         $('.edit-tab').hide();
-        $('.input-information').removeClass('border-red');
+        $('.input2').removeClass('border-red');
         $('[data-toggle="tooltip"]').tooltip("hide"); 
     });
 
     $('#add-button').click(function () {
-        $('.input-information').val("");
+        $('.input2').val("");
         $('.create-student').show();
     });
 
@@ -85,7 +85,7 @@
         if (regex.test(e)) return true;
         return false;
     }
-    $('.input-information').blur(function () {
+    $('.input2').blur(function () {
         if ($(this).val() !== "") {
             $(this).removeClass('border-red');
         } else {
@@ -95,8 +95,8 @@
     $(".btn-submit").click(function (event) {
 
         let check = true;
-        $('.input-information').removeClass('border-red');
-        $('.input-information').each(function () {
+        $('.input2').removeClass('border-red');
+        $('.input2').each(function () {
             if ($(this).val() === "") {
                 $(this).addClass('border-red');
                 check = false;
