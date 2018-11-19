@@ -1,97 +1,71 @@
 ﻿@model UET_BTL.Model.Entities.User
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    
+    <title>REVISUB</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Contents/CSS/bootstrap.min.css" rel="stylesheet" />
     @Styles.Render("~/login/css")
-    <title>my document</title>
 </head>
+
 <body>
-    <div class="page-header">
-
-        <div class="">
-            <select class="select-language" name="" id="" style="height: 30px; width: 180px;">
-                <option value="">Tiếng Việt (Vietnamese)</option>
-                <option value="">Tiếng Anh (ENGLISH)</option>
-                <option value="">Tiếng Đức (GERMENY)</option>
-            </select>
-        </div>
-    </div>
-    <div class="main-content">
-        <div class="content-login">
-            <div class="image">
-                <img src="~/Contents/Images/bgLogin-min.png" />
-            </div>
-
-            <form action="/Users/Login" method="post">
-                <div class="login-form">
-                    <div class="error">
-                        <ul>@ViewBag.ThongBao</ul>
-                    </div>
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <div class="dangnhap">ĐĂNG NHẬP HỆ THỐNG</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="item">
-                                    Tên đăng nhập
-                                </div>
-                            </td>
-                            <td>
-                                <div class="wrapp-login">
-                                    <div class="icon-user"></div>
-                                    <input id="username" type="text" name="username" value="" placeholder="Tên đăng nhập/Số điện thoại/Email" required />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="item">
-                                    Mật khẩu
-                                </div>
-                            </td>
-                            <td>
-                                <div class="wrapp-password">
-                                    <div class="icon-password"></div>
-                                    <input id="password" type="password" name="password" value="" placeholder="Mật khẩu" required />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <div class="login">
-                                    <input type="submit" name="name" value="ĐĂNG NHẬP" />
-                                </div>
-                            </td>
-                        </tr>
-
-                    </table>
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 style="font-family: Poppins-Bold;">REVISUB</h3>
                 </div>
-            </form>
-
+            </div>
         </div>
     </div>
-    <div class="email">
-        <div class="footer-item">Đại học công nghệ ĐHQGHN</div>
-        <div class="footer-item">Website: uet.vnu.edu.vn</div>
-        <div class="footer-item">Hướng dẫn sử dụng</div>
+    <div class="login-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 hidden-sm hidden-xs">
+                    <img src="~/Contents/Images/free-computer-elements-vector.png" class="img-responsive" style="padding-top: 85px"/>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="login-form text-center">
+                        <h4 class="title" style="font-size:30px;font-weight: bold;">LOG IN</h4>
+                        <div class="error" style="color:red">
+                            <p>@ViewBag.ThongBao</p>
+                        </div>
+                        <div class="input-form">
+                            <form action="/Users/Login" method="post">
+                                <div>
+                                    <input type="text" name="username" placeholder="Tài khoản" required id="username">
+                                    <span class="glyphicon glyphicon-user"></span>
+
+                                </div>
+                                <div>
+                                    <input type="password" name="password" placeholder="Mật khẩu" required id="password">
+                                    <span class="glyphicon glyphicon-lock"></span>
+
+
+                                </div>
+                                <button class="btn btn-success">Đăng nhập</button>
+                            </form>
+                            <a href="">Quên mật khẩu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="time-footer">
-        <pre>
-        Thời gian làm việc: Thứ 2 - Thứ 7: từ 7:30 đến 22:00,
-        Thứ 7, Chủ nhật: Sáng 8:00 - 12:00; Chiều 13:30 - 22:00
-        </pre>
+    <div class="bottom-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="pull-left">Copyright © 2018 Revisub. All right reserved .</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <footer>
-        <pre>Copyright © 2015 - 2018        uet.vnu.edu.vn</pre>
-    </footer>
+
 
 </body>
+
 </html>

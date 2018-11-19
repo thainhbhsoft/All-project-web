@@ -47,40 +47,41 @@ namespace UET_BTL_VERSION_1.Controllers
             ViewBag.sum = listKQ.Count();
             return View(listKQ.ToPagedList(pageNumber, pageSize));
         }
-        // GET: Students/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentID,Name,StudentCode,Course,DateOfBirth,Email,UserName,PassWord")] Student student)
+        public ActionResult Create(FormCollection form)
         {
-            if (ModelState.IsValid)
+            db.Configuration.ProxyCreationEnabled = false;
+            string username = form["UserName"].ToString();
+            if (db.Users.Any(x => x.UserName.Equals(username)))
             {
-                if (db.Students.Any(x => x.UserName == student.UserName))
-                {
-                    ViewBag.error = "Tên đăng nhập đã tồn tại";
-                    return View(student);
-                }
-                else
-                {
-                    db.Students.Add(student);
-                    db.SaveChanges();
-                    int studentid = db.Students.Max(x => x.StudentID);
-                    User user = new User()
-                    {
-                        UserName = student.UserName,
-                        PassWord = student.PassWord,
-                        Position = "Student",
-                        StudentID = studentid
-                    };
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
             }
-            return View(student);
+            else
+            {
+                Student stu = new Student();
+                stu.UserName = form["UserName"].ToString();
+                stu.Name = form["Name"].ToString();
+                stu.DateOfBirth = DateTime.Parse(form["DateOfBirth"].ToString()); 
+                stu.Course = form["Course"].ToString();
+                stu.StudentCode = form["StudentCode"].ToString();
+                stu.UserName = form["UserName"].ToString();
+                stu.Email = form["Email"].ToString();
+                stu.PassWord = form["PassWord"].ToString();
+                db.Students.Add(stu);
+                db.SaveChanges();
+                int studentid = db.Students.Max(x => x.StudentID);
+                User user = new User()
+                {
+                    UserName = stu.UserName,
+                    PassWord = stu.PassWord,
+                    Position = "Student",
+                    StudentID = studentid
+                };
+                db.Users.Add(user);
+                db.SaveChanges();
+                return Json(new { status = 1, student = stu }, JsonRequestBehavior.AllowGet);
+            }
         }
         // GET: Students/Edit/5
         public ActionResult Edit(int? id)

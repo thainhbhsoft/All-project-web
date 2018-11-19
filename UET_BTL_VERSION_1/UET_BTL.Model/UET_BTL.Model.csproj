@@ -56,6 +56,14 @@
     <Compile Include="Migrations\201811081010086_created.Designer.cs">
       <DependentUpon>201811081010086_created.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811180855156_removeValidation.cs" />
+    <Compile Include="Migrations\201811180855156_removeValidation.Designer.cs">
+      <DependentUpon>201811180855156_removeValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811180901477_removeValidation2.cs" />
+    <Compile Include="Migrations\201811180901477_removeValidation2.Designer.cs">
+      <DependentUpon>201811180901477_removeValidation2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UetSurveyDbContext.cs" />
     <Compile Include="Entities\ContentSurvey.cs" />
@@ -77,6 +85,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811081010086_created.resx">
       <DependentUpon>201811081010086_created.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180855156_removeValidation.resx">
+      <DependentUpon>201811180855156_removeValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180901477_removeValidation2.resx">
+      <DependentUpon>201811180901477_removeValidation2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

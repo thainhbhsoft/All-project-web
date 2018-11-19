@@ -170,9 +170,19 @@ button.btn.btn-default {
 
 
 /*---------------------start ajax create-student -----------------*/
+.create-student {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #80808082;
+    z-index: 999;
+    display: none;
+}
 
 .add-tab {
-    display: none;
+    /*display: none;*/
     position: fixed;
     margin: 0 auto;
     min-width: 39vw;
@@ -201,7 +211,7 @@ button.btn.btn-default {
     }
 
 .border-red {
-    border-color: red;
+    border:2px solid red;
 }
 .bottom-button{
     display:inline-block;

@@ -181,7 +181,6 @@
     <Content Include="Contents\CSS\dashboard.css" />
     <Content Include="Contents\CSS\Login.css" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Contents\Images\iconLogin.png" />
     <Content Include="Contents\js\survey.js" />
     <Content Include="Contents\js\subject.js" />
     <Content Include="Contents\js\student.js" />
@@ -204,7 +203,9 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Contents\Images\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Contents\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.ttf" />
@@ -212,7 +213,6 @@
     <Content Include="Contents\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Teachers\Create.cshtml" />
