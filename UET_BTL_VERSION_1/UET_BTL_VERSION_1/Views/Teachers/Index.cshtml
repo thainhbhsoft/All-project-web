@@ -33,9 +33,8 @@ else
     <h4>@ViewBag.messageSearch</h4>
     <h4>Tổng số giảng viên : @ViewBag.sum</h4>
     <p>
-        @Html.ActionLink("THÊM MỚI", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+        <button class="btn btn-primary" id="add-button">Thêm mới</button>
     </p>
-
     <div class="content-teacher">
         <div class="table-responsive">
             <table class="table table-hover table-striped">
@@ -98,10 +97,102 @@ else
     }
 }
 
-<div class="confirm-delete-teacher">
+<div class="delete-teacher-form">
+    <div class="add-tab">
+        <div class="header-tab">
+            <h5 class="text-center"></h5>
+        </div>
+        <div class="information-content  table-responsive">
+            <form action="#" >
+                <table class="table  ">
+                    <tr>
+                        
+                    </tr>
+                    <tr>
+                        <td>Họ và tên</td>
+                        <td><input name="Name" type="text" disabled class="input-information name" value="" maxlength="200" id="DteacherName" required=""></td>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Địa chỉ email</td>
+                            <td><input name="Email" type="text" disabled class="input-information" value="" id="DteacherEmail" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Tên đăng nhập</td>
+                            <td><input name="UserName" type="text" disabled class="input-information" value="" id="DteacherUsername" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Mật khẩu</td>
+                            <td><input name="PassWord" type="text" disabled class="input-information" value="" id="DteacherPassword" required=""></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="bottom-button">
+                                </div>
+                                <div class="bottom-button">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
+            </form>
+
+        </div>
+
+    </div>
 </div>
 
+<div class="create-teacher">
+    <div class="add-tab">
+        <div class="header-tab">
+            <h5>Thêm mới giảng viên</h5>
+        </div>
+        <div class="information-content  table-responsive">
+            <form action="/Teachers/Create" id="addTeacher" method="post">
+                <table class="table  ">
+                    <tr>
+                        <td>Họ và tên</td>
+                        <td><input name="Name" type="text" class="input-information name" value="" maxlength="200" id="teacherName" required=""></td>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Mã giảng viên</td>
+                            <td><input name="TeacherCode" type="text" class="input-information" value="" id="teacherId" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ email</td>
+                            <td><input name="Email" type="email" data-toggle="tooltip" data-placement="bottom" title="Email có dạng x@vnu.edu.vn với x (4-10 chữ cái )" class="input-information" value="" id="teacherEmail" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Tên đăng nhập</td>
+                            <td><input name="UserName" type="text" data-toggle="tooltip" data-placement="bottom" title="Tên dăng nhập không được trùng trong hệ thống" class="input-information" value="" id="teacherUsername" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Mật khẩu</td>
+                            <td><input name="PassWord" type="password" class="input-information" value="" id="teacherPassword" required=""></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="bottom-button">
+                                    <a href="#" class="btn btn-success btn-submit">Thêm mới</a>
+                                </div>
+                                <div class="bottom-button">
+                                    <a href="#" class="btn btn-danger btn-close" id="studentCancel">Hủy bỏ</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
 @section scripts
 {
     @Scripts.Render("~/teacher/js")

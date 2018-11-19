@@ -58,42 +58,38 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View();
         }
-        // GET: Teachers/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-        // POST: Teachers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeacherID,Name,TeacherCode,Email,UserName,PassWord")] Teacher teacher)
+        public ActionResult Create(FormCollection form)
         {
-            if (ModelState.IsValid)
+            db.Configuration.ProxyCreationEnabled = false;
+            string username = form["UserName"].ToString();
+            if (db.Users.Any(x => x.UserName.Equals(username)))
             {
-                if (db.Teachers.Any(x => x.UserName == teacher.UserName))
-                {
-                    ViewBag.error = "Tên đăng nhập đã tồn tại";
-                    return View(teacher);
-                }
-                else
-                {
-                    db.Teachers.Add(teacher);
-                    db.SaveChanges();
-                    int teachertid = db.Teachers.Max(x => x.TeacherID);
-                    User user = new User()
-                    {
-                        UserName = teacher.UserName,
-                        PassWord = teacher.PassWord,
-                        Position = "Teacher",
-                        TeacherID = teachertid
-                    };
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
             }
-            return View(teacher);
+            else
+            {
+                Teacher tea = new Teacher();
+                tea.UserName = form["UserName"].ToString();
+                tea.Name = form["Name"].ToString();
+                tea.TeacherCode = form["TeacherCode"].ToString();
+                tea.Email = form["Email"].ToString();
+                tea.PassWord = form["PassWord"].ToString();
+                db.Teachers.Add(tea);
+                db.SaveChanges();
+                int teacherid = db.Teachers.Max(x => x.TeacherID);
+                User user = new User()
+                {
+                    UserName = tea.UserName,
+                    PassWord = tea.PassWord,
+                    Position = "Teacher",
+                    TeacherID = teacherid
+                };
+                db.Users.Add(user);
+                db.SaveChanges();
+                return Json(new { status = 1, teacher = tea }, JsonRequestBehavior.AllowGet);
+            }
         }
         // GET: Teachers/Edit/5
         public ActionResult Edit(int? id)
@@ -139,7 +135,7 @@ namespace UET_BTL_VERSION_1.Controllers
             bool a = db.StudentDetails.Any(x => x.TeacherID == id);
             if (a)
             {
-                return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = 0 , teacher = teacher }, JsonRequestBehavior.AllowGet);
             }
             if (teacher == null)
             {

@@ -102,8 +102,10 @@ else
     }
 }
 
-<div class="confirm-delete-student">
+<div class="background-delete">
+    <div class="confirm-delete-student">
 
+    </div>
 </div>
 <div class="create-student">
     <div class="add-tab">
@@ -112,7 +114,6 @@ else
         </div>
         <div class="information-content  table-responsive">
             <form action="/Students/Create" id="addStudent" method="post">
-              @*  @Html.AntiForgeryToken()*@
                 <table class="table  ">
                     <tr>
                         <td>Họ và tên</td>

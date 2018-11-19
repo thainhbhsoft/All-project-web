@@ -30,14 +30,15 @@
                 $(".confirm-delete-student").html(content);
                 $(".confirm-delete-student").append("</br></br><button class='delete'>Delete</button>");
                 $(".confirm-delete-student").append("<button class='close1'>Close</button>");
-                $(".confirm-delete-student").show();
+                $(".background-delete").show();
                 
             }
         });
     });
 
     $(".confirm-delete-student").on("click", "button.delete", function () {
-        $(".confirm-delete-student").slideUp(700);
+        $(".confirm-delete-student").slideUp(500);
+        $(".background-delete").hide();
         rowCurrent.hide(1000);
         urldetail = '/Students/Delete';
         $.ajax({
@@ -50,7 +51,8 @@
         });
     });
     $(".confirm-delete-student").on("click", "button.close1", function () {
-        $(".confirm-delete-student").slideUp(700);
+        $(".confirm-delete-student").slideUp(500);
+        $(".background-delete").hide();
     });
     //end  ajax delete student
     //end  ajax create student
@@ -82,7 +84,7 @@
             }
         return dname;
     }
-
+     // Kiểm tra email vnu
     function isStudentEmail(e) {
         var regex = /(^(\d{8}))((@vnu.edu.vn)$)/;
         if (regex.test(e)) return true;
@@ -97,6 +99,8 @@
     $('.input-information').blur(function () {
         if ($(this).val() !== "") {
             $(this).removeClass('border-red');
+        } else {
+            $(this).addClass('border-red');
         }
     });
     $(".btn-submit").click(function (event) {

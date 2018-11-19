@@ -164,13 +164,12 @@ button.btn.btn-default {
     background: #c9dc44;
     text-align: center;
     font-size: 22px;
-    display: none;
 }
 
 
 
 /*---------------------start ajax create-student -----------------*/
-.create-student {
+.create-student, .create-teacher, .background-delete, .delete-teacher-form {
     position: fixed;
     left: 0;
     right: 0;
@@ -216,7 +215,7 @@ button.btn.btn-default {
 .bottom-button{
     display:inline-block;
 }
-.header-tab h4 {
+.header-tab h5 {
     margin: 0;
     padding: 0;
     font-size: 28px;

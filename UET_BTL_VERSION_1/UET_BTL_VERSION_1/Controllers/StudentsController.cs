@@ -60,7 +60,6 @@ namespace UET_BTL_VERSION_1.Controllers
             else
             {
                 Student stu = new Student();
-                stu.UserName = form["UserName"].ToString();
                 stu.Name = form["Name"].ToString();
                 stu.DateOfBirth = DateTime.Parse(form["DateOfBirth"].ToString()); 
                 stu.Course = form["Course"].ToString();
