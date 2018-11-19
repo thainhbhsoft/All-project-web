@@ -134,9 +134,5 @@
     }
     
     //end  ajax create student
-
-
-
-
 });
 
