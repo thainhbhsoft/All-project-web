@@ -14,31 +14,21 @@
             url: urldetail,
             data: { id: idCurrent },
             success: function (student) {
-                
-                    var content = "";
-                    var name = " </br> <span>Họ tên :</span>";
-                    var email = " </br> <span>Email :</span>";
-                    var username = "</br> <span>Tên đăng nhập :</span>";
-                    var password = "</br> <span>Mật khẩu :</span>";
-                    var courses = "</br> <span>Khóa học :</span>";
-                
-                    content += name + student.Name;
-                    content += email + student.Email;
-                    content += courses + student.Course;
-                    content += username + student.UserName;
-                    content += password + student.PassWord;
-                $(".confirm-delete-student").html(content);
-                $(".confirm-delete-student").append("</br></br><button class='delete'>Delete</button>");
-                $(".confirm-delete-student").append("<button class='close1'>Close</button>");
-                $(".background-delete").show();
-                
+                $("#DstudentName").val(student.Name);
+                $("#DstudentEmail").val(student.Email);
+                $("#DstudentUsername").val(student.UserName);
+                $("#DstudentPassword").val(student.PassWord);
+               
+                $(".delete-student-form h5:eq(0)").text("Xóa sinh viên");
+                $(".delete-student-form .bottom-button:eq(0)").html("<a class='btn btn-danger btn-delete'>Xóa</a>");
+                $(".delete-student-form .bottom-button:eq(1)").html("<a class='btn btn-success btn-cancle'>Hủy bỏ</a>");
+                $(".delete-student-form").show();
             }
         });
     });
 
-    $(".confirm-delete-student").on("click", "button.delete", function () {
-        $(".confirm-delete-student").slideUp(500);
-        $(".background-delete").hide();
+    $(".bottom-button").on("click", ".btn-delete", function () {
+        $(".delete-student-form").fadeOut(700);
         rowCurrent.hide(1000);
         urldetail = '/Students/Delete';
         $.ajax({
@@ -50,9 +40,8 @@
             }
         });
     });
-    $(".confirm-delete-student").on("click", "button.close1", function () {
-        $(".confirm-delete-student").slideUp(500);
-        $(".background-delete").hide();
+    $(".bottom-button").on("click", ".btn-cancle", function () {
+        $(".delete-student-form").fadeOut(700);
     });
     //end  ajax delete student
     //end  ajax create student

@@ -169,7 +169,7 @@ button.btn.btn-default {
 
 
 /*---------------------start ajax create-student -----------------*/
-.create-student, .create-teacher, .background-delete, .delete-teacher-form {
+.create-student, .create-teacher, .background-delete, .delete-teacher-form, .delete-student-form {
     position: fixed;
     left: 0;
     right: 0;

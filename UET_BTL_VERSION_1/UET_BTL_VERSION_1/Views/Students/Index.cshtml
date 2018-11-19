@@ -31,7 +31,6 @@ else
     <h4>@ViewBag.messageSearch</h4>
     <h4>Tổng số sinh viên : @ViewBag.sum</h4>
     <p>
-       @* @Html.ActionLink("THÊM MỚI", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })*@
         <button class="btn btn-primary" id="add-button">Thêm mới</button>
     </p>
     <div class="content-teacher">
@@ -102,15 +101,55 @@ else
     }
 }
 
-<div class="background-delete">
-    <div class="confirm-delete-student">
+
+<div class="delete-student-form">
+    <div class="add-tab">
+        <div class="header-tab">
+            <h5 class="text-center"></h5>
+        </div>
+        <div class="information-content  table-responsive">
+            <form action="#">
+                <table class="table  ">
+                    
+                    <tr>
+                        <td>Họ và tên</td>
+                        <td><input name="Name" type="text" disabled class="input-information name" value="" maxlength="200" id="DstudentName" required=""></td>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Địa chỉ email</td>
+                            <td><input name="Email" type="text" disabled class="input-information" value="" id="DstudentEmail" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Tên đăng nhập</td>
+                            <td><input name="UserName" type="text" disabled class="input-information" value="" id="DstudentUsername" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Mật khẩu</td>
+                            <td><input name="PassWord" type="text" disabled class="input-information" value="" id="DstudentPassword" required=""></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="bottom-button">
+                                </div>
+                                <div class="bottom-button">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+
+        </div>
 
     </div>
 </div>
 <div class="create-student">
     <div class="add-tab">
         <div class="header-tab">
-            <h4>Thêm mới sinh viên</h4>
+            <h5>Thêm mới sinh viên</h5>
         </div>
         <div class="information-content  table-responsive">
             <form action="/Students/Create" id="addStudent" method="post">
