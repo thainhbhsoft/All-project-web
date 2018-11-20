@@ -230,3 +230,16 @@ button.btn.btn-default {
     border-radius: 7px;
 }
 /*---------------------------------------*/
+
+body {
+    background: #56cc4f;
+}
+
+td {
+    vertical-align: middle !important;
+    cursor:pointer;
+    text-align:center;
+}
+th{
+    text-align:center;
+}
