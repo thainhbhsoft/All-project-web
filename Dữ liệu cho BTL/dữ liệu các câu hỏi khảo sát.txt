@@ -1,0 +1,27 @@
+﻿
+Trang thiết bị của giảng đường đầy đủ cho học tập
+Được giáo viên hỗ trợ kịp thời trong thời gian học
+Thời lượng môn học được phân bổ hợp lý
+Các tài liệu phục vụ môn học được cập nhật
+Môn học cung cấp các kiến thức trang bị cho nghề nghiệp
+giảng viên dạy đúng giờ và đầy đủ số buổi
+giảng viên hướng dẫn phương pháp tự học ở nhà
+phương pháp giảng dạy mới và dễ tiếp thu kiến thức
+
+
+CREATE PROCEDURE insertData
+@number int
+AS
+BEGIN
+ INSERT INTO Survey 
+ VALUES
+(@number,1,20),
+(@number,2,40),
+(@number,3,60),
+(@number,4,80),
+(@number,5,20),
+(@number,6,40),
+(@number,7,60),
+(@number,8,80);
+END
+exec insertData 21;
