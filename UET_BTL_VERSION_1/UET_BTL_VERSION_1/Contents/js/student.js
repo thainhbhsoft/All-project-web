@@ -53,7 +53,7 @@
 
     $('#add-button').click(function () {
         $('.input2').val("");
-        $(".create-student h5:eq(0)").text("Thêm mới giảng viên");
+        $(".create-student h5:eq(0)").text("Thêm mới sinh  viên");
         $(".create-student a:eq(0)").text("Thêm mới");
         $('.create-student').show();
     });
