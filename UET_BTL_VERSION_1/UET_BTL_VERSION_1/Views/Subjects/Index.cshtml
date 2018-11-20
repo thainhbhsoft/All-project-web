@@ -76,9 +76,55 @@
     <br>
     <input type="submit" value="Import">
 </form>
+<div class="delete-subject-form">
+    <div class="add-tab">
+        <div class="header-tab">
+            <h5 class="text-center">Xóa học phần</h5>
+        </div>
+        <div class="information-content  table-responsive">
+            <form action="#">
+                <table class="table  ">
 
-<div class="confirm-delete-subject">
+                    <tr>
+                        <td>Tên học phần</td>
+                        <td><input name="Name" type="text" disabled class="input-information name" value="" maxlength="200" id="DsubjectName" required=""></td>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Mã học phần</td>
+                            <td><input name="SubjectCode" type="text" disabled class="input-information" value="" id="DsubjectCode" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Số tín chỉ</td>
+                            <td><input name="CreditNumber" type="text" disabled class="input-information" value="" id="DsubjectCredit" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Phòng học</td>
+                            <td><input name="ClassRoom" type="text" disabled class="input-information" value="" id="DsubjectRoom" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Thời gian học</td>
+                            <td><input name="TimeTeach" type="text" disabled class="input-information" value="" id="DsubjectTime" required=""></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="bottom-button">
+                                    <a class='btn btn-danger btn-delete'>Xóa</a>
+                                </div>
+                                <div class="bottom-button">
+                                    <a class='btn btn-success btn-cancle'>Hủy</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
+            </form>
+
+        </div>
+
+    </div>
 </div>
 
 @section scripts

@@ -153,23 +153,9 @@ button.btn.btn-default {
     color: white;
 }
 
-/*---------------------start ajax confirm-delete -----------------*/
-.confirm-delete-teacher, .confirm-delete-student, .confirm-delete-subject, .confirm-delete-ContentSurvey {
-    position: fixed;
-    left: 468px;
-    top: 200px;
-    border: 1px solid #000;
-    height: 350px;
-    width: 469px;
-    background: #c9dc44;
-    text-align: center;
-    font-size: 22px;
-}
-
-
 
 /*---------------------start ajax create-student -----------------*/
-.create-student, .create-teacher, .background-delete, .delete-teacher-form, .delete-student-form {
+.create-student, .create-teacher, .delete-teacher-form, .delete-student-form, .delete-subject-form {
     position: fixed;
     left: 0;
     right: 0;
