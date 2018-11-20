@@ -24,25 +24,24 @@ namespace UET_BTL_VERSION_1.Controllers
             return RedirectToAction("Login", "Users");
            
         }
-        // GET: ContentSurveys/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-        // POST: ContentSurveys/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContentSurveyID,Text")] ContentSurvey contentSurvey)
+        public ActionResult Create(FormCollection form)
         {
-            if (ModelState.IsValid)
+            db.Configuration.ProxyCreationEnabled = false;
+            string text = form["Text"].ToString();
+            if (db.ContentSurveys.Any(x => x.Text.Equals(text)))
             {
-                db.Surveys.RemoveRange(db.Surveys);
-                db.ContentSurveys.Add(contentSurvey);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
             }
-            return View(contentSurvey);
+            else
+            {
+                ContentSurvey content = new ContentSurvey();
+                content.Text = text;
+                db.ContentSurveys.Add(content);
+                db.SaveChanges();
+                int lastId = db.ContentSurveys.Max(s => s.ContentSurveyID);
+                return Json(new { status = 1, content = content, id = lastId }, JsonRequestBehavior.AllowGet);
+            }
         }
         // GET: ContentSurveys/Edit/5
         public ActionResult Edit(int? id)
