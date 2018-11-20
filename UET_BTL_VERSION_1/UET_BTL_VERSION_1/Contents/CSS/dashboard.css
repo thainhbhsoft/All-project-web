@@ -155,7 +155,7 @@ button.btn.btn-default {
 
 
 /*---------------------start ajax create-student -----------------*/
-.create-student, .create-teacher, .delete-teacher-form, .delete-student-form, .delete-subject-form {
+.create-student, .create-teacher, .delete-teacher-form, .delete-student-form, .delete-subject-form, .delete-survey-form {
     position: fixed;
     left: 0;
     right: 0;
