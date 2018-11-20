@@ -61,7 +61,6 @@ namespace UET_BTL_VERSION_1.Controllers
             {
                 Student stu = new Student();
                 stu.Name = form["Name"].ToString();
-                stu.DateOfBirth = DateTime.Parse(form["DateOfBirth"].ToString()); 
                 stu.Course = form["Course"].ToString();
                 stu.StudentCode = form["StudentCode"].ToString();
                 stu.UserName = form["UserName"].ToString();
@@ -82,34 +81,24 @@ namespace UET_BTL_VERSION_1.Controllers
                 return Json(new { status = 1, student = stu }, JsonRequestBehavior.AllowGet);
             }
         }
-        // GET: Students/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
-        }
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentID,Name,StudentCode,Course,DateOfBirth,Email,UserName,PassWord")] Student student)
+        public ActionResult Edit(FormCollection form)
         {
-            if (ModelState.IsValid)
-            {
-                User user = db.Users.FirstOrDefault(x => x.StudentID == student.StudentID);
-                    user.UserName = student.UserName;
-                    user.PassWord = student.PassWord;
-                db.Entry(student).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(student);
+            db.Configuration.ProxyCreationEnabled = false;
+            int idStudent = int.Parse(form["idStudent"].ToString());
+            User user = db.Users.FirstOrDefault(x => x.StudentID == idStudent);
+            user.UserName = form["UserName"].ToString();
+            user.PassWord = form["PassWord"].ToString();
+            Student stu = db.Students.FirstOrDefault(x => x.StudentID == idStudent);
+            stu.Name = form["Name"].ToString();
+            stu.Course = form["Course"].ToString();
+            stu.StudentCode = form["StudentCode"].ToString();
+            stu.UserName = form["UserName"].ToString();
+            stu.Email = form["Email"].ToString();
+            stu.PassWord = form["PassWord"].ToString();
+            db.SaveChanges();
+            return Json(new { status = 2 }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult Delete(int? id)

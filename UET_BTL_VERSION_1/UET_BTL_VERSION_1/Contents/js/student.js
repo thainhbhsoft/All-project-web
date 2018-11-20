@@ -44,19 +44,35 @@
         $(".delete-student-form").fadeOut(700);
     });
     //end  ajax delete student
-    //end  ajax create student
+    //end  ajax create and edit student
     $('.btn-close').click(function () {
         $('.create-student').hide();
-        $('.edit-tab').hide();
         $('.input2').removeClass('border-red');
         $('[data-toggle="tooltip"]').tooltip("hide"); 
     });
 
     $('#add-button').click(function () {
         $('.input2').val("");
+        $(".create-student h5:eq(0)").text("Thêm mới giảng viên");
+        $(".create-student a:eq(0)").text("Thêm mới");
         $('.create-student').show();
     });
+    var idStudent = null;
+    var rowEditCurrent = null;
+    $('tbody').on("click", ".edit-student", function () {
+        rowEditCurrent = $(this).parent().parent();
+        $(".create-student h5:eq(0)").text("Chỉnh sửa sinh viên");
+        $(".create-student a:eq(0)").text("Lưu");
+        $("#idStudent").val($(this).attr("id"));
 
+        $("#studentName").val($(this).parent().parent().children("td:eq(1)").text().trim());
+        $("#studentId").val($(this).parent().parent().children("td:eq(4)").text().trim());
+        $("#studentClass").val($(this).parent().parent().children("td:eq(2)").text().trim());
+        $("#studentEmail").val($(this).parent().parent().children("td:eq(3)").text().trim());
+        $("#studentUsername").val($(this).parent().parent().children("td:eq(4)").text().trim());
+        $("#studentPassword").val($(this).parent().parent().children("td:eq(5)").text().trim());
+        $('.create-student').show();
+    });
     $('#studentName').blur(function () {
         $(this).val(ChuanhoaTen($(this).val()));
     });
@@ -95,6 +111,10 @@
     $(".btn-submit").click(function (event) {
 
         let check = true;
+        let checkEdit = false;
+        if ($(".create-student a:eq(0)").text() === "Lưu") {
+            checkEdit = true;
+        }
         $('.input2').removeClass('border-red');
         $('.input2').each(function () {
             if ($(this).val() === "") {
@@ -111,22 +131,35 @@
             check = false;
         }
         if (check) {
-            PeformAjaxCreateStudent();
+            if (checkEdit) {
+                PeformAjaxStudent("/Students/Edit");
+            } else {
+                PeformAjaxStudent("/Students/Create");
+            }
         }
     });
 
-    function PeformAjaxCreateStudent() {
+    function PeformAjaxStudent(urlDetail) {
         var frm = $('#addStudent');
             $.ajax({
                 type: "POST",
-                url: "/Students/Create",
+                url: urlDetail,
                 data: frm.serialize(),
                 success: function (data) {
                     if (data.status === 0) {
                         $('#studentUsername[data-toggle="tooltip"]').tooltip("show");
-                    } else {
+                    } else if (data.status === 1) {
                         $('.create-student').hide();
                         alert("create success");
+                    } else {
+                        rowEditCurrent.hide();
+                        $('.create-student').hide();
+                        rowEditCurrent.children("td:eq(1)").text($("#studentName").val());
+                        rowEditCurrent.children("td:eq(2)").text($("#studentClass").val());
+                        rowEditCurrent.children("td:eq(3)").text($("#studentEmail").val());
+                        rowEditCurrent.children("td:eq(4)").text($("#studentUsername").val());
+                        rowEditCurrent.children("td:eq(5)").text($("#studentPassword").val());
+                        rowEditCurrent.fadeIn(700);
                     }
                 }
             });
