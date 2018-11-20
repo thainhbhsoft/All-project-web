@@ -65,7 +65,6 @@
         $(".create-teacher a:eq(0)").text("Thêm mới");
         $('.create-teacher').show();
     });
-    var idTeacher = null;
     var rowEditCurrent = null;
     $('tbody').on("click", ".edit-teacher", function () {
         rowEditCurrent = $(this).parent().parent();

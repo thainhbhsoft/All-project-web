@@ -36,7 +36,7 @@
                             @Html.DisplayFor(modelItem => item.Text)
                         </td>
                         <td>
-                            <a class="btn btn-warning" id="@item.ContentSurveyID">Sửa</a>
+                            <a class="btn btn-warning edit-survey" id="@item.ContentSurveyID">Sửa</a>
                             <a href="#" class="btn btn-danger delete-ContentSurvey" id="@item.ContentSurveyID">Xóa</a>
                         </td>
                     </tr>
@@ -97,19 +97,17 @@
             <h5>Thêm mới tiêu chí</h5>
         </div>
         <div class="information-content  table-responsive">
-            <form  id="addSurvey" >
+            <form id="addSurvey">
                 <table class="table  ">
                     <tr>
-                        <td colspan="2" style="color:red;font-size:15px;font-weight:bold">
-                            (Lưu ý khi thêm tiêu chí mới sẽ xóa hết dữ liệu sinh viên đã đánh giá)
-                        </td>
+                        <td colspan="2" style="color:red;font-size:15px;font-weight:bold"></td>
                     </tr>
                     <tr>
                         <td colspan="2"><input name="Text" data-toggle="tooltip" data-placement="bottom" title="Tên tiêu chí không được trùng trong hệ thống" type="text" class="input-information input2 name" value="" maxlength="200" id="surveyName" required=""></td>
                     </tr>
                     <tbody>
                         <tr>
-                            
+
                             <td style="text-align:center" colspan="2">
                                 <div class="bottom-button">
                                     <a href="#" class="btn btn-success btn-submit">Thêm mới</a>
@@ -121,6 +119,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <input type="text" name="idContentSurvey" id="idContentSurvey" hidden />
 
             </form>
 

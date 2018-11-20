@@ -86,19 +86,27 @@ namespace UET_BTL_VERSION_1.Controllers
         public ActionResult Edit(FormCollection form)
         {
             db.Configuration.ProxyCreationEnabled = false;
+            string username = form["UserName"].ToString();
             int idStudent = int.Parse(form["idStudent"].ToString());
-            User user = db.Users.FirstOrDefault(x => x.StudentID == idStudent);
-            user.UserName = form["UserName"].ToString();
-            user.PassWord = form["PassWord"].ToString();
-            Student stu = db.Students.FirstOrDefault(x => x.StudentID == idStudent);
-            stu.Name = form["Name"].ToString();
-            stu.Course = form["Course"].ToString();
-            stu.StudentCode = form["StudentCode"].ToString();
-            stu.UserName = form["UserName"].ToString();
-            stu.Email = form["Email"].ToString();
-            stu.PassWord = form["PassWord"].ToString();
-            db.SaveChanges();
-            return Json(new { status = 2 }, JsonRequestBehavior.AllowGet);
+            if (db.Users.Where(x => x.UserName.Equals(username) && x.StudentID != idStudent).ToList().Count() > 0)
+            {
+                return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                User user = db.Users.FirstOrDefault(x => x.StudentID == idStudent);
+                user.UserName = username;
+                user.PassWord = form["PassWord"].ToString();
+                Student stu = db.Students.FirstOrDefault(x => x.StudentID == idStudent);
+                stu.Name = form["Name"].ToString();
+                stu.Course = form["Course"].ToString();
+                stu.StudentCode = form["StudentCode"].ToString();
+                stu.UserName = username;
+                stu.Email = form["Email"].ToString();
+                stu.PassWord = form["PassWord"].ToString();
+                db.SaveChanges();
+                return Json(new { status = 2 }, JsonRequestBehavior.AllowGet);
+            }
         }
         [HttpGet]
         public ActionResult Delete(int? id)

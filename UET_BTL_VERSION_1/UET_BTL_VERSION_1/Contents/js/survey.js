@@ -35,13 +35,26 @@
         $(".delete-survey-form").fadeOut(700);
     });
     //end  ajax delete ContentSurvey
-    //end  ajax create survey -----------------------------------------------------------------------------------
+    //end  ajax create and edit survey -----------------------------------------------------------------------------------
     $('.btn-close').click(function () {
         $('.create-survey').hide();
         $('.input2').removeClass('border-red');
     });
     $('#add-button').click(function () {
         $('.input2').val("");
+        $(".create-survey h5:eq(0)").text("Thêm mới tiêu chí");
+        $(".create-survey a:eq(0)").text("Thêm mới");
+        $(".create-survey td:eq(0)").text("(Lưu ý khi thêm tiêu chí mới sẽ xóa hết dữ liệu sinh viên đã đánh giá)");
+        $('.create-survey').show();
+    });
+    var rowEditCurrent = null;
+    $('tbody').on("click", ".edit-survey", function () {
+        rowEditCurrent = $(this).parent().parent();
+        $(".create-survey h5:eq(0)").text("Chỉnh sửa tiêu chí");
+        $(".create-survey td:eq(0)").text("");
+        $(".create-survey a:eq(0)").text("Lưu");
+        $("#idContentSurvey").val($(this).attr("id"));
+        $("#surveyName").val($(this).parent().parent().children("td:eq(1)").text().trim());
         $('.create-survey').show();
     });
     $('.input2').blur(function () {
@@ -53,6 +66,10 @@
     });
     $(".btn-submit").click(function (event) {
         let check = true;
+        let checkEdit = false;
+        if ($(".create-survey a:eq(0)").text() === "Lưu") {
+            checkEdit = true;
+        }
         $('.input2').removeClass('border-red');
         $('.input2').each(function () {
             if ($(this).val().trim() === "") {
@@ -61,31 +78,40 @@
             }
         });
         if (check) {
-            PeformAjaxCreateSurvey();
+            if (checkEdit) {
+                PeformAjaxSurvey("/ContentSurveys/Edit");
+            } else {
+                PeformAjaxSurvey("/ContentSurveys/Create");
+            }
         }
     });
     function appendRowSurvey(id, data, index) {
         $(".class-content-clone td:eq(2)").html("");
-        $(".class-content-clone td:eq(2)").append("<a class='btn btn-warning' id='" + id + "'>Sửa</a>");
+        $(".class-content-clone td:eq(2)").append("<a class='btn btn-warning edit-survey' id='" + id + "'>Sửa</a>");
         $(".class-content-clone td:eq(2)").append(" <a class='btn btn-danger delete-ContentSurvey' id='" + id + "'>Xóa</a>");
         $(".class-content-clone td:eq(0)").text(index);
         $(".class-content-clone td:eq(1)").text(data);
         var rownew = $(".class-content-clone tr:eq(0)").clone(true);
         $(".content-teacher tbody").append(rownew);
     }
-    function PeformAjaxCreateSurvey() {
+    function PeformAjaxSurvey(urlDetail) {
         var frm = $('#addSurvey');
         $.ajax({
             type: "POST",
-            url: "/ContentSurveys/Create",
+            url: urlDetail,
             data: frm.serialize(),
             success: function (data) {
                 if (data.status === 0) {
                     $('#surveyName[data-toggle="tooltip"]').tooltip("show");
-                } else {
+                } else if (data.status === 1) {
                     $('.create-survey').hide();
                     var index = parseInt($(".content-teacher .table-striped:last td:eq(0)").text()) + 1;
-                    appendRowSurvey(data.id, data.content.Text,index);
+                    appendRowSurvey(data.id, data.content.Text, index);
+                }else{
+                    rowEditCurrent.hide();
+                    $('.create-survey').hide();
+                    rowEditCurrent.children("td:eq(1)").text($("#surveyName").val());
+                    rowEditCurrent.fadeIn(700);
                 }
             }
         });

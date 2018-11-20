@@ -57,19 +57,23 @@ namespace UET_BTL_VERSION_1.Controllers
             }
             return View(contentSurvey);
         }
-        // POST: ContentSurveys/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ContentSurveyID,Text")] ContentSurvey contentSurvey)
+        public ActionResult Edit(FormCollection form)
         {
-            if (ModelState.IsValid)
+            db.Configuration.ProxyCreationEnabled = false;
+            string text = form["Text"].ToString();
+            int idContentSurvey = int.Parse(form["idContentSurvey"].ToString());
+            if (db.ContentSurveys.Where(x => x.Text.Equals(text) && x.ContentSurveyID != idContentSurvey).ToList().Count() > 0)
             {
-                db.Entry(contentSurvey).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
             }
-            return View(contentSurvey);
+            else
+            {
+                ContentSurvey content = db.ContentSurveys.FirstOrDefault(x => x.ContentSurveyID == idContentSurvey);
+                content.Text = text;
+                db.SaveChanges();
+                return Json(new { status = 2 }, JsonRequestBehavior.AllowGet);
+            }
         }
         // GET: ContentSurveys/Delete/5
         public ActionResult Delete(int? id)

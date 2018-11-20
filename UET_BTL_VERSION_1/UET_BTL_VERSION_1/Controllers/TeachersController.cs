@@ -96,17 +96,25 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             db.Configuration.ProxyCreationEnabled = false;
             int idTeacher = int.Parse(form["idTeacher"].ToString());
-            User user = db.Users.FirstOrDefault(x => x.TeacherID == idTeacher);
-            user.UserName = form["UserName"].ToString();
-            user.PassWord = form["PassWord"].ToString();
-            Teacher tea = db.Teachers.FirstOrDefault(x => x.TeacherID == idTeacher);
-            tea.UserName = form["UserName"].ToString();
-            tea.Name = form["Name"].ToString();
-            tea.TeacherCode = "123456";
-            tea.Email = form["Email"].ToString();
-            tea.PassWord = form["PassWord"].ToString();
-            db.SaveChanges();
-            return Json(new { status = 2}, JsonRequestBehavior.AllowGet);
+            string username = form["UserName"].ToString();
+            if (db.Users.Where(x => x.UserName.Equals(username) && x.TeacherID != idTeacher).ToList().Count() > 0)
+            {
+                return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                User user = db.Users.FirstOrDefault(x => x.TeacherID == idTeacher);
+                user.UserName = username;
+                user.PassWord = form["PassWord"].ToString();
+                Teacher tea = db.Teachers.FirstOrDefault(x => x.TeacherID == idTeacher);
+                tea.UserName = username;
+                tea.Name = form["Name"].ToString();
+                tea.TeacherCode = "123456";
+                tea.Email = form["Email"].ToString();
+                tea.PassWord = form["PassWord"].ToString();
+                db.SaveChanges();
+                return Json(new { status = 2 }, JsonRequestBehavior.AllowGet);
+            }
         }
         // GET: Teachers/Delete/5
         [HttpGet]

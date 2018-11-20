@@ -57,7 +57,6 @@
         $(".create-student a:eq(0)").text("Thêm mới");
         $('.create-student').show();
     });
-    var idStudent = null;
     var rowEditCurrent = null;
     $('tbody').on("click", ".edit-student", function () {
         rowEditCurrent = $(this).parent().parent();
