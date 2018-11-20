@@ -239,6 +239,7 @@ td {
     vertical-align: middle !important;
     cursor:pointer;
     text-align:center;
+    font-size:15px;
 }
 th{
     text-align:center;
