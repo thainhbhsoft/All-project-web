@@ -217,7 +217,6 @@
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Teachers\Edit.cshtml" />
     <Content Include="Views\Teachers\Index.cshtml" />
-    <Content Include="Views\ContentSurveys\Create.cshtml" />
     <Content Include="Views\ContentSurveys\Edit.cshtml" />
     <Content Include="Views\ContentSurveys\Index.cshtml" />
     <Content Include="Views\Subjects\ShowClass.cshtml" />

@@ -73,7 +73,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 Teacher tea = new Teacher();
                 tea.UserName = form["UserName"].ToString();
                 tea.Name = form["Name"].ToString();
-                tea.TeacherCode = form["TeacherCode"].ToString();
+                tea.TeacherCode = "123456";
                 tea.Email = form["Email"].ToString();
                 tea.PassWord = form["PassWord"].ToString();
                 db.Teachers.Add(tea);
@@ -88,39 +88,25 @@ namespace UET_BTL_VERSION_1.Controllers
                 };
                 db.Users.Add(user);
                 db.SaveChanges();
-                return Json(new { status = 1, teacher = tea }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = 1}, JsonRequestBehavior.AllowGet);
             }
         }
-        // GET: Teachers/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Teacher teacher = db.Teachers.Find(id);
-            if (teacher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(teacher);
-        }
-        // POST: Teachers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TeacherID,Name,TeacherCode,Email,UserName,PassWord")] Teacher teacher)
+        public ActionResult Edit(FormCollection form)
         {
-            if (ModelState.IsValid)
-            {
-                User user = db.Users.FirstOrDefault(x => x.TeacherID == teacher.TeacherID);
-                user.UserName = teacher.UserName;
-                user.PassWord = teacher.PassWord;
-                db.Entry(teacher).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(teacher);
+            db.Configuration.ProxyCreationEnabled = false;
+            int idTeacher = int.Parse(form["idTeacher"].ToString());
+            User user = db.Users.FirstOrDefault(x => x.TeacherID == idTeacher);
+            user.UserName = form["UserName"].ToString();
+            user.PassWord = form["PassWord"].ToString();
+            Teacher tea = db.Teachers.FirstOrDefault(x => x.TeacherID == idTeacher);
+            tea.UserName = form["UserName"].ToString();
+            tea.Name = form["Name"].ToString();
+            tea.TeacherCode = "123456";
+            tea.Email = form["Email"].ToString();
+            tea.PassWord = form["PassWord"].ToString();
+            db.SaveChanges();
+            return Json(new { status = 2}, JsonRequestBehavior.AllowGet);
         }
         // GET: Teachers/Delete/5
         [HttpGet]

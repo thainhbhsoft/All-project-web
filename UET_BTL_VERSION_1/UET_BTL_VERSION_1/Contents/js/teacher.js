@@ -52,7 +52,7 @@
         $(".delete-teacher-form").fadeOut(700);
     });
     //end  ajax delete teacher
-    //end  ajax create student
+    //start  ajax create and edit teacher
     $('.btn-close').click(function () {
         $('.create-teacher').hide();
         $('.input2').removeClass('border-red');
@@ -61,6 +61,21 @@
 
     $('#add-button').click(function () {
         $('.input2').val("");
+        $(".create-teacher h5:eq(0)").text("Thêm mới giảng viên");
+        $(".create-teacher a:eq(0)").text("Thêm mới");
+        $('.create-teacher').show();
+    });
+    var idTeacher = null;
+    var rowEditCurrent = null;
+    $('tbody').on("click", ".edit-teacher", function () {
+        rowEditCurrent = $(this).parent().parent();
+        $(".create-teacher h5:eq(0)").text("Chỉnh sửa giảng viên");
+        $(".create-teacher a:eq(0)").text("Lưu");
+        $("#teacherName").val($(this).parent().parent().children("td:eq(1)").text().trim());
+        $("#idTeacher").val($(this).attr("id"));
+        $("#teacherEmail").val($(this).parent().parent().children("td:eq(2)").text().trim());
+        $("#teacherUsername").val($(this).parent().parent().children("td:eq(3)").text().trim());
+        $("#teacherPassword").val($(this).parent().parent().children("td:eq(4)").text().trim());
         $('.create-teacher').show();
     });
 
@@ -96,6 +111,10 @@
     });
     $(".btn-submit").click(function (event) {
         let check = true;
+        let checkEdit = false;
+        if ($(".create-teacher a:eq(0)").text() === "Lưu") {
+            checkEdit = true;
+        }
         $('.input2').removeClass('border-red');
         $('.input2').each(function () {
             if ($(this).val().trim() === "") {
@@ -108,22 +127,34 @@
             check = false;
         }
         if (check) {
-            PeformAjaxCreateTeacher();
+            if (checkEdit) {
+                PeformAjaxTeacher("/Teachers/Edit");
+            } else {
+                PeformAjaxTeacher("/Teachers/Create");
+            }
         }
     });
 
-    function PeformAjaxCreateTeacher() {
+    function PeformAjaxTeacher(urlDetail) {
         var frm = $('#addTeacher');
         $.ajax({
             type: "POST",
-            url: "/Teachers/Create",
+            url: urlDetail,
             data: frm.serialize(),
             success: function (data) {
                 if (data.status === 0) {
                     $('#teacherUsername[data-toggle="tooltip"]').tooltip("show");
-                } else {
+                } else if (data.status === 1) {
                     $('.create-teacher').hide();
                     alert("create success");
+                } else {
+                    rowEditCurrent.hide();
+                    $('.create-teacher').hide();
+                    rowEditCurrent.children("td:eq(1)").text($("#teacherName").val());
+                    rowEditCurrent.children("td:eq(2)").text($("#teacherEmail").val());
+                    rowEditCurrent.children("td:eq(3)").text($("#teacherUsername").val());
+                    rowEditCurrent.children("td:eq(4)").text($("#teacherPassword").val());
+                    rowEditCurrent.fadeIn(700);
                 }
             }
         });

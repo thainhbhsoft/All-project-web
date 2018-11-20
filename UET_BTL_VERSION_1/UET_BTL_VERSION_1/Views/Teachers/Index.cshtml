@@ -70,10 +70,8 @@ else
                                 @Html.DisplayFor(modelItem => item.PassWord)
                             </td>
                             <td>
-
                                 <a href="#" class="btn btn-warning edit-teacher" id="@item.TeacherID">Sửa</a>
                                 <a href="#" class="btn btn-danger delete-teacher" id="@item.TeacherID">Xóa</a>
-
                             </td>
                         </tr>
                     }
@@ -158,10 +156,6 @@ else
                     </tr>
                     <tbody>
                         <tr>
-                            <td>Mã giảng viên</td>
-                            <td><input name="TeacherCode"   type="text" class="input-information input2" value="" id="teacherId" required=""></td>
-                        </tr>
-                        <tr>
                             <td>Địa chỉ email</td>
                             <td><input name="Email" type="email"  data-toggle="tooltip" data-placement="bottom" title="Email có dạng x@vnu.edu.vn với x (4-10 chữ cái )" class="input-information input2" value="" id="teacherEmail" required=""></td>
                         </tr>
@@ -171,7 +165,59 @@ else
                         </tr>
                         <tr>
                             <td>Mật khẩu</td>
-                            <td><input name="PassWord"  type="password" class="input-information input2" value="" id="teacherPassword" required=""></td>
+                            <td><input name="PassWord"  type="text" class="input-information input2" value="" id="teacherPassword" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="idTeacher" id="idTeacher" hidden />
+                            </td>
+                            <td>
+                                <div class="bottom-button">
+                                    <a href="#" class="btn btn-success submit-edit btn-submit">Thêm mới</a>
+                                </div>
+                                <div class="bottom-button">
+                                    <a href="#" class="btn btn-danger btn-close" id="studentCancel">Hủy bỏ</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+@*<div class="edit-teacher">
+    <div class="add-tab">
+        <div class="header-tab">
+            <h5>Thêm mới giảng viên</h5>
+        </div>
+        <div class="information-content  table-responsive">
+            <form action="/Teachers/Create" id="addTeacher" method="post">
+                <table class="table  ">
+                    <tr>
+                        <td>Họ và tên</td>
+                        <td><input name="Name" type="text" class="input-information input2 name" value="" maxlength="200" id="teacherName" required=""></td>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Mã giảng viên</td>
+                            <td><input name="TeacherCode" type="text" class="input-information input2" value="" id="teacherId" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ email</td>
+                            <td><input name="Email" type="email" data-toggle="tooltip" data-placement="bottom" title="Email có dạng x@vnu.edu.vn với x (4-10 chữ cái )" class="input-information input2" value="" id="teacherEmail" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Tên đăng nhập</td>
+                            <td><input name="UserName" type="text" data-toggle="tooltip" data-placement="bottom" title="Tên dăng nhập không được trùng trong hệ thống" class="input-information input2" value="" id="teacherUsername" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Mật khẩu</td>
+                            <td><input name="PassWord" type="password" class="input-information input2" value="" id="teacherPassword" required=""></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -192,7 +238,7 @@ else
         </div>
 
     </div>
-</div>
+</div>*@
 @section scripts
 {
     @Scripts.Render("~/teacher/js")
