@@ -78,7 +78,7 @@ namespace UET_BTL_VERSION_1.Controllers
                 };
                 db.Users.Add(user);
                 db.SaveChanges();
-                return Json(new { status = 1, student = stu }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
             }
         }
        

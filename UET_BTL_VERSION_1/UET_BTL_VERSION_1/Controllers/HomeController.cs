@@ -45,5 +45,14 @@ namespace UET_BTL_VERSION_1.Controllers
                 return PartialView();
             }
         }
+        public PartialViewResult MenuPartial()
+        {
+            User user = Session["user"] as User;
+            if (user != null)
+            {
+                ViewBag.position = user.Position.ToString();
+            }
+            return PartialView();
+        }
     }
 }

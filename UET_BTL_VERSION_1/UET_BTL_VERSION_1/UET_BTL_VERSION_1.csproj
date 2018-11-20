@@ -212,17 +212,13 @@
     <Content Include="Contents\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
-    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
-    <Content Include="Views\Teachers\Edit.cshtml" />
     <Content Include="Views\Teachers\Index.cshtml" />
     <Content Include="Views\ContentSurveys\Edit.cshtml" />
     <Content Include="Views\ContentSurveys\Index.cshtml" />
     <Content Include="Views\Subjects\ShowClass.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
-    <Content Include="Views\Shared\_LayoutStudent.cshtml" />
     <Content Include="Views\Teachers\ShowListSubject.cshtml" />
     <Content Include="Views\Teachers\ShowClass.cshtml" />
     <Content Include="Views\Teachers\ShowResultSurvey.cshtml" />
@@ -235,11 +231,12 @@
     <Content Include="Views\Subjects\ImportSubject.cshtml" />
     <Content Include="Views\Subjects\ResultSurveyEveryStudent.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
+    <Content Include="Views\Shared\_LayoutCommon.cshtml" />
     <Content Include="Views\Teachers\ShowCountResult.cshtml" />
     <Content Include="Views\Students\ShowCountResult.cshtml" />
     <Content Include="Views\Students\ShowInforStudent.cshtml" />
     <Content Include="Views\Teachers\ShowInforTeacher.cshtml" />
+    <Content Include="Views\Home\MenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

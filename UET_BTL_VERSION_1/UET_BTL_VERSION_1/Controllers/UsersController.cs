@@ -25,7 +25,7 @@ namespace UET_BTL_VERSION_1.Controllers
         {
             string username = form["username"].ToString().Trim();
             string password = form["password"].ToString().Trim();
-            User user = db.Users.SingleOrDefault(x => x.UserName == username && x.PassWord == password);
+            User user = db.Users.FirstOrDefault(x => x.UserName == username && x.PassWord == password);
             if (user != null)
             {
                 Session["user"] = user;
