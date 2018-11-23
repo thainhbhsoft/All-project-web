@@ -27,16 +27,23 @@ namespace UET_BTL_VERSION_1.Areas.SignIn.Controllers
             if (user != null)
             {
                 Session["user"] = user;
+               
                 if (user.Position.Equals("Teacher"))
                 {
+                    Teacher teacher = db.Teachers.FirstOrDefault(x => x.TeacherID == user.TeacherID);
+                    Session["fullName"] = teacher.Name.ToUpper();
                     return RedirectToAction("Index", "Teacher", new { area = "Member" });
                 }
                 else if (user.Position.Equals("Student"))
                 {
+                    
+                    Student stu = db.Students.FirstOrDefault(x => x.StudentID == user.StudentID);
+                    Session["fullName"] = stu.Name.ToUpper();
                     return RedirectToAction("Index", "Student",new { area = "Member" });
                 }
                 else
                 {
+                    Session["fullName"] = "Admin";
                     return RedirectToAction("Index", "Home", new { area = "Admin" });
                 }
 
@@ -48,30 +55,9 @@ namespace UET_BTL_VERSION_1.Areas.SignIn.Controllers
         public ActionResult Logout()
         {
             Session.Remove("user");
+            Session.Remove("fullname");
             return RedirectToAction("Login", "Home", new { area = "SignIn" });
         }
-
-        public PartialViewResult NamePartial()
-        {
-            User user = Session["user"] as User;
-            if (user.Position.Equals("Teacher"))
-            {
-                Teacher teacher = db.Teachers.FirstOrDefault(x => x.TeacherID == user.TeacherID);
-                ViewBag.Name = teacher.Name.ToUpper();
-                return PartialView();
-            }
-            else if (user.Position.Equals("Student"))
-            {
-                Student stu = db.Students.FirstOrDefault(x => x.StudentID == user.StudentID);
-                ViewBag.Name = stu.Name.ToUpper();
-                return PartialView();
-            }
-            else
-            {
-                return PartialView();
-            }
-        }
-
         public PartialViewResult MenuPartial()
         {
             User user = Session["user"] as User;

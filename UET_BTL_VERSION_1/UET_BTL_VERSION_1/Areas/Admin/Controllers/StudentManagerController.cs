@@ -18,14 +18,10 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index(int? page)
         {
-            if (Session["user"] != null)
-            {
                 int pageSize   = 20;
                 int pageNumber = (page ?? 1);
                 ViewBag.sum    = db.Students.Count();
                 return View(db.Students.ToList().ToPagedList(pageNumber, pageSize));
-            }
-            return RedirectToAction("Login", "Users");
         }
 
         [HttpPost]

@@ -221,7 +221,6 @@
     <Content Include="Assets\Shared\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\SignIn\Views\Home\Login.cshtml" />
     <Content Include="Areas\SignIn\Views\Home\MenuPartial.cshtml" />
-    <Content Include="Areas\SignIn\Views\Home\NamePartial.cshtml" />
     <Content Include="Areas\SignIn\Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Areas\Admin\Views\StudentManager\Index.cshtml" />

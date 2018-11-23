@@ -17,15 +17,10 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
 
         public ActionResult Index(int? page)
         {
-            if (Session["user"] != null)
-            {
                 int pageSize = 15;
                 int pageNumber = (page ?? 1);
                 ViewBag.sum = db.Teachers.Count();
                 return View(db.Teachers.ToList().ToPagedList(pageNumber, pageSize));
-            }
-            return RedirectToAction("Login", "Users");
-
         }
 
         [HttpPost]

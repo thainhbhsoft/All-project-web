@@ -15,12 +15,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            if (Session["user"] != null)
-            {
                 return View(db.ContentSurveys.ToList());
-            }
-            return RedirectToAction("Login", "Home",new { area = "SignIn"});
-
         }
 
         [HttpPost]

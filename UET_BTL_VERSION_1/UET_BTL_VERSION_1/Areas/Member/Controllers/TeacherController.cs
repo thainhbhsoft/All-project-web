@@ -20,8 +20,9 @@ namespace UET_BTL_VERSION_1.Areas.Member.Controllers
                     ViewBag.SumStudents = db.Teachers.FirstOrDefault(x => x.TeacherID == user.TeacherID).StudentDetail.Count();
                     ViewBag.SumSubjects = db.Teachers.FirstOrDefault(x => x.TeacherID == user.TeacherID).StudentDetail.GroupBy(x => x.SubjectID).Count();
                     ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
+                    return View();
                 }
-                return View();
+                return RedirectToAction("Login", "Home", new { area = "SignIn" });
         }
 
         public ActionResult ShowInforTeacher()

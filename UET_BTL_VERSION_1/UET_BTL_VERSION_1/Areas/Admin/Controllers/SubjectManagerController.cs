@@ -16,11 +16,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            if (Session["user"] != null)
-            {
                 return View(db.Subjects.ToList());
-            }
-            return RedirectToAction("Login", "Users");
         }
 
         public ActionResult Delete(int? id)
