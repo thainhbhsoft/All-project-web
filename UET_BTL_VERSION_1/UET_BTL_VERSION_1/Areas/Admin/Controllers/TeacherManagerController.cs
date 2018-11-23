@@ -27,13 +27,13 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             return RedirectToAction("Login", "Users");
 
         }
+
         [HttpPost]
         public ActionResult Index(FormCollection f, int? page)
         {
             string sTuKhoa = f["txtTimKiem"].ToString();
             ViewBag.tukhoa = sTuKhoa;
             List<Teacher> listKQ = db.Teachers.Where(x => x.Name.Contains(sTuKhoa)).ToList();
-            // phân trang
             int pageSize = 200;
             int pageNumber = (page ?? 1);
             if (listKQ.Count == 0)
@@ -45,6 +45,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             ViewBag.sum = listKQ.Count();
             return View(listKQ.ToPagedList(pageNumber, pageSize));
         }
+
         [HttpPost]
         public ActionResult Create(FormCollection form)
         {
@@ -77,6 +78,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                 return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpPost]
         public ActionResult Edit(FormCollection form)
         {
@@ -102,7 +104,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                 return Json(new { status = 2 }, JsonRequestBehavior.AllowGet);
             }
         }
-        // GET: Teachers/Delete/5
+
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -123,7 +125,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return Json(new { status = 1, teacher = teacher }, JsonRequestBehavior.AllowGet);
         }
-        // POST: Teachers/Delete/5
+
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -134,6 +136,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             db.SaveChanges();
             return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public ActionResult ImportTeacher(HttpPostedFileBase fileUpload)
         {
@@ -147,6 +150,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             ViewBag.countStudent = count;
             return View();
         }
+
         public bool ImportData(out int count, ExcelPackage package)
         {
             count = 0;
@@ -190,6 +194,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return result;
         }
+
         public bool SaveStudent(string userName, string passWord, string fullName, string email, UetSurveyDbContext db)
         {
             var result = false;

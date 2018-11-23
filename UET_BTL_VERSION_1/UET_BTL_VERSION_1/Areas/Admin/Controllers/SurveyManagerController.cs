@@ -12,7 +12,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
     public class SurveyManagerController : Controller
     {
         private UetSurveyDbContext db = new UetSurveyDbContext();
-        // GET: ContentSurveys
+
         public ActionResult Index()
         {
             if (Session["user"] != null)
@@ -22,6 +22,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             return RedirectToAction("Login", "Home",new { area = "SignIn"});
 
         }
+
         [HttpPost]
         public ActionResult Create(FormCollection form)
         {
@@ -42,7 +43,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                 return Json(new { status = 1, content = content, id = lastId }, JsonRequestBehavior.AllowGet);
             }
         }
-        // GET: ContentSurveys/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -56,6 +57,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return View(contentSurvey);
         }
+
         [HttpPost]
         public ActionResult Edit(FormCollection form)
         {
@@ -74,7 +76,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                 return Json(new { status = 2 }, JsonRequestBehavior.AllowGet);
             }
         }
-        // GET: ContentSurveys/Delete/5
+
         public ActionResult Delete(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -89,7 +91,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return Json(contentSurvey, JsonRequestBehavior.AllowGet);
         }
-        // POST: ContentSurveys/Delete/5
+
         [HttpPost]
         public ActionResult Delete(int id)
         {

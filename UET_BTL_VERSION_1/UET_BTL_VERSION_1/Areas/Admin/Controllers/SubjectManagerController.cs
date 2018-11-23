@@ -13,7 +13,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
     public class SubjectManagerController : Controller
     {
         private UetSurveyDbContext db = new UetSurveyDbContext();
-        // GET: Subjects
+
         public ActionResult Index()
         {
             if (Session["user"] != null)
@@ -22,7 +22,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return RedirectToAction("Login", "Users");
         }
-        // GET: Subjects/Delete/5
+
         public ActionResult Delete(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -37,7 +37,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return Json(subject, JsonRequestBehavior.AllowGet);
         }
-        // POST: Subjects/Delete/5
+
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -59,6 +59,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             db.SaveChanges();
             return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public ActionResult ImportSubject(HttpPostedFileBase fileUpload)
         {
@@ -71,6 +72,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return View();
         }
+
         public bool ImportData(out int count, ExcelPackage package)
         {
             count = 0;
@@ -137,6 +139,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return result;
         }
+
         public ActionResult ShowResultSurvey(int? id)
         {
             List<int> lis = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.Select(x => x.StudentDetailID).ToList();
@@ -156,7 +159,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             ViewBag.CountSurvey = db.ContentSurveys.ToList().Count();
             return View(student_Detail);
         }
-        // GET: Subjects/Details/5
+
         public ActionResult ShowClass(int? id)
         {
             if (id == null)
@@ -167,6 +170,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             return View(listStudent);
 
         }
+
         public ActionResult ResultSurveyEveryStudent(int? id)
         {
             ViewBag.hasSurvey = db.Surveys.Where(x => x.StudentDetailID == id).ToList().Count();

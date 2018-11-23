@@ -11,7 +11,7 @@ namespace UET_BTL_VERSION_1.Areas.Member.Controllers
     public class TeacherController : Controller
     {
         private UetSurveyDbContext db = new UetSurveyDbContext();
-        // GET: Member/Teacher
+
         public ActionResult Index()
         {
                 User user = Session["user"] as User;

@@ -14,27 +14,27 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
     public class StudentManagerController : Controller
     {
         private UetSurveyDbContext db = new UetSurveyDbContext();
-        // GET: Students
+
+        [HttpGet]
         public ActionResult Index(int? page)
         {
             if (Session["user"] != null)
             {
-                int pageSize = 20;
+                int pageSize   = 20;
                 int pageNumber = (page ?? 1);
-                ViewBag.sum = db.Students.Count();
+                ViewBag.sum    = db.Students.Count();
                 return View(db.Students.ToList().ToPagedList(pageNumber, pageSize));
             }
             return RedirectToAction("Login", "Users");
-
         }
+
         [HttpPost]
         public ActionResult Index(FormCollection f, int? page)
         {
             string sTuKhoa = f["txtTimKiem"].ToString();
             ViewBag.tukhoa = sTuKhoa;
             List<Student> listKQ = db.Students.Where(x => x.Name.Contains(sTuKhoa)).ToList();
-            // phân trang
-            int pageSize = 200;
+            int pageSize   = 200;
             int pageNumber = (page ?? 1);
             if (listKQ.Count == 0)
             {
@@ -45,6 +45,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             ViewBag.sum = listKQ.Count();
             return View(listKQ.ToPagedList(pageNumber, pageSize));
         }
+
         [HttpPost]
         public ActionResult Create(FormCollection form)
         {
@@ -56,22 +57,22 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             else
             {
-                Student stu = new Student();
-                stu.Name = form["Name"].ToString();
-                stu.Course = form["Course"].ToString();
+                Student stu     = new Student();
+                stu.Name        = form["Name"].ToString();
+                stu.Course      = form["Course"].ToString();
                 stu.StudentCode = form["StudentCode"].ToString();
-                stu.UserName = form["UserName"].ToString();
-                stu.Email = form["Email"].ToString();
-                stu.PassWord = form["PassWord"].ToString();
+                stu.UserName    = form["UserName"].ToString();
+                stu.Email       = form["Email"].ToString();
+                stu.PassWord    = form["PassWord"].ToString();
                 db.Students.Add(stu);
                 db.SaveChanges();
-                int studentid = db.Students.Max(x => x.StudentID);
+                int studentid   = db.Students.Max(x => x.StudentID);
                 User user = new User()
                 {
-                    UserName = stu.UserName,
-                    PassWord = stu.PassWord,
-                    Position = "Student",
-                    StudentID = studentid
+                    UserName    = stu.UserName,
+                    PassWord    = stu.PassWord,
+                    Position    = "Student",
+                    StudentID   = studentid
                 };
                 db.Users.Add(user);
                 db.SaveChanges();
@@ -91,20 +92,21 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             else
             {
-                User user = db.Users.FirstOrDefault(x => x.StudentID == idStudent);
-                user.UserName = username;
-                user.PassWord = form["PassWord"].ToString();
-                Student stu = db.Students.FirstOrDefault(x => x.StudentID == idStudent);
-                stu.Name = form["Name"].ToString();
-                stu.Course = form["Course"].ToString();
+                User user       = db.Users.FirstOrDefault(x => x.StudentID == idStudent);
+                user.UserName   = username;
+                user.PassWord   = form["PassWord"].ToString();
+                Student stu     = db.Students.FirstOrDefault(x => x.StudentID == idStudent);
+                stu.Name        = form["Name"].ToString();
+                stu.Course      = form["Course"].ToString();
                 stu.StudentCode = form["StudentCode"].ToString();
-                stu.UserName = username;
-                stu.Email = form["Email"].ToString();
-                stu.PassWord = form["PassWord"].ToString();
+                stu.UserName    = username;
+                stu.Email       = form["Email"].ToString();
+                stu.PassWord    = form["PassWord"].ToString();
                 db.SaveChanges();
                 return Json(new { status = 2 }, JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -120,12 +122,12 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return Json(student, JsonRequestBehavior.AllowGet);
         }
-        // POST: Students/Delete/5
+
         [HttpPost]
         public ActionResult Delete(int id)
         {
             Student student = db.Students.FirstOrDefault(x => x.StudentID == id);
-            User user = db.Users.FirstOrDefault(x => x.StudentID == id);
+            User user       = db.Users.FirstOrDefault(x => x.StudentID == id);
             IEnumerable<StudentDetail> list2 = db.StudentDetails.Where(x => x.StudentID == id);
             foreach (var item in list2)
             {
@@ -145,6 +147,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             db.SaveChanges();
             return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public ActionResult ImportStudent(HttpPostedFileBase fileUpload)
         {
@@ -158,6 +161,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             ViewBag.countStudent = count;
             return View();
         }
+
         public bool ImportData(out int count, ExcelPackage package)
         {
             count = 0;
@@ -198,6 +202,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             }
             return result;
         }
+
         public bool SaveStudent(string userName, string passWord, string fullName, string email, string course, UetSurveyDbContext db)
         {
             var result = false;
@@ -205,22 +210,22 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             {
                 if (db.Students.Where(x => x.UserName.Equals(userName)).Count() == 0)
                 {
-                    var stu = new Student();
-                    stu.UserName = userName;
-                    stu.PassWord = passWord;
+                    var stu         = new Student();
+                    stu.UserName    = userName;
+                    stu.PassWord    = passWord;
                     stu.StudentCode = userName;
-                    stu.Name = fullName;
-                    stu.Email = email;
-                    stu.Course = course;
+                    stu.Name        = fullName;
+                    stu.Email       = email;
+                    stu.Course      = course;
                     db.Students.Add(stu);
                     db.SaveChanges();
-                    int studentid = db.Students.Max(x => x.StudentID);
+                    int studentid   = db.Students.Max(x => x.StudentID);
                     User user = new User()
                     {
-                        UserName = userName,
-                        PassWord = passWord,
-                        Position = "Student",
-                        StudentID = studentid
+                        UserName    = userName,
+                        PassWord    = passWord,
+                        Position    = "Student",
+                        StudentID   = studentid
                     };
                     db.Users.Add(user);
                     db.SaveChanges();
