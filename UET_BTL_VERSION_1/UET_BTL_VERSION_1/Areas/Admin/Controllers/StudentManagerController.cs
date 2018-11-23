@@ -85,7 +85,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             string username = form["UserName"].ToString();
             int idStudent = int.Parse(form["idStudent"].ToString());
-            if (db.Users.Where(x => x.UserName.Equals(username) && x.StudentID != idStudent).ToList().Count() > 0)
+            if (db.Users.Any(x => x.UserName.Equals(username) && x.StudentID != idStudent))
             {
                 return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
             }
