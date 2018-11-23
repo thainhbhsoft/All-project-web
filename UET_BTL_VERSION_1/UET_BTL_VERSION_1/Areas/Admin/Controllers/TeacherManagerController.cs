@@ -166,7 +166,11 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                     object passWord = workSheet.Cells[startRow, startColumn + 2].Value;
                     object fullName = workSheet.Cells[startRow, startColumn + 3].Value;
                     object email = workSheet.Cells[startRow, startColumn + 4].Value;
-
+                    object checkColumn = workSheet.Cells[startRow, startColumn + 5].Value;
+                    if (checkColumn != null)
+                    {
+                        throw new Exception("error");
+                    }
                     if (data != null)
                     {
                         var isSuccess = SaveStudent(userName.ToString(), passWord.ToString(), fullName.ToString(), email.ToString(), db);
