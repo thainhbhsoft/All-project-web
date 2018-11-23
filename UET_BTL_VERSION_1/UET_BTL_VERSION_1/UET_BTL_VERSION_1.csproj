@@ -165,28 +165,33 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ContentSurveysController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StudentsController.cs" />
-    <Compile Include="Controllers\SubjectsController.cs" />
-    <Compile Include="Controllers\TeachersController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubjectManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SurveyManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TeacherManagerController.cs" />
+    <Compile Include="Areas\Member\Controllers\StudentController.cs" />
+    <Compile Include="Areas\Member\Controllers\TeacherController.cs" />
+    <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
+    <Compile Include="Areas\SignIn\Controllers\HomeController.cs" />
+    <Compile Include="Areas\SignIn\SignInAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Contents\CSS\bootstrap.min.css" />
-    <Content Include="Contents\CSS\dashboard.css" />
-    <Content Include="Contents\CSS\Login.css" />
-    <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Contents\js\survey.js" />
-    <Content Include="Contents\js\subject.js" />
-    <Content Include="Contents\js\student.js" />
-    <Content Include="Contents\js\teacher.js" />
-    <Content Include="Contents\js\bootstrap.min.js" />
-    <Content Include="Contents\js\jquery-3.3.1.min.js" />
+    <Content Include="Assets\SignIn\css\Login.css" />
+    <Content Include="Assets\Member\js\student.js" />
+    <Content Include="Assets\Member\js\subject.js" />
+    <Content Include="Assets\Member\js\survey.js" />
+    <Content Include="Assets\Member\js\teacher.js" />
+    <Content Include="Assets\Shared\css\bootstrap.min.css" />
+    <Content Include="Assets\Shared\css\dashboard.css" />
+    <Content Include="Assets\Shared\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\Shared\js\bootstrap.min.js" />
+    <Content Include="Assets\Shared\js\jquery-3.3.1.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -201,41 +206,44 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contents\Images\" />
+    <Folder Include="Assets\SignIn\images\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Contents\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Contents\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Contents\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Contents\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Member\Views\web.config" />
+    <Content Include="Areas\Member\Views\Shared\_LayoutCommon.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Assets\Shared\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\Shared\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\Shared\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\Shared\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\SignIn\Views\Home\Login.cshtml" />
+    <Content Include="Areas\SignIn\Views\Home\MenuPartial.cshtml" />
+    <Content Include="Areas\SignIn\Views\Home\NamePartial.cshtml" />
+    <Content Include="Areas\SignIn\Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\Students\Index.cshtml" />
-    <Content Include="Views\Teachers\Index.cshtml" />
-    <Content Include="Views\ContentSurveys\Index.cshtml" />
-    <Content Include="Views\Subjects\ShowClass.cshtml" />
-    <Content Include="Views\Subjects\Index.cshtml" />
-    <Content Include="Views\Users\Login.cshtml" />
-    <Content Include="Views\Teachers\ShowListSubject.cshtml" />
-    <Content Include="Views\Teachers\ShowClass.cshtml" />
-    <Content Include="Views\Teachers\ShowResultSurvey.cshtml" />
-    <Content Include="Views\Students\ShowListSubject.cshtml" />
-    <Content Include="Views\Home\NamePartial.cshtml" />
-    <Content Include="Views\Students\SurveySubject.cshtml" />
-    <Content Include="Views\Students\ImportStudent.cshtml" />
-    <Content Include="Views\Teachers\ImportTeacher.cshtml" />
-    <Content Include="Views\Subjects\ShowResultSurvey.cshtml" />
-    <Content Include="Views\Subjects\ImportSubject.cshtml" />
-    <Content Include="Views\Subjects\ResultSurveyEveryStudent.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutCommon.cshtml" />
-    <Content Include="Views\Teachers\ShowCountResult.cshtml" />
-    <Content Include="Views\Students\ShowCountResult.cshtml" />
-    <Content Include="Views\Students\ShowInforStudent.cshtml" />
-    <Content Include="Views\Teachers\ShowInforTeacher.cshtml" />
-    <Content Include="Views\Home\MenuPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TeacherManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SurveyManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SubjectManager\ShowClass.cshtml" />
+    <Content Include="Areas\Admin\Views\SubjectManager\Index.cshtml" />
+    <Content Include="Areas\Member\Views\Teacher\ShowListSubject.cshtml" />
+    <Content Include="Areas\Member\Views\Teacher\ShowClass.cshtml" />
+    <Content Include="Areas\Member\Views\Teacher\ShowResultSurvey.cshtml" />
+    <Content Include="Areas\Member\Views\Student\ShowListSubject.cshtml" />
+    <Content Include="Areas\Member\Views\Student\SurveySubject.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentManager\ImportStudent.cshtml" />
+    <Content Include="Areas\Admin\Views\TeacherManager\ImportTeacher.cshtml" />
+    <Content Include="Areas\Admin\Views\SubjectManager\ShowResultSurvey.cshtml" />
+    <Content Include="Areas\Admin\Views\SubjectManager\ImportSubject.cshtml" />
+    <Content Include="Areas\Admin\Views\SubjectManager\ResultSurveyEveryStudent.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Member\Views\Teacher\Index.cshtml" />
+    <Content Include="Areas\Member\Views\Student\Index.cshtml" />
+    <Content Include="Areas\Member\Views\Student\ShowInforStudent.cshtml" />
+    <Content Include="Areas\Member\Views\Teacher\ShowInforTeacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,19 @@
+﻿
+
+@{
+
+
+    if (ViewBag.position == "Teacher")
+    {
+        <a class="list-group-item" href="/Member/Teacher/Index">TRANG CHỦ<span class="glyphicon glyphicon-chevron-right arrow-right"></span> </a>
+        <a class="list-group-item" href="/Member/Teacher/ShowInforTeacher">TRANG CÁ NHÂN<span class="glyphicon glyphicon-chevron-right arrow-right"></span></a>
+        <a class="list-group-item" href="/Member/Teacher/ShowListSubject">DANH SÁCH HỌC PHẦN<span class="glyphicon glyphicon-chevron-right arrow-right"></span></a>
+    }
+    else if (ViewBag.position == "Student")
+    {
+        <a class="list-group-item" href="/Member/Student/Index">TRANG CHỦ<span class="glyphicon glyphicon-chevron-right arrow-right"></span> </a>
+        <a class="list-group-item" href="/Member/Student/ShowInforStudent">TRANG CÁ NHÂN<span class="glyphicon glyphicon-chevron-right arrow-right"></span></a>
+        <a class="list-group-item" href="/Member/Student/ShowListSubject">KHÓA HỌC CỦA TÔI<span class="glyphicon glyphicon-chevron-right arrow-right"></span></a>
+    }
+    
+}
