@@ -244,3 +244,11 @@ td {
 th{
     text-align:center;
 }
+input[type="radio"] {
+    font-size: 30px;
+    width: 33px;
+    height: 40px;
+    margin: 0px;
+    padding: 0px;
+    cursor:pointer;
+}
