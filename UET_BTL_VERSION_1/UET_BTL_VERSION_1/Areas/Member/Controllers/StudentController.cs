@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UET_BTL.Model;
+using UET_BTL.Model.Authority;
 using UET_BTL.Model.Entities;
 
 namespace UET_BTL_VERSION_1.Areas.Member.Controllers
 {
+    [AuthorizeBusiness]
     public class StudentController : Controller
     {
         private UetSurveyDbContext db = new UetSurveyDbContext();

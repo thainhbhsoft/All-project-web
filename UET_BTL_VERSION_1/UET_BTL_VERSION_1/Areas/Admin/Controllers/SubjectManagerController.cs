@@ -6,10 +6,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UET_BTL.Model;
+using UET_BTL.Model.Authority;
 using UET_BTL.Model.Entities;
 
 namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
 {
+    [AuthorizeBusiness]
     public class SubjectManagerController : Controller
     {
         private UetSurveyDbContext db = new UetSurveyDbContext();

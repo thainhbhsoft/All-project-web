@@ -7,13 +7,13 @@ namespace UET_BTL.Model.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class removeValidation2 : IMigrationMetadata
+    public sealed partial class add : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(removeValidation2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(add));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811180901477_removeValidation2"; }
+            get { return "201811231611544_add"; }
         }
         
         string IMigrationMetadata.Source

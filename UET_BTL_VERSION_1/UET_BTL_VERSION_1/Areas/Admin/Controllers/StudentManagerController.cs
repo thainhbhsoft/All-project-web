@@ -8,9 +8,11 @@ using PagedList;
 using UET_BTL.Model.Entities;
 using System.Net;
 using OfficeOpenXml;
+using UET_BTL.Model.Authority;
 
 namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
 {
+    [AuthorizeBusiness]
     public class StudentManagerController : Controller
     {
         private UetSurveyDbContext db = new UetSurveyDbContext();

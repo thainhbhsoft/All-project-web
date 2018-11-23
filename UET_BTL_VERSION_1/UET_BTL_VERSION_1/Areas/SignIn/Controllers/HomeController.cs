@@ -11,7 +11,7 @@ namespace UET_BTL_VERSION_1.Areas.SignIn.Controllers
     public class HomeController : Controller
     {
         private UetSurveyDbContext db = new UetSurveyDbContext();
-
+       
         [HttpGet]
         public ActionResult Login()
         {
@@ -67,7 +67,10 @@ namespace UET_BTL_VERSION_1.Areas.SignIn.Controllers
             }
             return PartialView();
         }
-
+        public ActionResult Authorize()
+        {
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

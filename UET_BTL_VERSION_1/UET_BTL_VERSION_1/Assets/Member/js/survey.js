@@ -106,6 +106,9 @@
                 } else if (data.status === 1) {
                     $('.create-survey').hide();
                     var index = parseInt($(".content-teacher .table-striped:last td:eq(0)").text()) + 1;
+                    if (Number.isNaN(index)) {
+                        index = 1;
+                    }
                     appendRowSurvey(data.id, data.content.Text, index);
                 }else{
                     rowEditCurrent.hide();

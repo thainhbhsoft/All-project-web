@@ -48,9 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201811180901477_removeValidation2.cs" />
-    <Compile Include="Migrations\201811180901477_removeValidation2.Designer.cs">
-      <DependentUpon>201811180901477_removeValidation2.cs</DependentUpon>
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Migrations\201811231611544_add.cs" />
+    <Compile Include="Migrations\201811231611544_add.Designer.cs">
+      <DependentUpon>201811231611544_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811231656349_add2.cs" />
+    <Compile Include="Migrations\201811231656349_add2.Designer.cs">
+      <DependentUpon>201811231656349_add2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UetSurveyDbContext.cs" />
@@ -68,8 +73,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811180901477_removeValidation2.resx">
-      <DependentUpon>201811180901477_removeValidation2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811231611544_add.resx">
+      <DependentUpon>201811231611544_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811231656349_add2.resx">
+      <DependentUpon>201811231656349_add2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
