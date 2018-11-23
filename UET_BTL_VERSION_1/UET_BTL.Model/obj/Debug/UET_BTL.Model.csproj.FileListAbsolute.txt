@@ -20,9 +20,6 @@ C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\bin\Debu
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\bin\Debug\EntityFramework.xml
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.Migrations.CreatedCSDL.resources
-C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.Migrations.created.resources
-C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.Migrations.removeValidation.resources
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.Migrations.removeValidation2.resources
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.csproj.GenerateResource.cache
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.csproj.CoreCompileInputs.cache

@@ -14,10 +14,10 @@ namespace UET_BTL.Model.Migrations
 
         protected override void Seed(UET_BTL.Model.UetSurveyDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            if (!context.Users.Any(s => s.Position == "Admin"))
+            {
+                context.Users.Add(new Entities.User { UserName = "admin", PassWord = "admin", Position = "Admin" });
+            }
         }
     }
 }
