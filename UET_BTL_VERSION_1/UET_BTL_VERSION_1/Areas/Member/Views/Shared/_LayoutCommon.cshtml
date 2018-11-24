@@ -1,10 +1,4 @@
-﻿@{
-    if (Session["user"] == null)
-    {
-        Response.Redirect("~/SignIn/Home/Login");
-    }
-}
-
+﻿
 <!DOCTYPE html>
 
 <html>
@@ -31,7 +25,7 @@
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="/dang-nhap">Đăng xuất </a>
+                                <a href="/SignIn/Home/Logout">Đăng xuất </a>
                             </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->

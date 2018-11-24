@@ -17,6 +17,38 @@ namespace UET_BTL_VERSION_1.Areas.SignIn.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            // Lấy user từ session
+            User user = Session["user"] as User;
+
+            if (user != null)
+            {
+                // Kiểm tra loại user để chuyển hướng
+                if (user.Position.Equals("Teacher"))
+                {
+                    // Lấy ra giảng viên theo id
+                    Teacher teacher = db.Teachers.FirstOrDefault(x => x.TeacherID == user.TeacherID);
+                    // Lưu tên user vào session
+                    Session["fullName"] = teacher.Name.ToUpper();
+                    // CHuyển hướng đến trang chủ cảu giảng viên
+                    return RedirectToAction("Index", "Teacher", new { area = "Member" });
+                }
+                else if (user.Position.Equals("Student"))
+                {
+                    // Lấy ra sinh viên theo id
+                    Student stu = db.Students.FirstOrDefault(x => x.StudentID == user.StudentID);
+                    // Lưu tên sinh viên vào session
+                    Session["fullName"] = stu.Name.ToUpper();
+                    // Chuyển hướng đến trang chủ của sinh viên
+                    return RedirectToAction("Index", "Student", new { area = "Member" });
+                }
+                else
+                {
+                    // Lưu tên admin vào session
+                    Session["fullName"] = "Admin";
+                    // Chuyển hướng đến trang chủ của admin
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+            }
             return View("~/Areas/SignIn/Views/Home/Login.cshtml");
         }
 
