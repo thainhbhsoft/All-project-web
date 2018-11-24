@@ -249,7 +249,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             try
             {
                 // Kiểm tra xem sinh viên đã tồn tại chưa
-                if (db.Students.Any(x => x.UserName.Equals(userName)))
+                if (!db.Students.Any(x => x.UserName.Equals(userName)))
                 {
                     // Khởi tạo sinh viên và gán dữ liệu rồi lưu vào db
                     var stu         = new Student();

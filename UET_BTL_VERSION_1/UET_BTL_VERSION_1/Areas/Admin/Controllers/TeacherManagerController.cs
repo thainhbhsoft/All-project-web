@@ -240,7 +240,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             try
             {
                 // Kiểm tra giảng viên đã tồn tại chưa
-                if (db.Teachers.Any(x => x.UserName.Equals(userName)))
+                if (!db.Teachers.Any(x => x.UserName.Equals(userName)))
                 {
                     // Khởi tạo giảng viên và gán giá trị cho các thuộc tính
                     Teacher teacher = new Teacher();

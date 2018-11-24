@@ -23,10 +23,10 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             if (Session["user"] != null)
             { 
                 // Gán các tham số tống số sinh viên, môn học, đánh giá, người online để truyền sang view
-                ViewBag.SumStudents = db.Students.ToList().Count();
-                ViewBag.SumSubjects = db.Subjects.ToList().Count();
-                ViewBag.SumSurveys = db.Surveys.GroupBy(x => x.StudentDetailID).Count();
-                ViewBag.SumUserOnline = HttpContext.Application["Online"].ToString();
+                ViewBag.SumStudents     = db.Students.ToList().Count();
+                ViewBag.SumSubjects     = db.Subjects.ToList().Count();
+                ViewBag.SumSurveys      = db.Surveys.GroupBy(x => x.StudentDetailID).Count();
+                ViewBag.SumUserOnline   = HttpContext.Application["Online"].ToString();
 
                 return View();
             }

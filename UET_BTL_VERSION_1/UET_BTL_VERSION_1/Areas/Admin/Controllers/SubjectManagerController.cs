@@ -107,7 +107,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                 object creditNumber = workSheet.Cells[9, 6].Value;
                 object time = workSheet.Cells[8, 3].Value;
                 // Kiểm tra xem học phần đó đã tồn tại chưa
-                if (db.Subjects.Any(x => x.SubjectCode.ToLower().Equals(subjectCode.ToString().ToLower())))
+                if (!db.Subjects.Any(x => x.SubjectCode.ToLower().Equals(subjectCode.ToString().ToLower())))
                 {
                     // Khởi tạo học phần và gán các giá trị cho thuộc tính
                     Subject sub = new Subject();

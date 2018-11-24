@@ -15,6 +15,11 @@ namespace UET_BTL_VERSION_1.Areas.SignIn
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
+                "DangNhap",
+                "dang-nhap",
+                new {controller = "Home", action = "Login", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
                 "SignIn_default",
                 "SignIn/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
