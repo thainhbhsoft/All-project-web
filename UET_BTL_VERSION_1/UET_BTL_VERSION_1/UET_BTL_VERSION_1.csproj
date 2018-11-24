@@ -184,15 +184,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\SignIn\css\Login.css" />
-    <Content Include="Assets\Member\js\student.js" />
-    <Content Include="Assets\Member\js\subject.js" />
-    <Content Include="Assets\Member\js\survey.js" />
-    <Content Include="Assets\Member\js\teacher.js" />
+    <Content Include="Assets\Admin\js\studentManager.js" />
+    <Content Include="Assets\Admin\js\subjectManager.js" />
+    <Content Include="Assets\Admin\js\surveyManager.js" />
+    <Content Include="Assets\Admin\js\teacherManager.js" />
     <Content Include="Assets\Shared\css\bootstrap.min.css" />
     <Content Include="Assets\Shared\css\dashboard.css" />
     <Content Include="Assets\Shared\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Shared\js\bootstrap.min.js" />
     <Content Include="Assets\Shared\js\jquery-3.3.1.min.js" />
+    <Content Include="Assets\SignIn\images\preload_waiting.gif" />
     <Content Include="Assets\SignIn\js\login.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -209,9 +210,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\SignIn\images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Member\Views\web.config" />

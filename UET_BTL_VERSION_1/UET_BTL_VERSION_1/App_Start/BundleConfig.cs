@@ -21,16 +21,16 @@ namespace UET_BTL_VERSION_1
                       "~/Assets/Shared/js/bootstrap.min.js"
                       ));
             bundles.Add(new ScriptBundle("~/teacher/js").Include(
-                     "~/Assets/Member/js/teacher.js"
+                     "~/Assets/Admin/js/teacherManager.js"
                      ));
             bundles.Add(new ScriptBundle("~/student/js").Include(
-                     "~/Assets/Member/js/student.js"
+                     "~/Assets/Admin/js/studentManager.js"
                      ));
             bundles.Add(new ScriptBundle("~/subject/js").Include(
-                     "~/Assets/Member/js/subject.js"
+                     "~/Assets/Admin/js/subjectManager.js"
                      ));
             bundles.Add(new ScriptBundle("~/survey/js").Include(
-                     "~/Assets/Member/js/survey.js"
+                     "~/Assets/Admin/js/surveyManager.js"
                      ));
             bundles.Add(new ScriptBundle("~/login/js").Include(
                      "~/Assets/SignIn/js/login.js"

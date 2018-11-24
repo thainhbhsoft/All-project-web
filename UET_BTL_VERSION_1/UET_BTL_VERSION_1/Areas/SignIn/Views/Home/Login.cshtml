@@ -48,7 +48,7 @@
                                 </div>
                                 <button class="btn btn-success">Đăng nhập</button>
                             </form>
-                            <a href="">Quên mật khẩu</a>
+                            <a href="#" id="forgot">Quên mật khẩu</a>
                         </div>
                     </div>
                 </div>
@@ -65,10 +65,48 @@
         </div>
     </div>
 
+    <div class="verify-email">
+        <div class="add-tab">
+            <div class="header-tab">
+                <h5>Xác nhận thông tin</h5>
+            </div>
+            <div class="information-content  table-responsive">
+                <form action="/SignIn/Home/GetPassWord" id="verfiry" method="post">
+                    <table class="table  ">
+                       
+                        <tbody>
+                            <tr>
+                                <td>Tên đăng nhập</td>
+                                <td><input name="UserName" type="text"  class="input-information input2" value="" id="Username" required=""></td>
+                            </tr>
+                            <tr>
+                                <td>Địa chỉ email</td>
+                                <td><input name="Email" type="email"   class="input-information input2" value="" id="Email" required=""></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="text-align:left;">
+                                    <div class="bottom-button">
+                                        <a href="#" class="btn btn-success btn-submit">Xác nhận</a>
+                                    </div>
+                                    <div class="bottom-button">
+                                        <a href="#" class="btn btn-danger btn-close" id="studentCancel">Hủy bỏ</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
+                </form>
 
+            </div>
 
+        </div>
+    </div>
 
+    <div class="load">
+        <img src="~/Assets/SignIn/images/preload_waiting.gif" />
+    </div>
     @Scripts.Render("~/bootstrap-jquery/js")
     @Scripts.Render("~/login/js")
 

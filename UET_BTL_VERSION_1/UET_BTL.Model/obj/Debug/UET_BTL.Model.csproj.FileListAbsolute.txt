@@ -24,7 +24,6 @@ C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debu
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.csproj.CopyComplete
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.dll
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.pdb
-C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.csprojAssemblyReference.cache
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.Migrations.add.resources
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.csproj.GenerateResource.cache
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL.Model\obj\Debug\UET_BTL.Model.Migrations.add2.resources

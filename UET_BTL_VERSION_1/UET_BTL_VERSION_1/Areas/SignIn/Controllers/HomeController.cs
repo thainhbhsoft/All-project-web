@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using UET_BTL.Model;
 using UET_BTL.Model.Entities;
+using System.Net.Mail;
 
 namespace UET_BTL_VERSION_1.Areas.SignIn.Controllers
 {
@@ -127,6 +128,61 @@ namespace UET_BTL_VERSION_1.Areas.SignIn.Controllers
         public ActionResult Authorize()
         {
             return View();
+        }
+
+        // Lấy lại mật khẩu
+        [HttpPost]
+        public JsonResult GetPassWord(FormCollection form)
+        {
+            // Lấy username và email từ form submit
+            string username = form["Username"].ToString().Trim();
+            string email = form["Email"].ToString().Trim();
+
+            // Lấy ra sinh viên có tên và email thỏa mãn
+            Student student = db.Students.FirstOrDefault(s => s.UserName.Equals(username) && s.Email.Equals(email));
+            if (student != null)
+            {
+                string emailAddress = student.Email;
+                string pass = student.PassWord;
+                string content = "<h1>Thông tin tài khoản là : </h1></br> ";
+                content += "<h1> Tên đăng nhập:  " + username + "</h1></br> ";
+                content += "<h1> Mật khẩu: " + pass + "</h1></br> ";
+                GuiEmail("Thông tin tài khoản", emailAddress , "tienxuantt@gmail.com", "Xuan06061998@", content);
+                return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            // Lấy ra giảng viên có tên và email thỏa mãn
+            Teacher teacher = db.Teachers.FirstOrDefault(s => s.UserName.Equals(username) && s.Email.Equals(email));
+            if (teacher != null)
+            {
+                string emailAddress = teacher.Email;
+                string pass = teacher.PassWord;
+                string content = "<h1>Thông tin tài khoản là : </h1></br>";
+                content += "<h1>Tên đăng nhập: " + username + "</h1></br>";
+                content += "<h1>Mật khẩu: " + pass + "</h1></br>";
+                GuiEmail("Thông tin tài khoản", emailAddress, "tienxuantt@gmail.com", "Xuan06061998@", content);
+                return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
+        }
+
+        // Gửi email
+        public void GuiEmail(string Title, string ToEmail, string FromEmail, string PassWord, string Content)
+        {
+            // goi email
+            MailMessage mail = new MailMessage();
+            mail.To.Add(ToEmail); // Địa chỉ nhận
+            mail.From = new MailAddress(ToEmail); // Địa chửi gửi
+            mail.Subject = Title; // tiêu đề gửi
+            mail.Body = Content; // Nội dung
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com"; // host gửi của Gmail
+            smtp.Port = 587; //port của Gmail
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential
+            (FromEmail, PassWord);//Tài khoản password người gửi
+            smtp.EnableSsl = true; //kích hoạt giao tiếp an toàn SSL
+            smtp.Send(mail); //Gửi mail đi
         }
         protected override void Dispose(bool disposing)
         {

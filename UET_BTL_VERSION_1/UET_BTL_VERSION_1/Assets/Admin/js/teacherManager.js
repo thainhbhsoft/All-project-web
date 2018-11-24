@@ -161,6 +161,6 @@
 
     }
 
-    //end  ajax create student
+    //end  ajax create teacher
 });
 
