@@ -95,7 +95,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
 
         // Chỉnh sửa sinh viên
         [HttpPost]
-        public ActionResult Edit(FormCollection form)
+        public JsonResult Edit(FormCollection form)
         {
             db.Configuration.ProxyCreationEnabled = false;
             // Lấy username từ form submit lên
