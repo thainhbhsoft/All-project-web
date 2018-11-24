@@ -69,7 +69,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin
                    "quan-ly-danh-gia/danh-sach-tieu-chi/{id}",
                    new { controller = "SurveyManager", action = "Index", id = UrlParameter.Optional }
                 );
-            context.MapRoute(
+                context.MapRoute(
                     "Admin_default",
                     "Admin/{controller}/{action}/{id}",
                     new { controller = "Home", action = "Index", id = UrlParameter.Optional }

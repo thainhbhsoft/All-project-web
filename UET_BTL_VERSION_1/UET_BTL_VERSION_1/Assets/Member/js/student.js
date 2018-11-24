@@ -116,9 +116,10 @@
         }
         $('.input2').removeClass('border-red');
         $('.input2').each(function () {
-            if ($(this).val() === "") {
+            if ($(this).val() === "" || $(this).val().length < 5 || $(this).val().length > 200) {
                 $(this).addClass('border-red');
                 check = false;
+                $(this).tooltip("show"); 
             }
         });
         if (!isStudentEmail($("#studentEmail").val())) {
