@@ -193,6 +193,7 @@
     <Content Include="Assets\Shared\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Shared\js\bootstrap.min.js" />
     <Content Include="Assets\Shared\js\jquery-3.3.1.min.js" />
+    <Content Include="Assets\SignIn\js\login.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">

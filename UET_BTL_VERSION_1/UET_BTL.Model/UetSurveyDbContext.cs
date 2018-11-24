@@ -17,7 +17,5 @@ namespace UET_BTL.Model
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
-
-
     }
 }
