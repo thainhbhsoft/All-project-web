@@ -102,3 +102,5 @@ C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.csproj.CopyComplete
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.dll
 C:\Users\Admin\Desktop\Các project web\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.pdb
+C:\Users\Admin\Desktop\VISUAL STUDIO\All-project-web\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\VISUAL STUDIO\All-project-web\UET_BTL_VERSION_1\UET_BTL_VERSION_1\obj\Debug\UET_BTL_VERSION_1.csproj.CoreCompileInputs.cache
