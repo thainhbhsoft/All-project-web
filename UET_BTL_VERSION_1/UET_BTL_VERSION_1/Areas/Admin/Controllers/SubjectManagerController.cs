@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using UET_BTL.Model;
 using UET_BTL.Model.Authority;
+using UET_BTL.Model.BusinessModel;
 using UET_BTL.Model.Entities;
 
 namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
@@ -29,13 +30,13 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             // Lấy ra học phần theo id 
             Subject subject = db.Subjects.Find(id);
             if (subject == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             // Truyền dữ liệu ra view để xác nhận xóa
             return Json(subject, JsonRequestBehavior.AllowGet);
@@ -45,12 +46,20 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Lấy ra học phần theo id
             Subject subject = db.Subjects.Find(id);
+            if (subject == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Xóa học phần
             db.Subjects.Remove(subject);
             // Lấy ra danh sách các học sinh trong học phần đó
-            IEnumerable<StudentDetail> list = db.StudentDetails.Where(x => x.SubjectID == id);
+            IEnumerable<StudentDetail> list = StudentDetailBusinessModel.GetAllStudentDetailBySubject(id);
             // xóa các survey của các học sinh đó
             foreach (var item in list)
             {
@@ -107,22 +116,18 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                 object creditNumber = workSheet.Cells[9, 6].Value;
                 object time = workSheet.Cells[8, 3].Value;
                 // Kiểm tra xem học phần đó đã tồn tại chưa
-                if (!db.Subjects.Any(x => x.SubjectCode.ToLower().Equals(subjectCode.ToString().ToLower())))
+                if (!SubjectBusinessModel.CheckBySubjectCode(subjectCode.ToString()))
                 {
-                    // Khởi tạo học phần và gán các giá trị cho thuộc tính
-                    Subject sub = new Subject();
-                    sub.Name = subjectName.ToString();
-                    sub.SubjectCode = subjectCode.ToString();
-                    sub.ClassRoom = classRoom.ToString();
-                    sub.CreditNumber = int.Parse(creditNumber.ToString());
-                    sub.TimeTeach = time.ToString();
-                    // lưu học phần vào DB
-                    db.Subjects.Add(sub);
-                    db.SaveChanges();
+                    int creditnumber = int.Parse(creditNumber.ToString());
+
+                    // Tạo và lưu một môn học
+                    SubjectBusinessModel.CreateAndSaveSubject(subjectName.ToString(), subjectCode.ToString(), 
+                    classRoom.ToString(), creditnumber, time.ToString());
+
                     // Lấy id của học phần vừa thêm
-                    int subID = db.Subjects.Max(x => x.SubjectID);
+                    int subID = SubjectBusinessModel.GetLastId();
                     // Lấy ID của giáo viên
-                    int teacherID = db.Teachers.FirstOrDefault(x => x.Name.ToLower().Equals(teacherName.ToString().ToLower())).TeacherID;
+                    int teacherID = TeacherBusinessModel.GetIdTeacherByName(teacherName.ToString());
 
                     do
                     {
@@ -133,7 +138,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                         if (data != null)
                         {
                             // Lấy ra sinh viên có username bằng username trong excel
-                            Student stu = db.Students.FirstOrDefault(x => x.UserName.Trim().Equals(userName.Trim()));
+                            Student stu = StudentBusinessModel.GetStudentByUserName(userName);
                             // Kiểm tra thông tin ngày sinh và cập nhật cho sinh viên
                             if (stu.DateOfBirth == null)
                             {
@@ -144,14 +149,8 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
                             {
                                 stu.StudentCode = userName;
                             }
-                            // Khởi tạo đối tượng sinh viên chi tiết theo môn học
-                            StudentDetail stuDetail = new StudentDetail();
-                            stuDetail.StudentID = stu.StudentID;
-                            stuDetail.SubjectID = subID;
-                            stuDetail.TeacherID = teacherID;
-                            // Lưu một sinh viên vào danh sách học phần
-                            db.StudentDetails.Add(stuDetail);
-                            db.SaveChanges();
+                            // tạo và lưu một studentdetail
+                            StudentDetailBusinessModel.CreateAndSaveStudentDetail(stu.StudentID, subID, teacherID);
                             result = true;
                         }
                         startRow++;
@@ -170,27 +169,30 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
         // Hiển thị kết quả đánh giá theo cả lớp học phần
         public ActionResult ShowResultSurvey(int? id)
         {
-            // Lấy ra danh sách các id sinh viên chi tiết của một học phần
-            List<int> lis = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.Select(x => x.StudentDetailID).ToList();
+            if (id == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Lấy số lượng sinh viên đã đánh giá học phần
-            ViewBag.hasSurvey = db.Surveys.Where(x => lis.Any(k => k == x.StudentDetailID)).ToList().Count();
+            ViewBag.hasSurvey = SubjectBusinessModel.GetSumStudentDoneSurvey(id);
             // Lấy ra thông tin chi tiết của sinh viên đầu tiên trong học phần đó
-            StudentDetail student_Detail = db.StudentDetails.First(x => x.SubjectID == id);
-            // Lấy tổng số sinh viên của học phần đó
-            ViewBag.SumStudent = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.ToList().Count();
+            StudentDetail student_Detail = StudentDetailBusinessModel.GetFirstStudentDetailBySubject(id);
+            if (student_Detail == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             if (ViewBag.hasSurvey == 0)
             {
                 return View(student_Detail);
             }
+            // Lấy tổng số sinh viên của học phần đó
+            ViewBag.SumStudent = SubjectBusinessModel.GetSumStudentBySubject(id);
             // Lấy ra điểm trung bình theo cả lớp của các tiêu chí
-            ViewBag.ListPointAver = db.Surveys
-                .Where(x => lis.Any(k => k == x.StudentDetailID))
-                .GroupBy(x => x.ContentSurveyID)
-                .Select(x => x.Average(y => y.Point)).ToList();
+            ViewBag.ListPointAver = SubjectBusinessModel.GetListAverage(id);
             // Lấy ra danh sách các tiêu chí đánh giá
-            ViewBag.NameSurvey = db.ContentSurveys.Select(x => x.Text).ToList();
+            ViewBag.NameSurvey = ContentSurveyBusinessModel.GetListContentSurvey();
             // Lấy ra tổng số tiêu chí đánh giá
-            ViewBag.CountSurvey = db.ContentSurveys.ToList().Count();
+            ViewBag.CountSurvey = ContentSurveyBusinessModel.GetSumContentSurvey();
             return View(student_Detail);
         }
 
@@ -199,33 +201,42 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             // Lấy ra danh sách sinh viên của học phần rồi truyền qua view
-            IEnumerable<StudentDetail> listStudent = db.StudentDetails.Where(x => x.SubjectID == id);
+            IEnumerable<StudentDetail> listStudent = StudentDetailBusinessModel.GetAllStudentDetailBySubject(id);
+            if (listStudent == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             return View(listStudent);
-
         }
 
         // Hiển thị kết quả đánh giá của từng sinh viên với học phần tương ứng
         public ActionResult ResultSurveyEveryStudent(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Kiểm tra xem sinh viên đã đánh giá chưa
-            ViewBag.hasSurvey = db.Surveys.Where(x => x.StudentDetailID == id).ToList().Count();
+            ViewBag.hasSurvey = SurveyBusinessModel.GetSumSurveyByStudent(id);
             if (ViewBag.hasSurvey == 0)
             {
                 return View();
             }
             // Lấy ra các kết quả đánh giá của sinh viên về học phần đó
-            ViewBag.ListPoint = db.Surveys
-              .Where(x => x.StudentDetailID == id)
-              .Select(x => x.Point).ToList();
+            ViewBag.ListPoint = SurveyBusinessModel.GetListPointByStudent(id);
+            if (ViewBag.ListPoint == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Lấy ra các tiêu chí đánh giá để hiển thị trong view
-            ViewBag.NameSurvey = db.ContentSurveys.Select(x => x.Text).ToList();
+            ViewBag.NameSurvey = ContentSurveyBusinessModel.GetListContentSurvey();
             // Lấy tổng số tiêu chí
-            ViewBag.CountSurvey = db.ContentSurveys.ToList().Count();
-            // Lấy ra các phản hồi của sinh viên về học phần đó
-            ViewBag.note = db.StudentDetails.SingleOrDefault(x => x.StudentDetailID == id).NoteSurvey;
+            ViewBag.CountSurvey = ContentSurveyBusinessModel.GetSumContentSurvey();
+            // Lấy ra  phản hồi của sinh viên về học phần đó
+            ViewBag.note = SurveyBusinessModel.GetNoteSurveyByStudent(id);
             return View();
         }
 

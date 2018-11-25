@@ -97,6 +97,10 @@ namespace UET_BTL_VERSION_1.Areas.Member.Controllers
         // Hiển thị danh sách cả lớp sinh viên của một học phần
         public ActionResult ShowClass(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Lấy ra danh sách sinh viên của học phần đó
             IEnumerable<StudentDetail> listStudent = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.ToList();
             return View(listStudent);
@@ -105,6 +109,10 @@ namespace UET_BTL_VERSION_1.Areas.Member.Controllers
         // Hiển thị kết quả đánh giá học phần của môn học đó
         public ActionResult ShowResultSurvey(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Lấy ra danh sách id của sinh viên - học phần
             List<int> lis = db.Subjects.FirstOrDefault(x => x.SubjectID == id).StudentDetail.Select(x => x.StudentDetailID).ToList();
             // Lấy ra một đối tượng sinh viên - học phần

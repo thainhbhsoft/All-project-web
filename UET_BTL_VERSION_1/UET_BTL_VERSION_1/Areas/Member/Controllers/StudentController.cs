@@ -104,6 +104,10 @@ namespace UET_BTL_VERSION_1.Areas.Member.Controllers
         // Đánh giá môn học 
         public ActionResult SurveySubject(int? id, int? stID)
         {
+            if (id == null || stID == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Lấy thông tin chi tiết môn học - sinh viên
             StudentDetail student_Detail = db.StudentDetails.First(x => x.SubjectID == id && x.StudentID == stID);
             // Kiểm tra sinh viên đã đánh giá chưa

@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessModel\ContentSurveyBusinessModel.cs" />
+    <Compile Include="BusinessModel\StudentBusinessModel.cs" />
+    <Compile Include="BusinessModel\StudentDetailBusinessModel.cs" />
+    <Compile Include="BusinessModel\SubjectBusinessModel.cs" />
+    <Compile Include="BusinessModel\SurveyBusinessModel.cs" />
+    <Compile Include="BusinessModel\TeacherBusinessModel.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Migrations\201811231611544_add.cs" />
     <Compile Include="Migrations\201811231611544_add.Designer.cs">
@@ -79,6 +85,9 @@
     <EmbeddedResource Include="Migrations\201811231656349_add2.resx">
       <DependentUpon>201811231656349_add2.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -25,6 +25,11 @@ namespace UET_BTL_VERSION_1.Areas.SignIn
                new { controller = "Home", action = "Authorize", id = UrlParameter.Optional }
            );
             context.MapRoute(
+               "notfound",
+               "notfound",
+               new { controller = "Home", action = "NotFoundWebsite", id = UrlParameter.Optional }
+           );
+            context.MapRoute(
                 "SignIn_default",
                 "SignIn/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }

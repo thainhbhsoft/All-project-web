@@ -72,10 +72,12 @@
 
 <form action="/quan-ly-hoc-phan/import-hoc-phan" method="post" enctype="multipart/form-data">
     Import một danh sách lớp học phần từ excel:<br>
-    <input type="file" name="fileUpload">
+    <input type="file" name="fileUpload" id="fileupload">
     <br>
-    <input type="submit" value="Import">
+    <input type="submit" value="Import" id="importdata" disabled ="disabled">
 </form>
+
+
 <div class="delete-subject-form">
     <div class="add-tab">
         <div class="header-tab">

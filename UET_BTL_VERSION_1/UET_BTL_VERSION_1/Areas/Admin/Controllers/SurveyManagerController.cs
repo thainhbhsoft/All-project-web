@@ -54,13 +54,13 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             // Lấy ra tiêu chí theo id
             ContentSurvey contentSurvey = db.ContentSurveys.Find(id);
             if (contentSurvey == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             // Truyền tiêu chí đó sang view để sửa
             return View(contentSurvey);
@@ -96,13 +96,13 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             // Lấy ra tiêu chí theo id
             ContentSurvey contentSurvey = db.ContentSurveys.Find(id);
             if (contentSurvey == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             return Json(contentSurvey, JsonRequestBehavior.AllowGet);
         }
@@ -111,6 +111,10 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Láy ra tiêu chí đó và xóa
             ContentSurvey contentSurvey = db.ContentSurveys.Find(id);
             db.ContentSurveys.Remove(contentSurvey);

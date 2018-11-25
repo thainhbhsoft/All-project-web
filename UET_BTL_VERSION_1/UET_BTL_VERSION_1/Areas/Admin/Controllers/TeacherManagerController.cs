@@ -135,7 +135,7 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             // Lấy giảng viên theo id
             Teacher teacher = db.Teachers.Find(id);
@@ -155,6 +155,10 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Lấy giảng viên theo id
             Teacher teacher = db.Teachers.Find(id);
             // Lấy user theo id của giảng viên

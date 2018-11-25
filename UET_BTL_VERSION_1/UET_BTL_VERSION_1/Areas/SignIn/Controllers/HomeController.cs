@@ -130,6 +130,12 @@ namespace UET_BTL_VERSION_1.Areas.SignIn.Controllers
             return View();
         }
 
+        // Hiển thị khi không tìm thấy trang
+        public ActionResult NotFoundWebsite()
+        {
+            return View();
+        }
+
         // Lấy lại mật khẩu
         [HttpPost]
         public JsonResult GetPassWord(FormCollection form)

@@ -1,5 +1,13 @@
 ﻿$(document).ready(function () {
-   
+
+    $("#fileupload").change(function () {
+        if ($(this).val() !== "") {
+            $('#importdata').prop("disabled", false);
+        } else {
+            $('#importdata').prop("disabled", true);
+        }
+    });
+
     var rowCurrent = null;
     var idCurrent = null;
    

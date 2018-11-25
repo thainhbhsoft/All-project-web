@@ -224,6 +224,7 @@
     <Content Include="Areas\SignIn\Views\Home\MenuPartial.cshtml" />
     <Content Include="Areas\SignIn\Views\web.config" />
     <Content Include="Areas\SignIn\Views\Home\Authorize.cshtml" />
+    <Content Include="Areas\SignIn\Views\Home\NotFoundWebsite.cshtml" />
     <None Include="packages.config" />
     <Content Include="Areas\Admin\Views\StudentManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TeacherManager\Index.cshtml" />

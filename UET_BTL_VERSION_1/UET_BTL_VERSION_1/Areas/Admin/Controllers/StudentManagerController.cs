@@ -132,12 +132,12 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             Student student = db.Students.Find(id);
             if (student == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
             }
             return Json(student, JsonRequestBehavior.AllowGet);
         }
@@ -146,6 +146,10 @@ namespace UET_BTL_VERSION_1.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("NotFoundWebsite", "Home", new { area = "SignIn" });
+            }
             // Tìm kiếm sinh viên theo mã
             Student student = db.Students.FirstOrDefault(x => x.StudentID == id);
             // Tìm kiếm user theo mã sinh viên
